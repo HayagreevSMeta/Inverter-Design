@@ -36,21 +36,26 @@
             margin-left: 80px;
             margin-top: 16px;
         }
-        .content {
+        .two-col {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             margin-left: 80px;
             margin-right: 80px;
-            margin-top: 40px;
+            margin-top: 32px;
+        }
+        .bullets {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 16px;
         }
         .bullet {
             font-family: 'Inter', sans-serif;
             font-weight: 400;
-            font-size: 18px;
+            font-size: 16px;
             color: #333333;
             line-height: 1.6;
-            padding-left: 20px;
+            padding-left: 16px;
             position: relative;
         }
         .bullet::before {
@@ -64,14 +69,25 @@
         .states-box {
             background: #F5F5F5;
             border-left: 4px solid #000000;
-            padding: 20px 24px;
-            margin-left: 20px;
+            padding: 16px 20px;
+            margin-left: 16px;
             margin-top: 8px;
             margin-bottom: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-family: 'Inter', monospace;
+            font-size: 14px;
             color: #000000;
             line-height: 1.8;
+        }
+        .img-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 460px;
+        }
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -80,17 +96,21 @@
         <div class="accent-bar"></div>
         <h2>FC Switching States and PD-PWM</h2>
         <div class="divider"></div>
-        <div class="content">
-            <div class="bullet"><span class="bold">Single phase leg structure:</span> Four switches (S1-S4) connected in series, with the flying capacitor (Cfc) connected between the S1/S2 and S3/S4 junctions.</div>
-            <div class="bullet"><span class="bold">Output voltage levels:</span> The topology synthesizes three distinct voltage levels at the output node: +Vdc/2, 0, and -Vdc/2.</div>
-            <div class="bullet"><span class="bold">Redundant zero states enable natural balancing:</span>
-                <div class="states-box">
-                    <span class="bold">State 1:</span> S1=1, S2=0, S3=1, S4=0 &rarr; Output = 0V (Charges Cfc)<br>
-                    <span class="bold">State 2:</span> S1=0, S2=1, S3=0, S4=1 &rarr; Output = 0V (Discharges Cfc)
+        <div class="two-col">
+            <div class="bullets">
+                <div class="bullet"><span class="bold">Single phase leg structure:</span> Four switches (S1-S4) connected in series, with the flying capacitor (Cfc) connected between the S1/S2 and S3/S4 junctions.</div>
+                <div class="bullet"><span class="bold">Output voltage levels:</span> The topology synthesizes three distinct voltage levels at the output node: +Vdc/2, 0, and -Vdc/2.</div>
+                <div class="bullet"><span class="bold">Redundant zero states enable natural balancing:</span>
+                    <div class="states-box">
+                        <span class="bold">State 1:</span> S1=1, S2=0, S3=1, S4=0 &rarr; Output = 0V (Charges Cfc)<br>
+                        <span class="bold">State 2:</span> S1=0, S2=1, S3=0, S4=1 &rarr; Output = 0V (Discharges Cfc)
+                    </div>
                 </div>
+                <div class="bullet"><span class="bold">PD-PWM modulation:</span> Phase Disposition PWM actively selects between the redundant zero states based on the current direction to maintain Vfc at exactly Vdc/2 (400V).</div>
             </div>
-            <div class="bullet"><span class="bold">PD-PWM modulation:</span> Phase Disposition PWM actively selects between the redundant zero states based on the current direction to maintain Vfc at exactly Vdc/2.</div>
-            <div class="bullet"><span class="bold">Pre-charge requirement:</span> A 20ms linear ramp is required to charge Vfc to 400V before active switching commences, preventing severe overvoltage across the inner switches.</div>
+            <div class="img-box">
+                <img src="/home/ubuntu/Inverter-Design/fc_inverter_schematic.png" alt="3-Level Flying Capacitor Schematic">
+            </div>
         </div>
     </div>
 </body>
