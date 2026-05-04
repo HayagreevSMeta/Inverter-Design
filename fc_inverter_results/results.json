@@ -1,0 +1,177 @@
+{
+  "simulation_info": {
+    "version": "FC_Inverter_Sim_v2",
+    "topology": "Three-phase three-level Flying Capacitor Inverter",
+    "application": "800V EV traction with adaptive fsw scheduling",
+    "time_step_us": 2.0,
+    "total_sim_time_s": 1.5,
+    "total_steps": 750000,
+    "wall_time_s": 28.6,
+    "model_features": [
+      "Nonlinear switching energy (quadratic I scaling)",
+      "4-layer Foster thermal network",
+      "Temperature-dependent Rds_on",
+      "Dead-time voltage distortion",
+      "Hanning-windowed THD",
+      "Dynamic FC voltage with natural PD-PWM balancing"
+    ]
+  },
+  "parameters": {
+    "Vdc_bus_V": 800.0,
+    "Vdc_half_V": 400.0,
+    "Vc_fc_ref_V": 400.0,
+    "R_load_ohm": 1.3,
+    "L_load_mH": 2.0,
+    "C_fc_mF": 1.5,
+    "m_index": 0.9,
+    "device": "Wolfspeed C3M0065090D (650V SiC MOSFET)",
+    "Rds_on_mohm": 4.0,
+    "E_on_uJ": 8500.0,
+    "E_off_uJ": 4200.0,
+    "dead_time_ns": 200.0
+  },
+  "drivetrain": {
+    "tyre_radius_m": 0.315,
+    "gear_ratio": 8.19,
+    "motor_poles": 8,
+    "fe_40kmh_Hz": 183.91,
+    "fe_80kmh_Hz": 367.82,
+    "fe_120kmh_Hz": 551.74,
+    "fe_140kmh_Hz": 643.69
+  },
+  "segments": [
+    {
+      "name": "Standstill",
+      "speed_kmh": 0,
+      "fe_Hz": 1.0,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.05,
+      "Ipk_A": 0.0
+    },
+    {
+      "name": "Urban low",
+      "speed_kmh": 20,
+      "fe_Hz": 92.0,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.1,
+      "Ipk_A": 207.0
+    },
+    {
+      "name": "Urban mid",
+      "speed_kmh": 40,
+      "fe_Hz": 183.9,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.2,
+      "Ipk_A": 135.8
+    },
+    {
+      "name": "Urban high",
+      "speed_kmh": 60,
+      "fe_Hz": 275.9,
+      "fsw_kHz": 10.0,
+      "duration_s": 0.2,
+      "Ipk_A": 97.2
+    },
+    {
+      "name": "Deceleration",
+      "speed_kmh": 20,
+      "fe_Hz": 92.0,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.1,
+      "Ipk_A": 207.0
+    },
+    {
+      "name": "Stop",
+      "speed_kmh": 0,
+      "fe_Hz": 1.0,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.05,
+      "Ipk_A": 0.0
+    },
+    {
+      "name": "Transition",
+      "speed_kmh": 80,
+      "fe_Hz": 367.8,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 75.0
+    },
+    {
+      "name": "Highway",
+      "speed_kmh": 120,
+      "fe_Hz": 551.7,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 51.0
+    },
+    {
+      "name": "Highway fast",
+      "speed_kmh": 140,
+      "fe_Hz": 643.7,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 43.9
+    },
+    {
+      "name": "Highway cruise",
+      "speed_kmh": 100,
+      "fe_Hz": 459.8,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 60.8
+    }
+  ],
+  "electrical": {
+    "peak_Ia_A": 133.01,
+    "peak_Van_V": 270.2,
+    "Ipk_urban_A": 135.76,
+    "Ipk_highway_A": 51.03
+  },
+  "fc_balance": {
+    "Vc_ref_V": 400.0,
+    "mean_Vfc_a_V": 400.05,
+    "ripple_full_cycle_V": 11.957,
+    "ripple_urban_sim_V": 8.317,
+    "ripple_highway_sim_V": 0.927,
+    "ripple_5kHz_pred_V": 4.525,
+    "ripple_20kHz_pred_V": 0.425
+  },
+  "thd": {
+    "urban": {
+      "fe_Hz": 183.9,
+      "fsw_kHz": 5,
+      "THD_pct": 1.9,
+      "I_fund_rms_A": 47.59
+    },
+    "highway": {
+      "fe_Hz": 551.7,
+      "fsw_kHz": 20,
+      "THD_pct": 1.62,
+      "I_fund_rms_A": 17.61
+    }
+  },
+  "losses": {
+    "scheduled": {
+      "cond_W": 54.13,
+      "sw_W": 87.04,
+      "total_W": 141.17
+    },
+    "fixed_20kHz": {
+      "cond_W": 54.13,
+      "sw_W": 146.89,
+      "total_W": 201.02
+    },
+    "sw_saving_W": 59.85,
+    "sw_saving_pct": 40.7
+  },
+  "thermal": {
+    "model": "4-layer Foster + Rth_cs + Rth_sa",
+    "T_ambient_C": 40.0,
+    "Tj_max_sched_C": 48.3,
+    "Tj_max_fixed_C": 49.8,
+    "Tj_limit_C": 150,
+    "margin_sched_C": 101.7,
+    "margin_fixed_C": 100.2,
+    "Tj_saving_C": 1.54
+  }
+}
