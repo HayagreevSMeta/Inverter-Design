@@ -160,30 +160,19 @@
         <h1>IV. CONCLUSION</h1>
         <p>This paper demonstrated that traction inverter design and optimization cannot be conducted in isolation from the vehicle architecture. The transition to an 800V architecture provides significant system-level benefits, and the 3L-FC topology was selected over the NPC alternative due to its superior thermal symmetry and natural balancing capabilities under dynamic EV loads. Component selection was rigorously justified using industry standards. By mapping mechanical vehicle speed to inverter electrical parameters, a comprehensive loss profile was generated using the Graovac-Purschel analytical method and CAB450M12XM3 datasheet parameters. Implementing a speed-adaptive switching frequency schedule reduced urban switching losses by 75%, saving 190 W (3-phase) and reducing thermal cycling amplitude by 53%. The time-domain simulation validated the design, maintaining excellent FC voltage balancing, low THD (&lt;2%), and safe thermal operation. This approach significantly improves overall drivetrain efficiency and reliability where EVs spend the majority of their operational life. It should be noted that the simulation employs ideal switching transitions and does not model parasitic effects such as device voltage drops, discrete dead-time distortion, DC bus ripple, or stray inductance; incorporating these non-idealities in future work would yield more conservative THD and loss estimates.</p>
 
-        <h1>References</h1>
+        <h2 class="centered">REFERENCES</h2>
         <div class="references">
-            <p>[1] T. Modeer et al., "Multilevel Inverters for EV Traction Applications: A Review," IEEE Transactions on Transportation Electrification, 2020.</p>
-            <p>[2] "A Closer Look at Multilevel Traction Inverters," Charged EVs, 2023.</p>
-            <p>[3] Texas Instruments, "EV Traction Inverter Design Priorities," Whitepaper SPRAD58B.</p>
-            <p>[4] S. Elbadaoui et al., "Choice between three-level NPC and FC topology under SVM control," EPJ Web of Conferences, vol. 330, 2025.</p>
-            <p>[5] Infineon Technologies, "Comparative analysis of 3-level topologies," Knowledge Base Article, Sept. 2025.</p>
-            <p>[6] L. M. Tolbert, "Multilevel Inverters for Large Automotive Electric Drives," Oak Ridge National Laboratory.</p>
-            <p>[7] Wolfspeed, "CAB450M12XM3 1200V, 450A SiC Half-Bridge Module Datasheet," Rev. 3, June 2024.</p>
-            <p>[8] TDK EPCOS, "Capacitors for DC Link and Flying Capacitor Applications," Product Guide.</p>
-            <p>[9] D. Graovac and M. Purschel, "IGBT Power Losses Calculation Using the Data-Sheet Parameters," Infineon Application Note AN 2009-05, Jan. 2009.</p>
+            <p>[1] I. Aghabali et al., "800-V electric vehicle powertrains: Review and analysis of benefits, challenges, and future trends," <i>IEEE Trans. Transp. Electrific.</i>, vol. 6, no. 4, pp. 1696-1714, 2020.</p>
+            <p>[2] D. Graovac and M. Pürschel, "IGBT Power Losses Calculation Using the Data-Sheet Parameters," <i>Infineon Application Note</i>, vol. 1, no. 1, pp. 1-15, 2009.</p>
+            <p>[3] D. Cittanti et al., "Analysis and Conceptualization of a 800 V 100 kVA Full-GaN Three-Level Flying Capacitor Inverter for Next-Generation EV," <i>IEEE J. Emerg. Sel. Topics Power Electron.</i>, vol. 10, no. 6, pp. 7264-7281, 2022.</p>
+            <p>[4] Wolfspeed, "CAB450M12XM3 1200 V, 450 A Silicon Carbide Half-Bridge Module Datasheet," Rev. 3, Jan. 2024.</p>
+            <p>[5] A. Shukla and A. Joshi, "Natural Balancing of Flying Capacitor Voltages in Multicell Inverter Under PD Carrier-Based PWM," <i>IEEE Trans. Power Electron.</i>, vol. 26, no. 6, pp. 1682-1693, 2011.</p>
+            <p>[6] IPC, "Requirements for Power Conversion Devices for the Computer and Telecommunications Industries," <i>IPC-9592B Standard</i>, 2012.</p>
+            <p>[7] X. Ding et al., "Analytical and experimental evaluation of SiC-inverter nonlinearities for traction drives used in electric vehicles," <i>IEEE Trans. Veh. Technol.</i>, vol. 67, no. 1, pp. 156-169, 2017.</p>
+            <p>[8] H. Wang and F. Blaabjerg, "Reliability of capacitors for DC-link applications in power electronic converters—An overview," <i>IEEE Trans. Ind. Appl.</i>, vol. 50, no. 5, pp. 3569-3578, 2014.</p>
+            <p>[9] E. Gurpinar and B. Ozpineci, "Loss analysis and mapping of a SiC MOSFET based segmented two-level three-phase inverter for EV traction systems," <i>2018 IEEE Transp. Electrific. Conf. (ITEC)</i>, pp. 468-473, 2018.</p>
+            <p>[10] W. Taha and B. Nahid-Mobarakeh, "Efficiency evaluation of 2L and 3L SiC-based traction inverters for 400V and 800V electric vehicle powertrains," <i>2021 IEEE Energy Convers. Congr. Expo. (ECCE)</i>, pp. 5241-5248, 2021.</p>
         </div>
     </div>
 </body>
-</html><h2 class="centered">REFERENCES</h2>
-        <ol>
-            <li>I. Aghabali et al., "800-V electric vehicle powertrains: Review and analysis of benefits, challenges, and future trends," <i>IEEE Trans. Transp. Electrific.</i>, vol. 6, no. 4, pp. 1696-1714, 2020.</li>
-            <li>D. Graovac and M. Pürschel, "IGBT Power Losses Calculation Using the Data-Sheet Parameters," <i>Infineon Application Note</i>, vol. 1, no. 1, pp. 1-15, 2009.</li>
-            <li>D. Cittanti et al., "Analysis and Conceptualization of a 800 V 100 kVA Full-GaN Three-Level Flying Capacitor Inverter for Next-Generation EV," <i>IEEE J. Emerg. Sel. Topics Power Electron.</i>, vol. 10, no. 6, pp. 7264-7281, 2022.</li>
-            <li>Wolfspeed, "CAB450M12XM3 1200 V, 450 A Silicon Carbide Half-Bridge Module Datasheet," Rev. 3, Jan. 2024.</li>
-            <li>A. Shukla and A. Joshi, "Natural Balancing of Flying Capacitor Voltages in Multicell Inverter Under PD Carrier-Based PWM," <i>IEEE Trans. Power Electron.</i>, vol. 26, no. 6, pp. 1682-1693, 2011.</li>
-            <li>IPC, "Requirements for Power Conversion Devices for the Computer and Telecommunications Industries," <i>IPC-9592B Standard</i>, 2012.</li>
-            <li>X. Ding et al., "Analytical and experimental evaluation of SiC-inverter nonlinearities for traction drives used in electric vehicles," <i>IEEE Trans. Veh. Technol.</i>, vol. 67, no. 1, pp. 156-169, 2017.</li>
-            <li>H. Wang and F. Blaabjerg, "Reliability of capacitors for DC-link applications in power electronic converters—An overview," <i>IEEE Trans. Ind. Appl.</i>, vol. 50, no. 5, pp. 3569-3578, 2014.</li>
-            <li>E. Gurpinar and B. Ozpineci, "Loss analysis and mapping of a SiC MOSFET based segmented two-level three-phase inverter for EV traction systems," <i>2018 IEEE Transp. Electrific. Conf. (ITEC)</i>, pp. 468-473, 2018.</li>
-            <li>W. Taha and B. Nahid-Mobarakeh, "Efficiency evaluation of 2L and 3L SiC-based traction inverters for 400V and 800V electric vehicle powertrains," <i>2021 IEEE Energy Convers. Congr. Expo. (ECCE)</i>, pp. 5241-5248, 2021.</li>
-        </ol>
+</html>
