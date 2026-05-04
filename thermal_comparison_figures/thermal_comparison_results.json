@@ -1,0 +1,68 @@
+{
+  "comparison_table": [
+    {
+      "operating_point": "Urban (40 km/h)",
+      "speed_kmh": 40,
+      "fe_Hz": 183.9,
+      "Ipk_A": 135.8,
+      "fsw_fixed_kHz": 20.0,
+      "fsw_adaptive_kHz": 5.0,
+      "Ploss_fixed_W": 161.1,
+      "Ploss_adaptive_W": 93.6,
+      "Tj_fixed_C": 63.2,
+      "Tj_adaptive_C": 53.5,
+      "Tj_reduction_C": 9.7,
+      "Tj_reduction_pct": 41.9
+    },
+    {
+      "operating_point": "Extra-Urban (80 km/h)",
+      "speed_kmh": 80,
+      "fe_Hz": 367.8,
+      "Ipk_A": 75.0,
+      "fsw_fixed_kHz": 20.0,
+      "fsw_adaptive_kHz": 10.0,
+      "Ploss_fixed_W": 68.5,
+      "Ploss_adaptive_W": 44.6,
+      "Tj_fixed_C": 49.9,
+      "Tj_adaptive_C": 46.4,
+      "Tj_reduction_C": 3.4,
+      "Tj_reduction_pct": 34.8
+    },
+    {
+      "operating_point": "Highway (120 km/h)",
+      "speed_kmh": 120,
+      "fe_Hz": 551.7,
+      "Ipk_A": 51.0,
+      "fsw_fixed_kHz": 20.0,
+      "fsw_adaptive_kHz": 20.0,
+      "Ploss_fixed_W": 41.7,
+      "Ploss_adaptive_W": 41.7,
+      "Tj_fixed_C": 46.0,
+      "Tj_adaptive_C": 46.0,
+      "Tj_reduction_C": 0.0,
+      "Tj_reduction_pct": 0.0
+    },
+    {
+      "operating_point": "Peak Torque (20 km/h)",
+      "speed_kmh": 20,
+      "fe_Hz": 92.0,
+      "Ipk_A": 207.0,
+      "fsw_fixed_kHz": 20.0,
+      "fsw_adaptive_kHz": 5.0,
+      "Ploss_fixed_W": 329.5,
+      "Ploss_adaptive_W": 217.3,
+      "Tj_fixed_C": 87.4,
+      "Tj_adaptive_C": 71.3,
+      "Tj_reduction_C": 16.2,
+      "Tj_reduction_pct": 34.1
+    }
+  ],
+  "transient": {
+    "peak_Tj_fixed_C": 62.4,
+    "peak_Tj_adaptive_C": 53.3,
+    "mean_Tj_fixed_C": 54.0,
+    "mean_Tj_adaptive_C": 49.2,
+    "thermal_cycling_fixed_C": 16.4,
+    "thermal_cycling_adaptive_C": 7.7
+  }
+}
