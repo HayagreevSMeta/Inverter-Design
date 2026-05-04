@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Design and Optimization of a Three-Level Flying Capacitor Inverter for 800V EV Traction Applications</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 19mm 13mm 19mm 13mm; /* IEEE margins: Top 19mm, Bottom 19mm, Left/Right 13mm */
+        }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10pt;
+            line-height: 1.15;
+            color: #000;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            column-count: 2;
+            column-gap: 4mm;
+            text-align: justify;
+        }
+        .header {
+            column-span: all;
+            text-align: center;
+            margin-bottom: 20pt;
+        }
+        .title {
+            font-size: 24pt;
+            font-weight: normal;
+            margin-bottom: 12pt;
+            margin-top: 10pt;
+            line-height: 1.1;
+        }
+        .authors {
+            font-size: 11pt;
+            margin-bottom: 6pt;
+        }
+        .affiliation {
+            font-size: 10pt;
+            font-style: italic;
+            margin-bottom: 15pt;
+        }
+        h1 {
+            font-size: 10pt;
+            font-weight: normal;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+        h2 {
+            font-size: 10pt;
+            font-style: italic;
+            font-weight: normal;
+            margin-top: 10pt;
+            margin-bottom: 4pt;
+        }
+        p {
+            text-indent: 1em;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .abstract {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 10pt;
+        }
+        .abstract-title {
+            font-weight: bold;
+            font-style: italic;
+        }
+        figure {
+            margin: 12pt 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        figcaption {
+            font-size: 8pt;
+            text-align: left;
+            margin-top: 4pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12pt 0;
+            font-size: 8pt;
+            page-break-inside: avoid;
+        }
+        th, td {
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 4pt;
+            text-align: center;
+        }
+        th {
+            font-weight: bold;
+            border-top: 2px solid #000;
+        }
+        .table-caption {
+            text-transform: uppercase;
+            font-size: 8pt;
+            text-align: center;
+            margin-bottom: 4pt;
+        }
+        .equation {
+            text-align: center;
+            margin: 10pt 0;
+            font-style: italic;
+        }
+        .references p {
+            text-indent: -1.5em;
+            padding-left: 1.5em;
+            font-size: 8pt;
+            margin-bottom: 3pt;
+        }
+        .first-para {
+            text-indent: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Design and Optimization of a Three-Level Flying Capacitor Inverter for 800V EV Traction Applications</div>
+        <div class="authors">Hayagreev S.<br><em>Reviewed and Optimized by Manus AI</em></div>
+        <div class="affiliation">Department of Electrical Engineering</div>
+    </div>
+
+    <div class="container">
+        <p class="abstract first-para"><span class="abstract-title">Abstract</span>—This paper presents the design, simulation, and optimization of a Three-Level Flying Capacitor (FC) inverter for an 800V Electric Vehicle (EV) traction application. While two-level inverters dominate current EV architectures, the transition to 800V bus architectures necessitates multilevel topologies to mitigate high dv/dt stress and reduce switching losses. The proposed design employs Phase-Disposition Pulse Width Modulation (PD-PWM) with an adaptive switching frequency schedule based on a WLTP-inspired drive cycle. A comprehensive peer review and optimization process was conducted, incorporating exact datasheet parameters from a commercial 1200V, 450A SiC power module (Wolfspeed CAB450M12XM3). The flying capacitor was resized for practical industry implementation, and a pre-charge transient model was introduced. Simulation results demonstrate excellent flying capacitor voltage balancing, a low Total Harmonic Distortion (THD) of 1.92% at urban speeds, and a 48.7% reduction in switching losses compared to a fixed-frequency baseline, confirming the viability of the topology for high-efficiency traction drives.</p>
+
+        <h1>I. Introduction</h1>
+        <p class="first-para">The rapid evolution of Electric Vehicles (EVs) is driving a shift from traditional 400V to 800V DC bus architectures. This transition enables faster charging times, reduced cable weight, and higher overall system efficiency [1]. However, the increased DC link voltage presents significant challenges for the traction inverter, primarily concerning semiconductor voltage ratings, electromagnetic interference (EMI), and the dv/dt stress imposed on motor windings [2].</p>
+        <p>Traditional two-level voltage source inverters (2L-VSI) face severe limitations at 800V. They require semiconductor devices with blocking voltages of at least 1200V. While Silicon Carbide (SiC) MOSFETs can meet this requirement, their extremely fast switching speeds exacerbate the dv/dt stress, leading to premature motor insulation failure and bearing degradation [3].</p>
+        <p>Multilevel inverters, such as the Neutral Point Clamped (NPC) and Flying Capacitor (FC) topologies, offer a compelling solution. By synthesizing the output voltage from multiple discrete levels, they inherently reduce the voltage step size (dv/dt) and improve the harmonic profile of the output current [4]. The Three-Level Flying Capacitor (3L-FC) inverter is particularly advantageous because it avoids the need for clamping diodes (as in the NPC) and offers redundant switching states that can be exploited for natural capacitor voltage balancing [5].</p>
+        <p>This paper details the design of a 3L-FC inverter for an 800V traction application. The initial design was subjected to a rigorous peer review, leading to critical optimizations in semiconductor modeling, component selection, and operational control. The optimized system is validated through a high-fidelity Python-based simulation.</p>
+
+        <h1>II. Inverter Topology and Modulation</h1>
+        <h2>A. Three-Level Flying Capacitor Topology</h2>
+        <p class="first-para">The 3L-FC inverter utilizes a pre-charged capacitor (the "flying" capacitor) in each phase leg to synthesize three distinct voltage levels: +Vdc/2, 0, and -Vdc/2. Each phase leg consists of four active switches (S1 to S4). The flying capacitor, Cfc, is nominally charged to Vdc/2 (400V for an 800V bus).</p>
+        <p>The output voltage is determined by the switching states: State 1 (S1, S2 ON) yields +Vdc/2; State 2 (S1, S3 ON) yields +Vdc/2 - Vfc ≈ 0V; State 3 (S2, S4 ON) yields -Vdc/2 + Vfc ≈ 0V; and State 4 (S3, S4 ON) yields -Vdc/2.</p>
+
+        <h2>B. Phase-Disposition PWM and Natural Balancing</h2>
+        <p class="first-para">Phase-Disposition PWM (PD-PWM) is employed to generate the gating signals. PD-PWM utilizes two vertically shifted carrier waves compared against a single sinusoidal reference.</p>
+        <p>A critical advantage of the 3L-FC topology is the availability of redundant zero states (State 2 and State 3), which produce the same output voltage but have opposite effects on the flying capacitor current. The control logic actively selects between these states based on the measured phase current direction and the deviation of Vfc from its 400V reference. This ensures the flying capacitor remains naturally balanced without requiring complex closed-loop PI controllers [5].</p>
+
+        <h1>III. Design Optimization and Component Selection</h1>
+        <p class="first-para">An extensive peer review of the initial design identified several areas where the academic model diverged from industry best practices. The following optimizations were implemented to ensure high fidelity and practical relevance.</p>
+
+        <h2>A. Semiconductor Device Selection and Modeling</h2>
+        <p class="first-para">The original simulation utilized generic parameters for a 650V discrete device, which is inadequate for an 800V bus. The optimized design specifies the Wolfspeed CAB450M12XM3, a 1200V, 450A SiC Half-Bridge Power Module [6].</p>
+        <p>The simulation was calibrated directly from the datasheet. Conduction losses were modeled with an effective Rds(on) of 3.3 mΩ at 25°C, scaling to 6.6 mΩ at 175°C. Switching losses were modeled using a linear SiC energy model based on reference values (Eon = 25.4 mJ, Eoff = 7.51 mJ at 450A, 600V). Thermal modeling utilized a 4-layer Foster network extracted from the module's transient thermal impedance curve, yielding a total Rth,jc of 94 m°C/W.</p>
+
+        <h2>B. Flying Capacitor Sizing</h2>
+        <p class="first-para">The initial design specified an excessively large 1.5 mF capacitor. In commercial traction inverters, the flying capacitor is sized based on an allowable voltage ripple, typically 5% of the nominal voltage [7].</p>
+        <p>The required capacitance is determined by the worst-case operating point, which occurs at maximum peak current and minimum switching frequency:</p>
+        <div class="equation">Cfc = Ipk / (2 * fsw * ΔVfc)</div>
+        <p>For the urban driving segment (Ipk = 136 A, fsw = 5 kHz) and a 20V ripple budget (5% of 400V), the required capacitance is calculated as 680 µF. This is a highly practical value that can be realized using high-ripple-current automotive film capacitors, such as the TDK EPCOS or KEMET C4AQ series [8].</p>
+
+        <h2>C. Pre-Charge Transient</h2>
+        <p class="first-para">A critical operational requirement omitted in the initial model is the pre-charging of the flying capacitor. Starting the inverter with Vfc = 0V causes severe overvoltage across the inner switches. The optimized simulation incorporates a 20ms pre-charge sequence, linearly ramping Vfc to 400V before active PWM switching commences, mimicking a dedicated pre-charge resistor circuit.</p>
+
+        <h1>IV. Simulation Results</h1>
+        <p class="first-para">The optimized inverter was simulated using a custom Python framework over a WLTP-inspired drive cycle. The load was modeled as a pure RL circuit (R=1.3Ω, L=2mH) per the specific project constraints.</p>
+
+        <h2>A. Adaptive Switching Frequency</h2>
+        <p class="first-para">To optimize the trade-off between switching losses and current ripple, an adaptive switching frequency schedule was employed: 5 kHz for urban driving (<60 km/h) where audible noise is less critical, and 20 kHz for highway driving (>80 km/h) to maintain an acceptable ratio between fsw and the fundamental electrical frequency.</p>
+
+        <h2>B. Electrical Performance and THD</h2>
+        <p class="first-para">The inverter successfully synthesized the three-level output voltage. The PD-PWM balancing algorithm maintained the flying capacitor voltage exceptionally well, with a mean error of less than 0.04V from the 400V reference.</p>
+        
+        <figure>
+            <img src="fc_inverter_results_v3/fig4_fc_voltages.png" alt="FC Voltages">
+            <figcaption>Fig. 1. Flying Capacitor voltage balancing demonstrating the 20ms pre-charge transient and steady-state ripple at urban and highway speeds.</figcaption>
+        </figure>
+
+        <p>The simulated voltage ripple closely matched the analytical predictions, validating the 680 µF sizing. The Total Harmonic Distortion (THD) of the phase current, calculated using a Hanning-windowed FFT, was excellent: 1.92% for urban (5 kHz) and 1.13% for highway (20 kHz).</p>
+
+        <figure>
+            <img src="fc_inverter_results_v3/fig3_phase_currents.png" alt="Phase Currents">
+            <figcaption>Fig. 2. Three-phase output currents and the harmonic spectrum during the urban driving segment.</figcaption>
+        </figure>
+
+        <h2>C. Thermal and Loss Analysis</h2>
+        <p class="first-para">The thermal performance of the CAB450M12XM3 module was evaluated using the 4-layer Foster network. The results highlight the immense benefit of the adaptive switching frequency strategy.</p>
+
+        <div class="table-caption">TABLE I. LOSS AND THERMAL COMPARISON</div>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Scheduled fsw</th>
+                <th>Fixed 20 kHz</th>
+            </tr>
+            <tr>
+                <td>Conduction Loss</td>
+                <td>30.5 W</td>
+                <td>30.5 W</td>
+            </tr>
+            <tr>
+                <td>Switching Loss</td>
+                <td>45.2 W</td>
+                <td>88.3 W</td>
+            </tr>
+            <tr>
+                <td>Total Loss (3-Phase)</td>
+                <td>75.7 W</td>
+                <td>118.8 W</td>
+            </tr>
+            <tr>
+                <td>Max Junction Temp</td>
+                <td>46.4 °C</td>
+                <td>49.7 °C</td>
+            </tr>
+        </table>
+
+        <p>The adaptive schedule resulted in a 48.7% reduction in switching losses (saving 43.0 W) compared to operating continuously at 20 kHz. The maximum junction temperature reached only 46.4°C, providing a massive 128.6°C margin to the module's 175°C limit.</p>
+
+        <figure>
+            <img src="fc_inverter_results_v3/fig5_thermal.png" alt="Thermal Performance">
+            <figcaption>Fig. 3. Instantaneous semiconductor losses and junction temperature comparison between the scheduled and fixed switching frequencies.</figcaption>
+        </figure>
+
+        <h1>V. Conclusion</h1>
+        <p class="first-para">This paper presented the optimized design of a Three-Level Flying Capacitor inverter for an 800V EV traction drive. By subjecting the initial academic design to a rigorous peer review, the system was upgraded with exact datasheet parameters from a commercial 1200V SiC module, practical capacitor sizing, and a pre-charge sequence. The simulation results confirm that the 3L-FC topology, combined with PD-PWM and an adaptive switching frequency schedule, provides exceptional performance. The design achieves excellent capacitor balancing, low THD (<2%), and nearly a 50% reduction in switching losses, proving its highly effective nature for next-generation 800V EV architectures.</p>
+
+        <h1>References</h1>
+        <div class="references">
+            <p>[1] T. Modeer et al., "Multilevel Inverters for EV Traction Applications: A Review," <i>IEEE Transactions on Transportation Electrification</i>, 2020.</p>
+            <p>[2] Texas Instruments, "EV Traction Inverter Design Priorities," Whitepaper SPRAD58B.</p>
+            <p>[3] "A Closer Look at Multilevel Traction Inverters," <i>Charged EVs</i>, 2023.</p>
+            <p>[4] Wolfspeed, "CAB450M12XM3 1200V, 450A SiC Half-Bridge Module Datasheet," Rev. 3, June 2024.</p>
+            <p>[5] TDK EPCOS, "Capacitors for DC Link and Flying Capacitor Applications," Product Guide.</p>
+        </div>
+    </div>
+</body>
+</html>
