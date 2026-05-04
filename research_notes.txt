@@ -1,0 +1,220 @@
+RESEARCH NOTES FOR PEER REVIEW
+================================
+
+SOURCE 1: TI Whitepaper "Design Priorities in EV Traction Inverters" (SPRAD58B, Sept 2022, Rev Feb 2026)
+- Power range: 100kW to 500kW for BEVs
+- Switching frequency: typically 5kHz to 30kHz for two-level inverters
+- DOE target: 100kW/L power density for OEMs by 2025 (met)
+- Functional safety: ISO 26262, ASIL C to ASIL D
+- 800+V technology with increased switching transient voltages (900V cars available as of 2025)
+- Three-level inverter offers "significantly higher efficiency and lower harmonic distortion"
+- Three-level allows "use of a smaller EMI filter"
+- Gate-drive strength adjustment to reduce overshoot and improve efficiency
+- Coreless current sensing trending (TMCS2100-Q1)
+- Inductive position sensing replacing resolvers
+- 8-in-1 architecture dominated market in 2025; 12-in-1 expected from 2030
+- System components: power modules, EMI filter, DC link capacitor, MCU, gate drivers, 
+  power conversion, active discharge, motor position sensor, current/voltage sensors
+
+SOURCE 2: Wolfspeed "SiC Power for 800V EV Traction Inverter Platforms" (Mar 2025)
+- SiC material is more reliable and durable than Si IGBTs
+- SiC enables 800V DC bus with reduced current rating and simplified wiring
+- Key benefits: higher switching frequency capability, lower losses, smaller passives
+
+SOURCE 3: IEEE "Performance and EMI Assessment of Post-800V Traction Inverter Topologies" (EVS38)
+- Multilevel inverters significantly reduce switching losses
+- Reduce mean junction temperature
+- Exhibit superior EMI performance
+
+SOURCE 4: IEEE "Achieving EMC Compliance in Traction Inverters" (2026)
+- Industry standard: 50kW to 250kW power rating
+- Switching frequencies: 2kHz to 20kHz
+- EMC compliance critical for automotive certification
+
+SOURCE 5: IEEE "Comparative Evaluation of Three-Phase Three-Level GaN and SiC FCi" (Jan 2024)
+- "Straightforward design procedure allows to dimension both FCis for 99% efficiency at nominal operation"
+- High short-circuit protection capability
+
+SOURCE 6: McGrath & Holmes, IEEE Trans. Power Electron., vol. 26, no. 7, 2011
+- PD-PWM has superior balancing characteristics for FC converters
+- 173 citations - seminal work on FC voltage balancing
+
+SOURCE 7: Shukla et al., IEEE Trans. Power Electron., 2010
+- Natural balancing of FC voltages under PD carrier-based PWM
+- 142 citations
+
+SOURCE 8: IEEE "SiC MOSFETs: The Inevitable Trend for 800V Electric..." (2024, 20 citations)
+- SiC MOSFET superior choice for 800V applications
+
+SOURCE 9: "800V, 500kW high power density SiC traction inverter" (IEEE, 2024, 8 citations)
+- 800V, 500kW three-phase traction inverter
+- 98.5% peak efficiency achieved
+- Uses 1200V SiC MOSFETs
+
+KEY INDUSTRY STANDARDS IDENTIFIED:
+- ISO 26262: Functional safety (ASIL C/D for traction inverter)
+- CISPR 25: EMC for automotive electronics
+- IEEE Std 519: Harmonic limits
+- IEC 61800-5-1: Drive safety
+- AEC-Q101: Automotive semiconductor qualification
+- UN ECE R100: EV safety (high voltage)
+
+INDUSTRY vs ACADEMIA DESIGN DIFFERENCES:
+Industry focuses on:
+1. Power density (kW/L) - DOE target 100kW/L
+2. Efficiency at rated AND partial load
+3. EMC compliance (CISPR 25)
+4. Functional safety (ISO 26262 ASIL D)
+5. Thermal cycling reliability (power cycling, mission profiles)
+6. Cost optimization ($/kW)
+7. Active discharge for safety
+8. Gate driver integration and protection
+9. DC-link capacitor lifetime (ripple current rating)
+10. Busbar design and parasitic inductance
+
+Academia focuses on:
+1. Novel modulation strategies
+2. THD minimization
+3. Topology comparison
+4. Control algorithms
+5. Simulation validation
+6. Steady-state analysis
+7. Idealized component models
+
+SOURCE 10: Wolfspeed HM Power Module Family (wolfspeed.com, May 2026)
+- Platform: 175°C continuous junction operation, Si3N4 power substrate, AlSiC baseplate
+- Low inductance: 4.9 nH (critical for high dv/dt SiC switching)
+- Module size: 110 x 6 x 12.2 mm (62mm baseplate compatible)
+- Applications: Railway & Traction, Solar & Renewable Energy
+
+Key modules for 800V EV traction (1200V, Half-Bridge):
+- CAR600M12HN6: 1200V, 600A, Half-Bridge Rectifier, 175°C
+- CLB800M12HM3P: 1200V, 800A, Common-Source, 1.3mΩ, 175°C
+- CAB760M12HM3: 1200V, 760A, Half-Bridge, 1.33mΩ, 175°C
+- CAS480M12HM3: 1200V, 480A, Half-Bridge, 2.29mΩ, 175°C
+
+For our design (peak ~136A per phase, 3-level so each device sees Vdc/2=400V):
+- CAS480M12HM3 is most appropriate: 480A rating gives >3x margin
+- Rds_on = 2.29mΩ at 25°C (much lower than our assumed 4.0mΩ)
+- This is a half-bridge module - for FC topology need 4 switches per phase
+
+ALTERNATIVE: For 3-level FC, could use individual switch modules or discrete SiC MOSFETs
+- Wolfspeed C3M0021120K: 1200V, 21mΩ discrete (paralleled)
+- Infineon FF8MR12W2M1_B11: 1200V automotive SiC module
+
+CRITICAL FINDING: Our simulation uses Rds_on = 4.0mΩ which is reasonable for a 
+450A-class module. The actual Wolfspeed CAS480M12HM3 has 2.29mΩ at 25°C.
+This means our conduction losses may be ~43% too high. However, for a 3-level FC topology,
+we need 4 half-bridge positions per phase (not a standard 6-pack), so the module 
+selection is more complex.
+
+SOURCE 11: Charged EVs "A closer look at multilevel traction inverters" (March 2025, Jeffrey Jenkins)
+KEY INDUSTRY CRITICISMS OF FC MLI FOR EV TRACTION:
+1. "fiendishly difficult to control" - FC type acknowledged as hardest to control
+2. "introduces the thorny problem of how to pre-charge its flying capacitors during startup"
+3. "the capacitors in the voltage dividers have to carry considerable ripple current, 
+   both at the fundamental (motor) frequency and the PWM frequency"
+4. "just the AC voltage divider capacitors required by most MLI topologies will likely 
+   take up as much volume all by themselves as a complete 2-level VSI"
+5. "the argument for MLIs in EVs is a tough one to sell" when LC filters on 2-level 
+   can achieve similar EMI reduction
+6. NPC type is "far easier" to control than FC type
+7. FC type advantages: higher fault tolerance, lower ultimate THD achievable
+8. For 800V with SiC: "not so relevant with SiC MOSFETs as they are widely available 
+   in the 1.2 kV and 1.7 kV ratings"
+9. T-type inverter saves switches but requires full-voltage-rated devices
+
+CRITICAL DESIGN GAPS IN OUR PROJECT (identified from literature):
+- No pre-charging strategy discussed
+- No DC-link capacitor design (only FC capacitor)
+- No EMI filter design
+- No gate driver considerations
+- No fault protection strategy
+- No power density analysis
+- No comparison with 2-level + LC filter alternative
+- Load model is purely RL (no back-EMF from motor)
+- No mission profile / reliability analysis
+- No parasitic inductance / layout considerations
+
+SOURCE 12: TDK Flying Capacitor Solution Guide (Nov 2022)
+- FC sizing equation: C_FC = I_peak / (2 * f_sw * ΔV_FC)
+- For their example: 60A peak, 16kHz, 80Vpp ripple → 24µF
+- Film capacitors preferred for FC: high ripple current, long life (>100k hours)
+- CeraLink ceramic alternative for space-constrained designs
+- Ambient temperature assumption: 60°C (heat from power modules doesn't significantly affect FC)
+- Key selection criteria: resonance frequency, energy density, ripple current, 
+  temperature rating (up to 125°C for film)
+
+SOURCE 13: Anderson et al., IEEE TPEL 2020 (162 citations)
+"Three levels are not enough: Scaling laws for multilevel converters"
+- Provides scaling laws for inductor current ripple and capacitor voltage ripple
+- Compares 2-level 400V vs 3-level 800V converters
+- Important reference for justifying 3-level at 800V
+
+SOURCE 14: McGrath & Holmes, IEEE TPEL 2011 (173 citations)
+"Enhanced voltage balancing of a flying capacitor multilevel converter using PD modulation"
+- PD-PWM has superior natural balancing characteristics
+- Balancing time constant reduces with higher switching frequency
+- Seminal reference for our modulation choice
+
+SOURCE 15: AQG 324 (ECPE Working Group, 2017-present)
+- European Qualification Guideline for Power Modules in Power Electronics Converter Units
+- Tests: thermal cycling, power cycling, humidity, vibration, mechanical shock
+- Referenced standards: IEC 60749, JEDEC JESD22
+- VW and other OEMs use this as baseline for supplier qualification
+- Key test: Power cycling (Coffin-Manson model): N_f = A * (ΔTj)^(-α) * exp(Ea/(k*Tj_max))
+  Typical: α ≈ 4-5 for wire bonds, Ea ≈ 0.4 eV
+
+SOURCE 16: Cougo et al. (2026) "Influence of high frequency power cycles on SiC"
+- Thermal cycles at motor current frequency observed in SiC automotive powertrain
+- "High frequency" loss models needed for accurate lifetime prediction
+- Mission profile approach essential for reliability
+
+SOURCE 17: Chakraborty et al., IEEE JESTPE (2021, 72 citations)
+"Real-Life Mission Profile-Oriented Lifetime Estimation of SiC HV DC/DC Converter for EV"
+- Uses real EV measurement data (244 mission profiles categorized into 3 types)
+- Demonstrates proper methodology for lifetime estimation
+
+SOURCE 18: LinkedIn/Impedyme (2025) "Why passive R-L loads fail in inverter testing"
+- RL loads cannot capture back-EMF effects
+- Motor emulator needed for realistic torque/speed simulation
+- Regenerative braking cannot be tested with RL load
+- This is a KNOWN LIMITATION of our simulation approach
+
+CRITICAL PEER REVIEW FINDINGS SUMMARY:
+=========================================
+
+CATEGORY A - PHYSICS/MODELLING ERRORS:
+1. Load model: Pure RL ignores back-EMF → current magnitude is WRONG at high speed
+   - At 120km/h, fe=174Hz, back-EMF ≈ 0.8*Vdc/2 = 320V
+   - Actual current would be much lower than RL prediction
+   - Our sim predicts Ipk = m*Vdc/Z(fe) = 0.9*400/sqrt(1.3²+(2π*174*0.002)²) ≈ 163A
+   - With back-EMF: I ≈ (V_applied - V_bemf) / Z ≈ much lower at high speed
+   
+2. No field weakening region modelled (critical above base speed)
+
+3. FC pre-charging not addressed (industry requirement per Charged EVs)
+
+CATEGORY B - MISSING INDUSTRY REQUIREMENTS:
+4. No DC-link capacitor design (ripple current, ESR, lifetime)
+5. No EMI filter design (CISPR 25 compliance)
+6. No gate driver selection (isolated, with DESAT protection)
+7. No active discharge circuit (UN ECE R100 safety requirement)
+8. No functional safety analysis (ISO 26262 ASIL)
+9. No power density calculation (DOE target: 100kW/L)
+10. No busbar design / parasitic inductance analysis
+
+CATEGORY C - COMPONENT SELECTION GAPS:
+11. SiC module: generic "450A class" - need specific part number
+12. FC capacitor: 1.5mF at 400V - need specific film capacitor selection with 
+    ripple current verification
+13. No DC-link capacitor specified
+14. No gate driver IC specified
+15. No current/voltage sensor specified
+
+CATEGORY D - SIMULATION METHODOLOGY:
+16. Fixed modulation index (m=0.9) - should vary with speed/torque
+17. No closed-loop current control (open-loop V/f only)
+18. No overmodulation or six-step operation at high speed
+19. Drive cycle is synthetic (not WLTP/NEDC standard)
+20. No efficiency map generation

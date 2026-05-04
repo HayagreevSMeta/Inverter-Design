@@ -1,0 +1,181 @@
+{
+  "simulation_info": {
+    "version": "FC_Inverter_Sim_v3 (Datasheet-Calibrated)",
+    "topology": "Three-phase three-level Flying Capacitor Inverter",
+    "application": "800V EV traction (driving only) with adaptive fsw scheduling",
+    "device": "Wolfspeed CAB450M12XM3 (1200V, 450A SiC Half-Bridge)",
+    "load_model": "Pure RL (R=1.3\u03a9, L=2mH) per project specification",
+    "time_step_us": 2.0,
+    "total_sim_time_s": 1.52,
+    "total_steps": 760000,
+    "wall_time_s": 35.7,
+    "model_features": [
+      "Datasheet-calibrated Rds_on with temperature scaling (2.0x at 175\u00b0C)",
+      "Linear SiC switching energy model (Eon=25.4mJ, Eoff=7.51mJ @ 450A/600V)",
+      "4-layer Foster thermal network (Rth_jc=94 m\u00b0C/W from Fig. 17)",
+      "Dead-time voltage distortion",
+      "Hanning-windowed THD computation",
+      "Dynamic FC voltage with PD-PWM natural balancing",
+      "Pre-charging transient (20ms linear ramp)",
+      "Revised FC sizing (680\u00b5F for 5% ripple budget)"
+    ]
+  },
+  "parameters": {
+    "Vdc_bus_V": 800.0,
+    "Vdc_half_V": 400.0,
+    "Vc_fc_ref_V": 400.0,
+    "R_load_ohm": 1.3,
+    "L_load_mH": 2.0,
+    "C_fc_uF": 680.0,
+    "m_index": 0.9,
+    "Rds_on_25C_mohm": 3.3,
+    "Rds_on_175C_mohm": 6.6,
+    "Eon_mJ_at_ref": 25.4,
+    "Eoff_mJ_at_ref": 7.51,
+    "Err_mJ_at_ref": 0.2,
+    "ref_conditions": "450A, 600V",
+    "dead_time_ns": 200.0,
+    "Rth_jc_mCW": 94.0,
+    "Rth_total_mCW": 144.00000000000003
+  },
+  "drivetrain": {
+    "tyre_radius_m": 0.315,
+    "gear_ratio": 8.19,
+    "motor_poles": 8,
+    "fe_40kmh_Hz": 183.91,
+    "fe_80kmh_Hz": 367.82,
+    "fe_120kmh_Hz": 551.74,
+    "fe_130kmh_Hz": 597.72
+  },
+  "segments": [
+    {
+      "name": "Pre-charge",
+      "speed_kmh": 0,
+      "fe_Hz": 1.0,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.02,
+      "Ipk_A": 0.0
+    },
+    {
+      "name": "Urban low",
+      "speed_kmh": 30,
+      "fe_Hz": 137.9,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.15,
+      "Ipk_A": 166.2
+    },
+    {
+      "name": "Urban mid",
+      "speed_kmh": 40,
+      "fe_Hz": 183.9,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.2,
+      "Ipk_A": 135.8
+    },
+    {
+      "name": "Urban high",
+      "speed_kmh": 55,
+      "fe_Hz": 252.9,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.2,
+      "Ipk_A": 104.9
+    },
+    {
+      "name": "Deceleration",
+      "speed_kmh": 25,
+      "fe_Hz": 114.9,
+      "fsw_kHz": 5.0,
+      "duration_s": 0.1,
+      "Ipk_A": 185.3
+    },
+    {
+      "name": "Extra-urban",
+      "speed_kmh": 80,
+      "fe_Hz": 367.8,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 75.0
+    },
+    {
+      "name": "Highway",
+      "speed_kmh": 120,
+      "fe_Hz": 551.7,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.25,
+      "Ipk_A": 51.0
+    },
+    {
+      "name": "Highway fast",
+      "speed_kmh": 130,
+      "fe_Hz": 597.7,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 47.2
+    },
+    {
+      "name": "Highway cruise",
+      "speed_kmh": 100,
+      "fe_Hz": 459.8,
+      "fsw_kHz": 20.0,
+      "duration_s": 0.2,
+      "Ipk_A": 60.8
+    }
+  ],
+  "electrical": {
+    "peak_Ia_A": 110.38,
+    "peak_Van_V": 272.6,
+    "Ipk_urban_A": 135.76,
+    "Ipk_highway_A": 51.03
+  },
+  "fc_balance": {
+    "Vc_ref_V": 400.0,
+    "C_fc_uF": 680.0,
+    "sizing_basis": "C = Ipk/(2*fsw_min*dVfc) = 136/(2*5000*20) = 680\u00b5F",
+    "mean_Vfc_a_V": 400.04,
+    "ripple_urban_sim_V": 17.97,
+    "ripple_highway_sim_V": 2.001,
+    "ripple_5kHz_pred_V": 19.97,
+    "ripple_20kHz_pred_V": 1.876
+  },
+  "thd": {
+    "urban": {
+      "fe_Hz": 183.9,
+      "fsw_kHz": 5,
+      "THD_pct": 1.92,
+      "I_fund_rms_A": 47.52
+    },
+    "highway": {
+      "fe_Hz": 551.7,
+      "fsw_kHz": 20,
+      "THD_pct": 1.13,
+      "I_fund_rms_A": 17.66
+    }
+  },
+  "losses": {
+    "scheduled": {
+      "cond_W": 30.5,
+      "sw_W": 45.2,
+      "total_W": 75.7
+    },
+    "fixed_20kHz": {
+      "cond_W": 30.5,
+      "sw_W": 88.3,
+      "total_W": 118.8
+    },
+    "sw_saving_W": 43.0,
+    "sw_saving_pct": 48.7
+  },
+  "thermal": {
+    "model": "4-layer Foster (from CAB450M12XM3 datasheet Fig. 17) + Rth_cs + Rth_sa",
+    "T_ambient_C": 40.0,
+    "Tj_max_sched_C": 46.4,
+    "Tj_max_fixed_C": 49.7,
+    "Tj_limit_C": 175,
+    "margin_sched_C": 128.6,
+    "margin_fixed_C": 125.3
+  },
+  "efficiency": {
+    "inverter_eta_pct": 29.5,
+    "note": "Approximate - based on RL load power delivery vs DC bus draw"
+  }
+}

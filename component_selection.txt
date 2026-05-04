@@ -1,0 +1,240 @@
+COMPONENT SELECTION NOTES
+=========================
+
+1. SiC POWER MODULE: Wolfspeed CAB450M12XM3
+   - Configuration: Half-Bridge (2 switches per module)
+   - Vds: 1200V
+   - Rds_on (typ): 2.6 mΩ (at 25°C, Vgs=15V)
+   - DC Continuous Current: 450A (Tc=25°C, Tj≤175°C) / 438A (Tc=90°C)
+   - Pulsed Current: 900A
+   - Power Dissipation: 1670W (Tc=25°C)
+   - Tj max: 175°C (operational: -40 to 175°C)
+   - Package inductance: 6.7 nH
+   - Silicon Nitride insulator, Copper baseplate
+   - Third-generation SiC MOSFET technology
+   - Kelvin drain pin for gate driver overcurrent protection
+   - Integrated temperature sensing (NTC)
+   
+   For 3-level FC topology: Need 2 half-bridge modules per phase (4 switches total)
+   → 6 modules total for 3-phase inverter
+   
+   COST ESTIMATE: ~$200-400 per module (industrial qty) → ~$1200-2400 for 6 modules
+
+   NEED TO CHECK ON PAGES 2-5:
+   - Rds_on at 175°C (expect ~2x = 5.2 mΩ)
+   - Switching energy Eon, Eoff at various currents
+   - Thermal resistance Foster network parameters
+   - Body diode characteristics
+
+DATASHEET PAGE 2 - MOSFET Characteristics (Per Position):
+   - Rds_on: 2.6 mΩ typ at 25°C (Vgs=15V, Id=450A)
+   - Rds_on: 3.4 mΩ typ at 25°C (Vgs=15V, Id=450A) [different figure?]
+   - Rds_on: 4.7 mΩ at Tj=175°C (Vgs=15V, Id=450A) → 1.81x increase
+   
+   Switching Energy (at Vdd=600V, Id=450A, Vgs=-4V/15V, Rg_on=4.0Ω, Rg_off=0.0Ω, Ls=10.2nH):
+   - Eon: 25.4 mJ (Tvj=25°C), 24.0 mJ (125°C), 24.4 mJ (175°C)
+   - Eoff: 7.51 mJ (Tvj=25°C), 8.10 mJ (125°C), 8.35 mJ (175°C)
+   - Total Esw = 25.4 + 7.51 = 32.91 mJ at 25°C, 450A, 600V
+   
+   Thermal: Rth_jc = 0.094 °C/W per FET (junction to case)
+   
+   Body Diode:
+   - Vf = 4.7V (Vgs=-4V, Isd=450A, 25°C)
+   - Vf = 4.2V (Vgs=-4V, Isd=450A, 175°C)
+   - trr = 78 ns
+
+SCALING FOR OUR APPLICATION:
+   Our operating point: Vdc/2 = 400V (not 600V), Ipk ≈ 136A (not 450A)
+   
+   Voltage scaling: Esw ∝ V → factor = 400/600 = 0.667
+   Current scaling (quadratic model): 
+     Eon at 136A ≈ 25.4 * (0.1*(136/450)² + 0.8*(136/450) + 0.1) * (400/600)
+                  ≈ 25.4 * (0.1*0.091 + 0.8*0.302 + 0.1) * 0.667
+                  ≈ 25.4 * (0.0091 + 0.242 + 0.1) * 0.667
+                  ≈ 25.4 * 0.351 * 0.667 = 5.95 mJ
+     Eoff at 136A ≈ 7.51 * 0.351 * 0.667 = 1.76 mJ
+     Total Esw ≈ 7.71 mJ per switching event at 136A, 400V
+   
+   Conduction loss at 136A:
+     P_cond = Rds_on * I²_rms = 2.6e-3 * (136/√2)² = 2.6e-3 * 9248 = 24.0W per device
+     With 2 devices conducting: 48W per phase (at 25°C)
+     At 100°C: Rds_on ≈ 3.8 mΩ → P_cond = 3.8e-3 * 9248 = 35.1W per device → 70.2W per phase
+
+CRITICAL FINDING: Our simulation uses Rds_on = 4.0 mΩ which is between the 25°C (2.6mΩ) 
+and 175°C (4.7mΩ) values. This is actually a reasonable "average operating" value but 
+should be modeled as temperature-dependent starting from 2.6 mΩ at 25°C.
+
+UPDATE NEEDED: Change base Rds_on from 4.0 to 2.6 mΩ, and temperature coefficient from 
+0.8 to 0.81 (to reach 4.7 mΩ at 175°C: 2.6 * (1 + 0.81*1.0) = 4.7 ✓)
+
+DATASHEET PAGE 3:
+   Diode Reverse Recovery Energy:
+   - Err = 0.2 mJ (25°C), 0.9 mJ (125°C), 1.1 mJ (175°C) at 600V, 450A
+   
+   NTC Temperature Sensor: R25 = 4700Ω, Beta(25-85) = 3435K
+   
+   Module Physical:
+   - Package Resistance M1 (High-Side): 0.72 mΩ at Tc=125°C
+   - Package Resistance M2 (Low-Side): 0.63 mΩ at Tc=125°C
+   - Stray Inductance: 6.7 nH (between terminals 2&3, f=10MHz)
+   - Case Temperature range: -40 to 125°C
+   - Weight: 175g
+   - Isolation Voltage: 4.0 kV (AC, 50Hz, 1 minute)
+   - CTI: 600
+
+   IMPORTANT: Rth_jc = 0.094 °C/W (from page 2)
+   This is PER POSITION (per switch). For the full module (2 positions):
+   Each switch has its own thermal path to the case.
+
+DATASHEET PAGE 4 - Typical Performance:
+   Figure 2: Normalized On-State Resistance vs. Drain Current for Various Tj:
+   - At 450A: normalized Rds_on ≈ 1.0 (25°C), 1.4 (100°C), 1.6 (125°C), 1.8 (150°C), 2.0 (175°C)
+   - At 136A (our operating point): slightly lower normalization
+   - CONFIRMS: Rds_on(175°C) / Rds_on(25°C) ≈ 2.0x → 2.6mΩ * 2.0 = 5.2mΩ at 175°C
+   
+   Note (6): Total Effective Resistance (Per Switch Position) = MOSFET Rds_on + Switch Position Package Resistance
+   → Total = 2.6 + 0.72 = 3.32 mΩ (high-side) or 2.6 + 0.63 = 3.23 mΩ (low-side) at 25°C
+   
+   This means our simulation's 4.0 mΩ is actually close to the total effective resistance 
+   at ~75°C operating temperature. REASONABLE but should be corrected to 3.3 mΩ base.
+
+NEED: Foster network thermal parameters (likely on page 5-6 with Zth curves)
+
+DATASHEET PAGES 6-7 - Critical Performance Data:
+
+Figure 13: Switching Energy vs. Temperature (Is=450A, Vdd=600V):
+   - Eon+Eoff at 25°C ≈ 33 mJ, at 175°C ≈ 33 mJ (nearly flat for SiC!)
+   - Eon at 25°C ≈ 25 mJ, at 175°C ≈ 25 mJ
+   - Eoff at 25°C ≈ 8 mJ, at 175°C ≈ 8 mJ
+   → SiC switching losses are nearly temperature-independent (major advantage over Si IGBT)
+
+Figure 15: Switching Energy vs. Current (Tvj=25°C, Vdd=800V):
+   - At 200A: Eon ≈ 20mJ, Eoff ≈ 10mJ, Err ≈ 2mJ → Total ≈ 32mJ
+   - At 400A: Eon ≈ 55mJ, Eoff ≈ 20mJ, Err ≈ 5mJ → Total ≈ 80mJ
+   - At 600A: Eon ≈ 85mJ, Eoff ≈ 30mJ, Err ≈ 8mJ → Total ≈ 123mJ
+   - At 136A (our peak, interpolated): Eon ≈ 15mJ, Eoff ≈ 7mJ → Total ≈ 22mJ at 800V
+   - Scale to 400V (our Vdc/2): ≈ 22 * (400/800) = 11 mJ per event
+   
+   WAIT - Figure 15 is at Vdd=800V, not 600V! Need to re-check.
+   The tabulated values (page 2) are at 600V. Figure 15 is at 800V.
+   
+   For our design at 400V, 136A:
+   Using linear voltage scaling from 600V data: Esw(400V) = Esw(600V) * (400/600)
+   From table: Eon(450A,600V) = 25.4mJ, Eoff = 7.51mJ
+   Current scaling (from Figure 15 shape, roughly linear for SiC):
+   At 136A/450A ratio = 0.302:
+   Eon(136A,600V) ≈ 25.4 * 0.40 = 10.2 mJ (using curve shape, not purely linear)
+   Eoff(136A,600V) ≈ 7.51 * 0.40 = 3.0 mJ
+   Voltage scale: * (400/600) = 0.667
+   → Eon(136A,400V) ≈ 6.8 mJ
+   → Eoff(136A,400V) ≈ 2.0 mJ
+   → Total Esw ≈ 8.8 mJ per switching event
+
+Figure 17: Thermal Impedance Zth_jc (MOSFET):
+   From the curve, reading Foster network approximation:
+   - Rth_jc total = 0.094 °C/W (confirmed from page 2)
+   - Curve shows: reaches ~0.01 at 100µs, ~0.05 at 1ms, ~0.08 at 10ms, ~0.094 at 100ms
+   - Foster 4-layer approximation:
+     R1=0.015, τ1=0.1ms; R2=0.025, τ2=1ms; R3=0.030, τ3=10ms; R4=0.024, τ4=100ms
+     (Total = 0.094 °C/W)
+
+Figure 20: Continuous Drain Current Derating vs. Tc:
+   - At Tc=25°C: Id_cont = 450A
+   - At Tc=90°C: Id_cont ≈ 350A
+   - At Tc=125°C: Id_cont ≈ 250A (package ampacity limit)
+   - Our peak 136A is well within limits even at Tc=125°C ✓
+
+Figure 22: Typical Output Current vs. Switching Frequency (Inverter Application):
+   - At 20kHz: Iout ≈ 400A rms (Vdd=800V, Tc=90°C, Tj=175°C, MF=1)
+   - At 40kHz: Iout ≈ 300A rms
+   - At 80kHz: Iout ≈ 200A rms
+   - Our application: 136A peak = 96A rms at 20kHz → massive thermal margin ✓
+
+UPDATED SIMULATION PARAMETERS (from actual datasheet):
+   Rds_on_25C = 3.3 mΩ (2.6 mΩ die + 0.7 mΩ package)
+   Rds_on_175C = 6.6 mΩ (2x factor from Figure 2)
+   Temp coefficient: Rds_on(T) = 3.3e-3 * (1 + 1.0 * (T-25)/(175-25))
+   
+   Eon_ref = 6.8 mJ at 136A, 400V (scaled from datasheet)
+   Eoff_ref = 2.0 mJ at 136A, 400V
+   → Our simulation used E_on_ref=8.5mJ, E_off_ref=4.2mJ at I_ref=300A, V_ref=400V
+   → At 136A with quadratic model: E_on ≈ 8.5*(0.1*0.205² + 0.8*0.453 + 0.1)*1.0 = 8.5*0.467 = 3.97mJ
+   → This is LOWER than the datasheet suggests. Need to recalibrate.
+   
+   Better approach: Use I_ref=450A, V_ref=600V from datasheet directly
+   Eon_ref = 25.4 mJ, Eoff_ref = 7.51 mJ
+   Then scale in simulation: E = E_ref * (I/I_ref) * (V/V_ref) [approximately linear for SiC]
+   
+   Thermal: Rth_jc = 0.094 °C/W per switch position
+   Foster: R=[0.015, 0.025, 0.030, 0.024], τ=[0.1e-3, 1e-3, 10e-3, 100e-3]
+
+2. FLYING CAPACITOR SELECTION:
+   Requirements:
+   - Voltage rating: ≥ 500V (FC holds 400V with margin)
+   - Capacitance: 1.5 mF (from our sizing: C = Ipk/(2*fsw_min*ΔVfc) = 250/(2*5000*50) = 500µF minimum)
+     Actually with our revised sizing at worst case: C = 136/(2*5000*5) = 2.72 mF for 5V ripple
+     Or for 25V ripple (acceptable): C = 136/(2*5000*25) = 544 µF → round to 600µF
+   - High ripple current capability (full load current flows through FC during zero states)
+   - Low ESR for minimal heating
+   - Automotive temperature range (-40 to +105°C minimum)
+   
+   OPTION A: KEMET C4AQ Series (AEC-Q200 qualified)
+   - C4AQLBW5700A3LK: 70µF, 500V, polypropylene, AEC-Q200
+   - Would need ~9 in parallel for 630µF → bulky but reliable
+   - High ripple current per unit
+   
+   OPTION B: TDK B32776 Series (DC-Link, MKP)
+   - B32776E5306K000: 30µF, 500V DC, polypropylene
+   - Would need ~20 in parallel → too many
+   - Better: B32776G8156K000: 15µF, 800V → wrong voltage class
+   
+   OPTION C: Custom film capacitor bank
+   - For 1.5mF at 500V: likely need a custom capacitor assembly
+   - TDK B32778 series goes up to 50µF at 900V
+   - More realistic: use 4x 150µF 500V = 600µF per phase
+   
+   PRACTICAL INDUSTRY SOLUTION:
+   For a 3-level FC inverter at this power level, the FC is typically:
+   - A bank of parallel film capacitors on a custom busbar
+   - Or a single large power film capacitor (e.g., from SBE or CDE)
+   - Typical volume: ~0.5-1.0 L per phase for 600µF at 500V
+   
+   REVISED FC SIZING (more realistic):
+   Using TDK FC sizing formula: C_FC = I_peak / (2 * f_sw * ΔV_FC)
+   - At 5kHz (urban, worst case): C = 136 / (2 * 5000 * 20) = 680 µF for 20V ripple (5%)
+   - At 20kHz (highway): C = 136 / (2 * 20000 * 20) = 170 µF (easily met)
+   → Select C_FC = 680 µF (not 1.5 mF as in original design)
+   → 1.5 mF is conservative but oversized (gives only 9V ripple at worst case)
+   → For industry: 680µF is more practical, 1.5mF is academic overkill
+
+3. DC-LINK CAPACITOR (MISSING FROM ORIGINAL DESIGN):
+   Requirements:
+   - Voltage: ≥ 900V (for 800V bus with margin)
+   - Capacitance: sized for ripple current, not energy storage
+   - Ripple current: I_ripple_rms ≈ 0.5 * I_load_rms * √(3) ≈ 0.5 * 96 * 1.73 ≈ 83A rms
+   - ESR: low enough to limit voltage ripple to <2% (16V pp)
+   - ESL: low enough for fast switching (< 20nH for SiC at 20kHz)
+   
+   SELECTION: TDK B32776G8306K000 (30µF, 800V, MKP)
+   - Parallel 10x for 300µF total
+   - Or use automotive-grade DC-link capacitor module
+   - Industry standard: ~200-500µF for 100kW class inverter
+   
+   ALTERNATIVE: Film capacitor module (e.g., TDK EPCOS B25620 series)
+   - Single module: 200µF, 900V, designed for inverter DC-link
+   - Ripple current: 80-120A rms
+   - This is what industry uses
+
+4. GATE DRIVER (MISSING FROM ORIGINAL DESIGN):
+   For SiC MOSFET with Kelvin source:
+   - Infineon 1ED3491MC12N: Isolated gate driver for 1200V SiC
+   - Silicon Labs Si828x: Isolated gate driver with DESAT protection
+   - Wolfspeed CGD12HB00D: Reference gate driver for XM3 modules
+   
+   Requirements:
+   - Output: +15V/-4V (per CAB450M12XM3 datasheet)
+   - Isolation: ≥ 4kV (reinforced)
+   - DESAT protection (overcurrent detection)
+   - Active Miller clamping
+   - Propagation delay < 100ns
+   - Dead-time generation: 200ns (as in our simulation)
