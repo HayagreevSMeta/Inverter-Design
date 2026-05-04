@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .col-text {
+            flex: 1.1;
+        }
+        .col-image {
+            flex: 0.9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 10px; /* reduced to save vertical space */
+            position: relative;
+            padding-left: 30px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+        .img-container {
+            width: 500px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px; /* slightly reduced */
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .caption {
+            font-size: 14px;
+            color: #4B5563;
+            text-align: center;
+            line-height: 1.4;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>FC Switching States and PD-PWM</h2>
+            
+            <div class="two-column">
+                <div class="col-text">
+                    <ul>
+                        <li><strong>3-Level Output:</strong> Synthesizes +V<sub>dc</sub>/2, 0, and -V<sub>dc</sub>/2 using four switches per phase, reducing voltage steps and dv/dt stress.</li>
+                        <li><strong>Redundant Zero States:</strong> The '0' voltage level can be achieved by two different switch combinations, providing a degree of freedom in control.</li>
+                        <li><strong>Natural Balancing:</strong> Phase-Disposition PWM (PD-PWM) naturally balances the flying capacitor voltage without complex closed-loop control.</li>
+                        <li><strong>Mechanism:</strong> By alternating between redundant zero states based on the phase current direction, the capacitor charges or discharges to maintain exactly V<sub>dc</sub>/2.</li>
+                    </ul>
+                </div>
+                
+                <div class="col-image">
+                    <div class="img-container">
+                        <img src="/home/ubuntu/Inverter-Design/Screenshot 2026-05-04 063301.png" alt="FC Inverter Schematic">
+                    </div>
+                    <div class="caption">
+                        Fig. 1. Three-phase schematic diagram of the 3-level flying capacitor traction inverter.<br>
+                        Source: Advanced Power Electronics Converters (E. Cipriano).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

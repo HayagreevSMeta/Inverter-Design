@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 60px;
+        }
+        .col {
+            flex: 1;
+        }
+        h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 30px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Topology Selection: FC vs NPC</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Thermal Symmetry & Component Count</h3>
+                    <ul>
+                        <li><strong>Asymmetric Stress in NPC:</strong> NPC suffers from unequal loss distribution between inner and outer switches, complicating cooling system design.</li>
+                        <li><strong>Symmetric Stress in FC:</strong> FC distributes voltage and current stresses symmetrically across all four switches. Every switch blocks exactly half the DC bus voltage (Vdc/2).</li>
+                        <li><strong>Reduced Conduction Loss:</strong> FC eliminates the need for clamping diodes required in the NPC, removing components from the conduction path.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <h3>Dynamic Load Balancing</h3>
+                    <ul>
+                        <li><strong>Transient Instability in NPC:</strong> The NPC neutral point is notoriously difficult to keep balanced under highly dynamic, rapidly fluctuating EV loads.</li>
+                        <li><strong>Natural Balancing in FC:</strong> FC utilizes redundant switching states to naturally balance the flying capacitor voltage.</li>
+                        <li><strong>Power Factor Independence:</strong> By actively selecting between redundant states based on the phase current direction, the FC remains balanced at Vdc/2 regardless of the load power factor.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

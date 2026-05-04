@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 60px;
+        }
+        .col {
+            flex: 1;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 30px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+        .highlight-box {
+            background-color: #F8F9FA;
+            border-left: 6px solid #2563EB;
+            padding: 40px;
+            margin-top: 10px;
+        }
+        .highlight-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 20px;
+        }
+        .highlight-box li {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .highlight-box li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>The dv/dt Problem and Multilevel Solution</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <ul>
+                        <li><strong>The 1200V Requirement:</strong> Traditional two-level voltage source inverters (2L-VSI) require 1200V-class semiconductors to operate on an 800V DC bus.</li>
+                        <li><strong>The SiC Trade-off:</strong> While Silicon Carbide (SiC) devices easily meet this voltage requirement and offer low losses, their extremely fast switching transitions generate severe <strong>dv/dt stress</strong>.</li>
+                        <li><strong>Motor Degradation:</strong> This high rate of voltage change over time leads to premature motor winding insulation failure and bearing degradation.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <div class="highlight-box">
+                        <div class="highlight-title">The Multilevel Solution</div>
+                        <ul>
+                            <li>To mitigate dv/dt stress, a <strong>multilevel inverter topology</strong> is required.</li>
+                            <li>It synthesizes the output voltage from multiple discrete levels, inherently reducing the voltage step size (e.g., 400V steps instead of 800V steps).</li>
+                            <li>This cuts the dv/dt stress in half and significantly improves the harmonic profile of the output waveform.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

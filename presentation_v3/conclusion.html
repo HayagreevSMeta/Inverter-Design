@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px; /* Reduced from 40px */
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 60px;
+        }
+        .col {
+            flex: 1;
+        }
+        h3 {
+            font-size: 24px; /* Reduced from 26px */
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 16px; /* Reduced from 20px */
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 20px; /* Reduced from 22px */
+            line-height: 1.5; /* Reduced from 1.6 */
+            margin-bottom: 16px; /* Reduced from 24px */
+            position: relative;
+            padding-left: 28px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 28px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Conclusion</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Key Findings</h3>
+                    <ul>
+                        <li><strong>Topology Validation:</strong> The 800V 3-Level Flying Capacitor topology successfully mitigates dv/dt stress and improves harmonic performance compared to 2L-VSI.</li>
+                        <li><strong>Loss Reduction:</strong> The simulated adaptive switching frequency schedule reduces urban switching losses by <strong>75%</strong> (from 84.3W to 21.1W per phase).</li>
+                        <li><strong>Thermal Improvement:</strong> The adaptive schedule reduces thermal cycling amplitude by <strong>53%</strong>, significantly extending the lifetime of the SiC power modules.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <h3>Limitations & Future Work</h3>
+                    <ul>
+                        <li><strong>Ideal Switching:</strong> The current time-domain simulation employs ideal switching transitions.</li>
+                        <li><strong>Unmodeled Parasitics:</strong> The model does not currently account for device voltage drops, discrete dead-time distortion, DC bus ripple, or stray inductance.</li>
+                        <li><strong>Future Enhancements:</strong> Incorporating these non-idealities in future iterations would yield more conservative and hardware-accurate THD and loss estimates.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

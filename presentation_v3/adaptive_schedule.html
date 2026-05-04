@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .col-text {
+            flex: 1.1;
+        }
+        .col-image {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .intro-text {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+        .highlight-box {
+            background-color: #F8F9FA;
+            border-left: 6px solid #2563EB;
+            padding: 16px 22px;
+            margin-bottom: 20px;
+        }
+        .highlight-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 8px;
+        }
+        .highlight-text {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .img-container {
+            width: 500px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Simulated Adaptive Switching Frequency</h2>
+            
+            <div class="two-column">
+                <div class="col-text">
+                    <div class="intro-text">
+                        An adaptive switching frequency schedule was developed and fully implemented within the time-domain simulation. The core methodology relies on maintaining a sufficient frequency modulation ratio (m<sub>f</sub> = f<sub>sw</sub>/f<sub>e</sub>) to ensure waveform quality while minimizing losses.
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-title">Urban Driving (Low f<sub>e</sub>)</div>
+                        <div class="highlight-text">
+                            Because f<sub>e</sub> is low (184 Hz), the controller dynamically reduces f<sub>sw</sub> to 5 kHz while maintaining a high modulation ratio (m<sub>f</sub> ≈ 27). This yields massive switching loss savings exactly when the phase current is highest.
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="col-image">
+                    <div class="img-container">
+                        <img src="/home/ubuntu/Inverter-Design/thermal_comparison_figures/fig3_Tj_bar_comparison.png" alt="Junction Temperature Comparison">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

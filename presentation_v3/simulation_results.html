@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .three-column {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+        .col {
+            flex: 1;
+        }
+        .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 28px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 28px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Simulation Results</h2>
+            
+            <div class="three-column">
+                <div class="col">
+                    <div class="section-title">FC Voltage Balancing</div>
+                    <ul>
+                        <li><strong>Pre-charge Sequence:</strong> A 20ms linear ramp is implemented to prevent inrush currents during startup.</li>
+                        <li><strong>Natural Balancing:</strong> PD-PWM successfully keeps the flying capacitor voltage tightly regulated at exactly 400V.</li>
+                        <li><strong>Ripple Budget:</strong> The peak-to-peak voltage ripple is 18.0V, successfully meeting the strict 5% (20V) design constraint.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <div class="section-title">THD Validation</div>
+                    <ul>
+                        <li><strong>Harmonic Performance:</strong> The 3-level output inherently reduces the voltage step size, significantly improving power quality.</li>
+                        <li><strong>Urban Driving:</strong> At a 5 kHz switching frequency, the output Total Harmonic Distortion (THD) is 1.92%.</li>
+                        <li><strong>Highway Driving:</strong> At a 20 kHz switching frequency, the output THD is 1.13%.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <div class="section-title">Thermal Analysis</div>
+                    <ul>
+                        <li><strong>Foster Network:</strong> A 4-layer thermal model accurately captures the transient junction temperature dynamics.</li>
+                        <li><strong>Peak Temperature:</strong> The junction temperature (T<sub>j</sub>) peaks at only 50.1°C under the adaptive schedule.</li>
+                        <li><strong>Safety Margin:</strong> This provides a massive 124.9°C safety margin to the 175°C semiconductor limit.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

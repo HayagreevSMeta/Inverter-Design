@@ -1,0 +1,168 @@
+{
+  "project_info": {
+    "title": "Vehicle Architecture-Driven Design and Comprehensive Loss Analysis of an 800V Three-Level Flying Capacitor Traction Inverter",
+    "created": 1777906537.1720998,
+    "last_updated": 1777907302.4663904,
+    "total_slides": 13
+  },
+  "slides": [
+    {
+      "id": "title",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_overview",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "800v_architecture",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "dvdt_problem",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "fc_vs_npc",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "switching_states",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "component_selection",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "vehicle_mapping",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "switching_losses",
+      "state": "edited",
+      "pageNum": 9
+    },
+    {
+      "id": "adaptive_schedule",
+      "state": "edited",
+      "pageNum": 10
+    },
+    {
+      "id": "thermal_impact",
+      "state": "edited",
+      "pageNum": 11
+    },
+    {
+      "id": "simulation_results",
+      "state": "edited",
+      "pageNum": 12
+    },
+    {
+      "id": "conclusion",
+      "state": "edited",
+      "pageNum": 13
+    }
+  ],
+  "outline": [
+    {
+      "id": "title",
+      "title": "Vehicle Architecture-Driven Design and Comprehensive Loss Analysis of an 800V Three-Level Flying Capacitor Traction Inverter",
+      "summary": "Title slide with author and affiliation",
+      "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_schematic.png - The title slide requests the FC inverter schematic as a subtle background element. Image 19 is a clear schematic of a three-level flying capacitor inverter, which is highly relevant to the presentation's core topic.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "project_overview",
+      "title": "Project Overview",
+      "summary": "Introduction to the problem statement of modeling a vehicle and evaluating losses",
+      "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_results/fig5_thermal.png; /home/ubuntu/upload/search_images/5mmhlHoV1cFG.jpg; /home/ubuntu/upload/search_images/8u7219V8NoHU.jpg - This slide discusses the 800V EV architecture. Images 3, 26, and 27 all depict EV powertrain diagrams, which visually support the discussion of high-voltage EV architecture and its components.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "800v_architecture",
+      "title": "Design Choice: 800V Architecture",
+      "summary": "Justification for 800V architecture to reduce phase currents and ohmic losses",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "dvdt_problem",
+      "title": "The dv/dt Problem and Multilevel Solution",
+      "summary": "Why 2L-VSI is insufficient at 800V and the need for multilevel topologies",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "fc_vs_npc",
+      "title": "Topology Selection: FC vs NPC",
+      "summary": "Comparison of FC and NPC highlighting thermal symmetry and natural balancing",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "switching_states",
+      "title": "FC Switching States and PD-PWM",
+      "summary": "Explanation of 3L-FC switching states and natural balancing via PD-PWM with schematic",
+      "image_plan": "/home/ubuntu/upload/search_images/UHnXuYSG0Dhr.png; /home/ubuntu/upload/search_images/6Mm7Myhb8PPL.jpg; /home/ubuntu/upload/search_images/aTmbb5bAcKaD.png - This slide discusses component selection, specifically mentioning SiC modules. Images 21, 23, and 25 are all related to SiC power modules for EV traction inverters, providing relevant visual context for the component selection.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "component_selection",
+      "title": "Component Selection",
+      "summary": "Justification for Wolfspeed CAB450M12XM3 SiC module and 680uF film capacitor",
+      "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig4_vehicle_architecture.png - This slide maps vehicle speed to inverter operating points. Image 11 directly illustrates the relationship between vehicle speed, electrical frequency, peak phase current, and switching frequency, which is highly relevant to the slide's content.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "vehicle_mapping",
+      "title": "Vehicle Architecture Mapping",
+      "summary": "Mapping mechanical vehicle speed to electrical operating points and current profiles",
+      "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig1_switching_loss_vs_speed.png - This slide discusses switching loss vs. speed. Image 10, titled 'Switching Loss vs. Vehicle Speed — Effect of fsw', directly visualizes the data and concepts presented in the slide.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "switching_losses",
+      "title": "Switching Loss Analysis",
+      "summary": "Application of Graovac-Purschel analytical method to SiC MOSFETs",
+      "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig2_loss_breakdown.png - This slide explains how adaptive switching frequency reduces urban losses. Image 12, 'Loss Breakdown: Adaptive Schedule vs. Fixed 20 kHz', clearly illustrates the reduction in losses with the adaptive schedule.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "adaptive_schedule",
+      "title": "Simulated Adaptive Switching Frequency",
+      "summary": "Methodology of adapting fsw based on fe to maintain mf and reduce losses",
+      "image_plan": "/home/ubuntu/Inverter-Design/thermal_comparison_figures/fig3_Tj_bar_comparison.png - This slide focuses on the thermal impact and junction temperature reduction. Image 17, 'Junction Temperature at Key Operating Points', directly compares junction temperatures for fixed and adaptive schedules, supporting the key points of the slide.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "thermal_impact",
+      "title": "Thermal Impact of Adaptive Schedule",
+      "summary": "Reduction in junction temperature and thermal cycling amplitude",
+      "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_results_v3/fig4_fc_voltages.png - This slide validates the design through simulation, specifically mentioning FC voltage balancing. Image 7, 'Flying Capacitor Voltages (Cfc=680uF, Vfc_ref=400V)', directly shows the FC voltage waveforms and balancing, which is crucial for this slide.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "simulation_results",
+      "title": "Simulation Results",
+      "summary": "Validation of THD, FC voltage balancing, and pre-charge sequence",
+      "image_plan": "",
+      "slide_template_key": ""
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "summary": "Summary of key findings, loss reductions, and future work limitations",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    }
+  ]
+}

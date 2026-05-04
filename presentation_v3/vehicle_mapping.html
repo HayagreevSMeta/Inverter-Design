@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        .col-text {
+            flex: 1.1;
+        }
+        .col-image {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 22px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+        .equation-box {
+            background-color: #F8F9FA;
+            border-left: 6px solid #2563EB;
+            padding: 12px 20px;
+            margin: 12px 0 12px 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 28px;
+            font-style: italic;
+            text-align: center;
+        }
+        .img-container {
+            width: 500px;
+            height: 360px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Vehicle Architecture Mapping</h2>
+            
+            <div class="two-column">
+                <div class="col-text">
+                    <ul>
+                        <li><strong>Drivetrain Parameters:</strong> Single-speed reduction gear (G = 8.19), tyre radius (r = 0.315 m), and 8-pole PMSM (p = 4).</li>
+                        <li><strong>Fundamental Frequency (f<sub>e</sub>):</strong> Directly proportional to vehicle speed.
+                            <div class="equation-box">
+                                f<sub>e</sub> = (v / r) × (G / 2π) × p
+                            </div>
+                        </li>
+                        <li><strong>Urban Driving (40 km/h):</strong> Low frequency (184 Hz) but high phase current (136 A) for acceleration. Represents the highest current stress.</li>
+                        <li><strong>Highway Cruising (120 km/h):</strong> High frequency (552 Hz) but significantly lower sustained current (51 A) due to increased load impedance.</li>
+                    </ul>
+                </div>
+                
+                <div class="col-image">
+                    <div class="img-container">
+                        <img src="/home/ubuntu/Inverter-Design/switching_loss_figures/fig1_switching_loss_vs_speed.png" alt="Switching Loss vs Speed">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

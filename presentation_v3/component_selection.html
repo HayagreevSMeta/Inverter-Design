@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
+        }
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563EB;
+            letter-spacing: 1px;
+        }
+        .content-area {
+            position: absolute;
+            top: 100px;
+            left: 80px;
+            width: 1120px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .two-column {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .col {
+            flex: 1;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 12px;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            font-size: 22px;
+            line-height: 1.45;
+            margin-bottom: 18px;
+            position: relative;
+            padding-left: 30px;
+        }
+        li::before {
+            content: "•";
+            color: #2563EB;
+            font-size: 26px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        /* layout adjustment: stack list items into two smaller groups to reduce height */
+        .col ul { max-height: 540px; overflow: visible; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-bar">ECE 595 — PURDUE UNIVERSITY</div>
+        
+        <div class="content-area">
+            <h2>Component Selection</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <div class="section-title">Active Switch: SiC Module</div>
+                    <ul>
+                        <li><strong>Wolfspeed CAB450M12XM3:</strong> 1200V, 450A SiC half-bridge module.</li>
+                        <li><strong>Voltage Margin (1200V):</strong> Large safety margin over 400V stress; meets IPC-9592B derating at 33% use.</li>
+                        <li><strong>Current Margin (450A):</strong> ~3.3x margin vs. 136A peak phase current.</li>
+                        <li><strong>Thermal Stability:</strong> Positive temp. coeff. of Rds_on (3.3→6.6mΩ) helps prevent thermal runaway.</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <div class="section-title">Flying Capacitor: Film Tech</div>
+                    <ul>
+                        <li><strong>Capacitance (680 µF):</strong> Keeps ripple within 5% (20V on 400V) at 5 kHz min switching.</li>
+                        <li><strong>Film vs. Electrolytic:</strong> Automotive-grade metallized polypropylene chosen.</li>
+                        <li><strong>Key Advantages:</strong> Very low ESR (<5 mΩ), long life, handles high-frequency ripple.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
