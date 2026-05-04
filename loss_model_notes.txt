@@ -1,0 +1,103 @@
+STANDARD ANALYTICAL SWITCHING LOSS MODEL FOR IEEE PAPERS
+=========================================================
+
+Source: Graovac, D. and Purschel, M., "IGBT Power Losses Calculation Using the 
+Data-Sheet Parameters," Infineon Application Note AN 2009-05, Jan 2009.
+
+Also: Rao, N. and Chamund, D., "Calculating Power Losses in an IGBT Module," 
+Dynex Application Note AN6156-1, 2014.
+
+This is the most widely cited method in IEEE traction inverter papers.
+
+THE METHOD:
+===========
+For a sinusoidal PWM inverter with modulation index m and power factor cos(φ):
+
+1. CONDUCTION LOSSES (per switch):
+   P_cond = Rds_on * I²_rms_switch
+   
+   For a 2-level inverter:
+   I²_rms_switch = (Ipk²/8) * (1 + (4m*cos(φ))/(3π))
+   
+   For a 3-level FC inverter (each switch conducts ~half the time of 2-level):
+   I²_rms_switch ≈ (Ipk²/16) * (1 + (4m*cos(φ))/(3π))
+   
+   Or more precisely for 3L-FC with PD-PWM:
+   Each outer switch (S1, S4): I²_rms = (Ipk²/8) * (m/(2π)) * [π/2 + (4/3)*cos(φ)]
+   Each inner switch (S2, S3): I²_rms = (Ipk²/8) * (1/(2π)) * [π - m*(π/2 + (4/3)*cos(φ))]
+
+2. SWITCHING LOSSES (per switch, per fundamental cycle):
+   P_sw = fsw * (1/2π) * ∫₀²π E_sw(i(θ), Vdc) dθ
+   
+   Where E_sw = Eon + Eoff is the total switching energy per event.
+   
+   For linear scaling (standard for SiC):
+   E_sw(I, V) = E_sw_ref * (I/I_ref) * (V/V_ref)
+   
+   Integrating over one fundamental cycle with i(θ) = Ipk*sin(θ):
+   P_sw = fsw * E_sw_ref * (Ipk/I_ref) * (V/V_ref) * (1/π)
+   
+   This simplifies to:
+   P_sw = (fsw/π) * (Eon + Eoff)_ref * (Ipk/I_ref) * (Vdc_sw/V_ref)
+   
+   Where Vdc_sw is the voltage across the switch during switching.
+   For 3L-FC: Vdc_sw = Vdc/2 = 400V (switches only block half the bus)
+
+3. FOR THE 3-LEVEL FC TOPOLOGY:
+   - Each switch only blocks Vdc/2 (not full Vdc)
+   - Each switch only switches at fsw/2 on average (due to redundant states)
+   - But with PD-PWM, each switch switches at fsw
+   
+   Total switching loss per phase (4 switches):
+   P_sw_phase = 4 * (fsw/π) * (Eon + Eoff)_ref * (Ipk/I_ref) * (Vdc/2)/V_ref
+   
+   BUT: In 3L-FC, only 2 switches commutate per transition, so:
+   P_sw_phase = 2 * (fsw/π) * (Eon + Eoff)_ref * (Ipk/I_ref) * (Vdc/2)/V_ref
+
+KEY ADVANTAGE FOR OUR PAPER:
+============================
+The switching loss scales LINEARLY with fsw. So:
+- At fsw = 5 kHz: P_sw ∝ 5000
+- At fsw = 10 kHz: P_sw ∝ 10000 (2x)
+- At fsw = 20 kHz: P_sw ∝ 20000 (4x)
+
+This makes the adaptive fsw scheduling extremely powerful:
+- Urban (high current, low fe): Use low fsw → saves switching losses
+- Highway (low current, high fe): Use high fsw → THD acceptable, losses low anyway
+
+NUMERICAL CALCULATION FOR OUR DESIGN:
+======================================
+Device: CAB450M12XM3
+Eon_ref = 25.4 mJ at I_ref=450A, V_ref=600V
+Eoff_ref = 7.51 mJ at I_ref=450A, V_ref=600V
+Esw_ref = 32.91 mJ
+
+For urban (40 km/h): Ipk = 136A, fsw = 5 kHz, Vdc_sw = 400V
+P_sw_phase = 2 * (5000/π) * 32.91e-3 * (136/450) * (400/600)
+           = 2 * 1592 * 32.91e-3 * 0.302 * 0.667
+           = 2 * 1592 * 0.006627
+           = 2 * 10.55
+           = 21.1 W per phase
+
+For highway (120 km/h): Ipk = 51A, fsw = 20 kHz, Vdc_sw = 400V
+P_sw_phase = 2 * (20000/π) * 32.91e-3 * (51/450) * (400/600)
+           = 2 * 6366 * 32.91e-3 * 0.113 * 0.667
+           = 2 * 6366 * 0.002487
+           = 2 * 15.83
+           = 31.7 W per phase
+
+For highway with FIXED 20kHz at urban current (136A):
+P_sw_phase = 2 * (20000/π) * 32.91e-3 * (136/450) * (400/600)
+           = 2 * 6366 * 32.91e-3 * 0.302 * 0.667
+           = 2 * 6366 * 0.006627
+           = 2 * 42.2
+           = 84.4 W per phase
+
+SWITCHING LOSS SAVING (urban segment):
+Fixed 20kHz: 84.4 W/phase
+Scheduled 5kHz: 21.1 W/phase
+Saving: 63.3 W/phase = 75% reduction!
+
+Total 3-phase saving: 190 W
+
+This is the KEY RESULT for the paper.
