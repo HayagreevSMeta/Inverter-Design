@@ -1,0 +1,113 @@
+FC vs NPC TOPOLOGY COMPARISON NOTES (for IEEE paper)
+=====================================================
+
+SOURCE: Infineon Community Knowledge Base (Sept 2025)
+"Comparative analysis of 3-level topologies"
+
+TABLE: Comparative analysis of 3-level topologies
+| Criteria            | NPC                        | T-Type                    | ANPC                      | FC                           |
+|---------------------|----------------------------|---------------------------|---------------------------|------------------------------|
+| Component Count     | Moderate (diodes+switches) | Low (fewer switches)      | High (active switches)    | High (capacitors+switches)   |
+| Voltage Stress      | Low (Vdc/2)                | Moderate (Vdc/2 for some) | Low (Vdc/2)               | Low (Vdc/2)                  |
+| Efficiency          | Moderate (diode losses)    | High (fewer components)   | Moderate (switching loss) | Moderate (capacitor losses)  |
+| NP Balancing        | Challenging                | Moderate                  | Good (active control)     | Good (natural balancing)     |
+| Cost                | Moderate                   | Low                       | High                      | High (capacitors)            |
+| Applications        | Medium-voltage drives,grids| Low-medium voltage        | High-power, fault-tolerant| Medium-high voltage          |
+| Scalability         | Limited (diode count)      | Limited                   | Moderate                  | Good (more capacitors)       |
+| Complexity          | Moderate (control)         | Low                       | High (control)            | High (capacitor balancing)   |
+
+KEY FINDINGS:
+- FC: "preferred for applications that require scalability and low harmonic distortion"
+- FC: "modular design and ability to minimize harmonic distortion"
+- NPC: "well-suited for medium-voltage applications where balancing cost and efficiency is crucial"
+- NPC: neutral point balancing is "Challenging" vs FC's "Good (natural balancing)"
+
+SOURCE: EPJ Web of Conferences 330, 01005 (2025) - CISTEM 2024
+"Choice between three-level NPC and FC topology under SVM control"
+- Both topologies commonly used with single voltage source
+- FC uses voltaic condensates for intermediate voltages
+- FC offers better adaptation to load variations
+- NPC generates very high-quality output voltage
+- NPC: capacitor balance management problematic for >3 levels
+
+SOURCE: Charged EVs (2023) "A Closer Look at Multilevel Traction Inverters"
+Key points for EV traction:
+- FC advantage: No clamping diodes needed (fewer components in conduction path)
+- FC advantage: All switches rated at same voltage (Vdc/2) - symmetric thermal stress
+- FC advantage: Redundant switching states enable natural voltage balancing
+- FC advantage: Modular - can scale to more levels without topology change
+- NPC disadvantage: Unequal loss distribution (outer switches carry more loss)
+- NPC disadvantage: Clamping diodes add conduction loss and are not controllable
+- NPC disadvantage: DC-link midpoint balancing requires active control
+- FC disadvantage: Large capacitors add volume, weight, and cost
+- FC disadvantage: Pre-charging circuit required at startup
+- FC disadvantage: Capacitor reliability (lifetime, ESR degradation)
+
+SOURCE: ETH Zurich (Schweizer et al.) - ECPE Workshop
+"Comparative Evaluation of Advanced 3-level Inverter/Converter Topologies"
+- At high switching frequencies (>10kHz), FC becomes more attractive because:
+  - Capacitor ripple current decreases with higher fsw
+  - Smaller capacitors can be used
+  - SiC enables high fsw operation
+
+FOR EV TRACTION SPECIFICALLY:
+=============================
+WHY FC IS CHOSEN OVER NPC:
+1. Equal voltage stress on ALL switches → same device can be used everywhere
+   (NPC has inner/outer switch asymmetry)
+2. Natural capacitor balancing via redundant states → simpler control
+   (NPC requires active DC midpoint balancing)
+3. No clamping diodes → fewer components in conduction path → lower losses
+4. Better fault tolerance → if one capacitor fails, degraded operation possible
+5. Scalability to higher levels without topology change
+6. Symmetric thermal loading → all switches see similar loss → uniform aging
+
+WHY NPC MIGHT BE PREFERRED:
+1. No bulky flying capacitors → smaller volume
+2. Lower cost (no expensive film capacitors)
+3. More mature technology in industrial drives
+4. Simpler for 3-level (complexity increases for FC at higher levels)
+
+FOR 800V EV CONTEXT:
+- 800V bus → each switch blocks 400V → 650V devices could work, but 1200V SiC 
+  gives margin for transients
+- FC natural balancing is critical because EV drive cycles have rapidly changing 
+  load conditions → NPC midpoint would drift
+- FC capacitor volume is acceptable in EV (not space-constrained like aerospace)
+- Pre-charging is already needed for DC-link capacitor in EV → adding FC pre-charge
+  is minimal additional complexity
+
+COMPONENT SELECTION RATIONALE:
+==============================
+SWITCH SELECTION (CAB450M12XM3):
+- 1200V rating: Provides 50% voltage margin over 800V bus (400V per switch)
+  - Industry standard: 2.5x blocking voltage margin for transient spikes
+  - 1200V SiC >> 650V GaN for this application (GaN limited to ~650V)
+- 450A rating: Provides 3.3x margin over 136A peak current
+  - Accounts for: transient overload, derating at temperature, SOA margin
+  - Half-bridge module: integrates 2 switches → only 2 modules per phase leg
+- SiC over Si IGBT: 
+  - 10x lower switching energy at same current
+  - No tail current → clean turn-off
+  - Enables high fsw (20kHz) without excessive loss
+  - Temperature-independent switching energy (unlike IGBT)
+- Package: 62mm industry-standard footprint
+  - Compatible with existing liquid cooling plates
+  - Low stray inductance (8nH) for clean switching
+
+CAPACITOR SELECTION (680µF):
+- Sizing equation: C = Ipk / (2 * fsw_min * ΔVfc)
+  - Ipk = 136A (worst case urban)
+  - fsw_min = 5 kHz (lowest scheduled frequency)
+  - ΔVfc = 20V (5% of 400V reference)
+  - C = 136 / (2 * 5000 * 20) = 680 µF
+- Film capacitor (not electrolytic):
+  - High ripple current capability (>100A RMS)
+  - Low ESR (<5mΩ) → minimal self-heating
+  - Long lifetime (>100,000 hours at 85°C)
+  - Self-healing capability
+  - No polarity constraint
+- Candidate parts: TDK EPCOS B32778 series, KEMET C4AQ series
+  - Both rated for automotive (AEC-Q200 qualified)
+  - 450V DC rating with 20% derating at 400V
+  - Operating temperature: -40°C to +105°C
