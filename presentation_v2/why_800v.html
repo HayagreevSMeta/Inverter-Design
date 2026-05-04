@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
@@ -27,73 +27,100 @@
             line-height: 1.3;
             margin-left: 80px;
             margin-right: 80px;
-            padding-top: 60px;
+            padding-top: 50px;
+        }
+        .course-tag {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2563EB;
+            margin-left: 80px;
+            padding-top: 12px;
+            letter-spacing: 0.5px;
         }
         .divider {
             width: 60px;
             height: 3px;
             background: #2563EB;
             margin-left: 80px;
-            margin-top: 16px;
+            margin-top: 12px;
         }
-        .two-col {
+        .intro-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+        .grid-3 {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 40px;
             margin-left: 80px;
             margin-right: 80px;
-            margin-top: 32px;
+            margin-top: 40px;
         }
-        .bullets {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .card {
+            border-top: 3px solid #000000;
+            padding-top: 20px;
         }
-        .bullet {
+        .card-num {
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 24px;
+            color: #2563EB;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #000000;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .card-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
             color: #333333;
             line-height: 1.6;
-            padding-left: 16px;
-            position: relative;
-        }
-        .bullet::before {
-            content: "\2022";
-            position: absolute;
-            left: 0;
-            color: #2563EB;
-            font-weight: 700;
-        }
-        .bold { font-weight: 700; color: #000000; }
-        .img-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 420px;
-        }
-        .img-box img {
-            width: 500px;
-            height: 400px;
-            object-fit: contain;
         }
     </style>
 </head>
 <body>
     <div class="slide-container">
         <div class="accent-bar"></div>
-        <h2>Why 800V Architecture?</h2>
+        <div class="course-tag">ECE 595 — PURDUE UNIVERSITY</div>
+        <h2>Design Choice: 800V Architecture</h2>
         <div class="divider"></div>
-        <div class="two-col">
-            <div class="bullets">
-                <div class="bullet"><span class="bold">Ultra-fast charging at 350+ kW</span> — reduces charge time from ~45 min to under 20 min compared to 400V systems.</div>
-                <div class="bullet"><span class="bold">75% reduction in I²R losses</span> — halving current for the same power output cuts ohmic losses across inverter, motor, and cabling.</div>
-                <div class="bullet"><span class="bold">50% less copper</span> — smaller conductor cross-section saves approximately 10–15 kg of vehicle weight.</div>
-                <div class="bullet"><span class="bold">Industry adoption</span> — Porsche Taycan, Hyundai E-GMP, and GM Ultium all use 800V platforms.</div>
-                <div class="bullet"><span class="bold">Challenge:</span> Higher DC-link voltage significantly increases dv/dt stress on motor insulation, demanding advanced inverter topologies.</div>
+        
+        <div class="intro-text">
+            To meet modern EV performance demands, an <span style="font-weight: 700; color: #000000;">800V DC bus architecture</span> was explicitly chosen for this design over traditional 400V systems to address three primary vehicle-level objectives:
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-num">01</div>
+                <div class="card-title">Halved Phase Currents</div>
+                <div class="card-text">
+                    Doubling the bus voltage from 400V to 800V halves the required phase current for the exact same motor power output.
+                </div>
             </div>
-            <div class="img-box">
-                <img src="/home/ubuntu/upload/search_images/8u7219V8NoHU.jpg" alt="EV Powertrain">
+            <div class="card">
+                <div class="card-num">02</div>
+                <div class="card-title">Reduced Ohmic Losses</div>
+                <div class="card-text">
+                    Lower currents drastically reduce I&sup2;R conduction losses in the traction inverter switches, motor stator windings, and high-voltage DC cabling.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-num">03</div>
+                <div class="card-title">Ultra-Fast Charging</div>
+                <div class="card-text">
+                    An 800V bus allows for DC fast charging at power levels exceeding 350 kW without requiring prohibitively thick, heavy, or liquid-cooled charging cables.
+                </div>
             </div>
         </div>
     </div>

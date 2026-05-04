@@ -4,7 +4,7 @@ Good morning, everyone. Today, we'll dive into the design and analysis of an 800
 
 # 2 - Why 800V Architecture?
 
-So, why are we seeing this shift to 800V architectures in electric vehicles? The core reason is simple: it enables ultra-fast charging, cutting typical charge times from 45 minutes down to under 20 minutes. This higher voltage also dramatically reduces I²R losses by 75% across the entire powertrain, because we're halving the current for the same power. And, a big bonus for vehicle manufacturers, it allows for 50% less copper, saving about 10 to 15 kilograms in vehicle weight. Major players like Porsche, Hyundai, and GM are already adopting 800V, but this higher voltage introduces a significant challenge: increased dv/dt stress on motor insulation, which demands advanced inverter topologies.
+So, why did we choose an 800V architecture for this design? It's all about meeting modern EV performance demands, especially for charging and efficiency. The main reason is that doubling the bus voltage effectively halves the phase current for the same power output. This dramatically reduces I squared R losses by 75% across the entire powertrain, from the inverter to the motor and even the cabling. This also means we can use 50% less copper, saving 10 to 15 kilograms in vehicle weight. Plus, 800V enables ultra-fast DC charging at over 350 kilowatts, cutting charge times from 45 minutes to under 20 minutes. But this higher voltage also brings a challenge: increased dv/dt stress on motor insulation, which leads us to our next point.
 
 # 3 - The dv/dt Problem
 
