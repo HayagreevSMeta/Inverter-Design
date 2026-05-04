@@ -7,6 +7,8 @@
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
+            display: flex;
+            flex-direction: column;
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
@@ -16,6 +18,7 @@
             color: #000000;
         }
         h2 {
+            flex: 0 0 auto;
             font-weight: 700;
             font-size: 36px;
             margin-bottom: 40px;
@@ -27,7 +30,12 @@
             line-height: 1.5;
             margin-bottom: 20px;
         }
+        ul { list-style-type: disc; }
+        ol { list-style-type: decimal; }
         ul, ol {
+            list-style-position: outside;
+            margin-left: 40px;
+            padding-left: 20px;
             margin-left: 40px;
             margin-bottom: 20px;
             font-size: 20px;
@@ -37,8 +45,19 @@
             margin-bottom: 10px;
         }
         .two-col {
+            flex: 1 1 auto;
+            align-items: center;
             display: grid;
             grid-template-columns: 1fr 1fr;
+            min-width: 0;
+            gap: 40px;
+        }
+        .two-col-wide-right {
+            flex: 1 1 auto;
+            align-items: center;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            min-width: 0;
             gap: 40px;
         }
         table {
@@ -57,6 +76,8 @@
             font-weight: bold;
         }
         .chart-container {
+            max-width: 100%;
+            min-width: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -75,19 +96,20 @@
 
 <h2>Vehicle Architecture Mapping</h2>
 
-<div class="two-col">
-<div>
-<div>Drivetrain parameters dictate the operating points: <span class="bold">G = 8.19</span> gear ratio, <span class="bold">r = 0.315m</span> tyre radius, <span class="bold">p = 4</span> pole pairs.</div>
-<div>Electrical frequency (fe) is directly proportional to vehicle speed (v):
-                    <div>fe = (v/r) × (G/2π) × p</div>
-</div>
-<div>Using an RL load model (R = 1.3Ω, L = 2mH), <span class="bold">current decreases with speed</span> as load impedance increases.</div>
-<div><span class="bold">Urban (40 km/h):</span> fe = 184 Hz, Ipk = 136A — highest thermal stress.</div>
-<div><span class="bold">Highway (120 km/h):</span> fe = 552 Hz, Ipk = 51A — lowest loss but highest frequency demand.</div>
-</div>
-<div>
-<img alt="Vehicle Architecture Mapping" src="/home/ubuntu/Inverter-Design/switching_loss_figures/fig4_vehicle_architecture.png"/>
-</div>
+<div class="two-col-wide-right">
+    <div>
+        <p>Drivetrain parameters dictate the operating points: <strong>G = 8.19</strong> gear ratio, <strong>r = 0.315m</strong> tyre radius, <strong>p = 4</strong> pole pairs.</p>
+        <p>Electrical frequency (fe) is directly proportional to vehicle speed (v):<br>
+        <strong>fe = (v/r) × (G/2π) × p</strong></p>
+        <p>Using an RL load model (R = 1.3Ω, L = 2mH), <strong>current decreases with speed</strong> as load impedance increases.</p>
+        <ul>
+            <li><strong>Urban (40 km/h):</strong> fe = 184 Hz, Ipk = 136A — highest thermal stress.</li>
+            <li><strong>Highway (120 km/h):</strong> fe = 552 Hz, Ipk = 51A — lowest loss but highest frequency demand.</li>
+        </ul>
+    </div>
+    <div class="chart-container">
+        <img alt="Vehicle Architecture Mapping" src="/home/ubuntu/Inverter-Design/switching_loss_figures/fig4_vehicle_architecture.png"/>
+    </div>
 </div>
 </div>
 </body>
