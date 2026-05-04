@@ -7,8 +7,6 @@
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
-            display: flex;
-            flex-direction: column;
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
@@ -18,7 +16,6 @@
             color: #000000;
         }
         h2 {
-            flex: 0 0 auto;
             font-weight: 700;
             font-size: 36px;
             margin-bottom: 40px;
@@ -30,12 +27,7 @@
             line-height: 1.5;
             margin-bottom: 20px;
         }
-        ul { list-style-type: disc; }
-        ol { list-style-type: decimal; }
         ul, ol {
-            list-style-position: outside;
-            margin-left: 40px;
-            padding-left: 20px;
             margin-left: 40px;
             margin-bottom: 20px;
             font-size: 20px;
@@ -45,11 +37,8 @@
             margin-bottom: 10px;
         }
         .two-col {
-            flex: 1 1 auto;
-            align-items: center;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-width: 0;
             gap: 40px;
         }
         table {
@@ -68,8 +57,6 @@
             font-weight: bold;
         }
         .chart-container {
-            max-width: 100%;
-            min-width: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,27 +77,37 @@
 <h2>Project Overview</h2>
 
 <div class="two-col">
-    <div>
-        <p>In an EV traction inverter, the <strong>fundamental frequency is not fixed</strong> — it follows the vehicle operating condition because it is directly tied to motor speed via <strong>f<sub>e</sub> = (P/2) · n<sub>mech</sub> / 60</strong>.</p>
-        <p>Under <strong>city driving</strong>, the inverter operates at low f<sub>e</sub> with high current.<br>
-        Under <strong>highway driving</strong>, f<sub>e</sub> is higher but current is lower. The <strong>switching frequency can also be scheduled</strong> according to operating condition rather than kept constant, balancing efficiency, torque quality, and switching stress across the drive cycle.</p>
-        <br>
-        <p><strong>System Parameters:</strong></p>
-        <ul>
-            <li><strong>Load:</strong> 3-phase RL (R = 1.3 Ω, L = 2 mH)</li>
-            <li><strong>DC Bus:</strong> 800V battery source</li>
-            <li><strong>Deliverables:</strong> IEEE conference paper</li>
-        </ul>
-    </div>
-    <div>
-        <p><strong>Project Objectives:</strong></p>
-        <ol>
-            <li>Research and select a suitable <strong>three-level inverter topology</strong>, specifying components (voltage, current, frequency)</li>
-            <li>Develop a detailed <strong>simulation model</strong> including DC source, switching devices, and capacitors</li>
-            <li><strong>Compare semiconductor temperature</strong> under adaptive f<sub>sw</sub> vs. constant 20 kHz baseline</li>
-            <li>Analyze output current waveforms and verify expected <strong>THD performance</strong></li>
-        </ol>
-    </div>
+<div>
+<div>
+                    In an EV traction inverter, the <span class="bold">fundamental frequency is not fixed</span> — it follows the vehicle operating condition because it is directly tied to motor speed via <span class="bold">f<sub>e</sub> = (P/2) · n<sub>mech</sub> / 60</span>.
+                </div>
+<div style="padding-top: 14px;">
+                    Under <span class="bold">city driving</span>, the inverter operates at low f<sub>e</sub> with high current. Under <span class="bold">highway driving</span>, f<sub>e</sub> is higher but current is lower. The <span class="bold">switching frequency can also be scheduled</span> according to operating condition rather than kept constant, balancing efficiency, torque quality, and switching stress across the drive cycle.
+                </div>
+<p>Load:3-phase RL — R = 1.3 Ω, L = 2 mHDC Bus:800V battery sourceDeliverables:IEEE conference paper</p>
+</div>
+<div>
+<div>Project Objectives</div>
+<ul>
+<li>
+<span>1</span>
+<span>Research and select a suitable <span style="font-weight:700;">three-level inverter topology</span>, specifying components (voltage, current, frequency)</span>
+</li>
+<li>
+<span>2</span>
+<span>Develop a detailed <span style="font-weight:700;">simulation model</span> including DC source, switching devices, and capacitors</span>
+</li>
+<li>
+<span>3</span>
+<span><span style="font-weight:700;">Compare semiconductor temperature</span> under adaptive f<sub>sw</sub> vs. constant 20 kHz baseline</span>
+</li>
+<li>
+<span>4</span>
+<span>Analyze output current waveforms and verify expected <span style="font-weight:700;">THD performance</span></span>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </body>
 </html>
