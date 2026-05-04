@@ -1,0 +1,41 @@
+EXPANDED REFERENCES FOR IEEE PAPER
+====================================
+
+KEY PAPERS FOUND:
+
+1. SiC MOSFET Loss Modeling (validates Graovac method for SiC):
+   - Gurpinar & Ozpineci, "Loss analysis and mapping of a SiC MOSFET based segmented two-level three-phase inverter for EV traction systems," IEEE Transportation Electrification Conf., 2018.
+     DOI: 10.1109/ITEC.2018.8450188 (Cited by 61)
+     KEY: Uses analytical loss model with SiC datasheet parameters for EV traction. Validates the approach.
+   
+   - Taha et al., "Efficiency evaluation of 2L and 3L SiC-based traction inverters for 400V and 800V electric vehicle powertrains," IEEE ECCE, 2021.
+     DOI: 10.1109/ECCE47101.2021.9490082 (Cited by 31)
+     KEY: Directly compares 2L vs 3L SiC inverters at 400V and 800V. Perfect for our context.
+
+   - MDPI Energies paper: "A Novel Analytical Formulation of SiC-MOSFET Losses to Size High-Efficiency Three-Phase Inverters," Energies, vol. 16, no. 2, 2023.
+     KEY: Adapts the classical analytical loss formulation specifically for SiC MOSFETs.
+
+2. 800V EV Architecture:
+   - Aghabali et al., "800-V electric vehicle powertrains: Review and analysis of benefits, challenges, and future trends," IEEE Trans. Transportation Electrification, 2020.
+     DOI: 10.1109/TTE.2020.3044938 (Cited by 516!)
+     KEY: THE definitive reference for 800V EV architecture. 516 citations.
+
+3. Flying Capacitor Inverter for EV:
+   - Cittanti et al., "Analysis and Conceptualization of a 800 V 100 kVA Full-GaN Three-Level Flying Capacitor Inverter for Next-Generation EV," IEEE, 2022.
+     DOI: 10.1109/JESTPE.2022.3186588 (Cited by 8)
+     KEY: 800V 3L-FC inverter specifically for EV. Directly relevant.
+
+   - Rohner et al., "Comparative Evaluation of Three-Phase Three-Level GaN Multi-Level Flying Capacitor Inverters," IEEE Access, 2024. (Cited by 19)
+     KEY: Compares FC topologies, discusses natural balancing.
+
+4. dv/dt and Multilevel:
+   - Li et al., "Simple Control Strategies for dv/dt Reduction in SiC Modular Multilevel Converters," IEEE, 2019.
+     DOI: 10.1109/TPEL.2019.2960251
+
+WHY GRAOVAC-PURSCHEL APPLIES TO SiC:
+- The method calculates average switching loss as: Psw = fsw/pi * Esw_ref * (Ipk/Iref) * (Vdc/Vref)
+- This is topology-agnostic and device-agnostic — it only needs Esw from the datasheet
+- For IGBTs: Esw scales non-linearly with current (quadratic)
+- For SiC MOSFETs: Esw scales approximately linearly with current (simpler)
+- The Gurpinar 2018 and Taha 2021 papers both use this exact approach with SiC devices
+- The key adaptation: SiC conduction uses P = I^2 * Rds_on (resistive) instead of P = Vce_sat * I + r * I^2 (IGBT threshold + resistive)

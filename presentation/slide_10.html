@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thermal Impact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Merriweather:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #FDFDFD;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 100px repeat(4, 1fr) 1fr;
+            grid-template-columns: repeat(6, 1fr);
+        }
+        /* 6-row modular grid outlined by 0.5px gray strokes */
+        .grid-line-h { position: absolute; left: 0; right: 0; height: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .grid-line-v { position: absolute; top: 0; bottom: 0; width: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .gl-h1 { top: calc(100% / 6 * 1); }
+        .gl-h2 { top: calc(100% / 6 * 2); }
+        .gl-h3 { top: calc(100% / 6 * 3); }
+        .gl-h4 { top: calc(100% / 6 * 4); }
+        .gl-h5 { top: calc(100% / 6 * 5); }
+        
+        .gl-v1 { left: calc(100% / 6 * 1); }
+        .gl-v2 { left: calc(100% / 6 * 2); }
+        .gl-v3 { left: calc(100% / 6 * 3); }
+        .gl-v4 { left: calc(100% / 6 * 4); }
+        .gl-v5 { left: calc(100% / 6 * 5); }
+
+        .title-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 1 / 2;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            padding-right: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: #1C1C1C;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-wrapper {
+            grid-column: 1 / 4;
+            grid-row: 2 / 6;
+            padding-left: 40px;
+            padding-right: 20px;
+            padding-top: 30px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .text-block {
+            font-family: 'Merriweather', serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: #595959;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .text-block::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4361EE;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #F72585;
+            font-weight: bold;
+        }
+
+        .image-wrapper {
+            grid-column: 4 / 7;
+            grid-row: 2 / 6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+            height: 480px;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Accent geometric shapes */
+        .shape-1 {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #4361EE;
+            top: 20px;
+            left: 20px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+
+        .shape-2 {
+            position: absolute;
+            width: 120px;
+            height: 30px;
+            background-color: #F72585;
+            bottom: 40px;
+            left: 40px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Grid Lines -->
+        <div class="grid-line-h gl-h1"></div>
+        <div class="grid-line-h gl-h2"></div>
+        <div class="grid-line-h gl-h3"></div>
+        <div class="grid-line-h gl-h4"></div>
+        <div class="grid-line-h gl-h5"></div>
+        
+        <div class="grid-line-v gl-v1"></div>
+        <div class="grid-line-v gl-v2"></div>
+        <div class="grid-line-v gl-v3"></div>
+        <div class="grid-line-v gl-v4"></div>
+        <div class="grid-line-v gl-v5"></div>
+
+        <div class="shape-1"></div>
+        <div class="title-wrapper">
+            <h2>adaptive schedule reduces tj from 63°c to 54°c in urban driving, extending module lifetime</h2>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-block">
+                <span class="highlight">Urban Tj reduction:</span> Junction temperature drops from 63.2°C (fixed 20 kHz) to 53.5°C (adaptive 5 kHz) — a <span class="highlight">ΔTj of 9.7°C</span>.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Peak torque Tj reduction:</span> At 20 km/h, the temperature drops from 87.4°C to 71.3°C — a massive <span class="highlight">ΔTj of 16.2°C</span>.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Thermal cycling amplitude</span> over a mixed drive cycle is reduced by 53% (from 16.4°C to 7.7°C).
+            </div>
+            <div class="text-block">
+                Per the Coffin-Manson fatigue model, this reduced thermal cycling directly and significantly <span class="highlight">extends solder fatigue lifetime</span>.
+            </div>
+            <div class="text-block">
+                All operating points remain well below the module's Tj_max of 175°C, providing <span class="highlight">>100°C of thermal margin</span>.
+            </div>
+            <div class="shape-2"></div>
+        </div>
+
+        <div class="image-wrapper">
+            <img src="/home/ubuntu/Inverter-Design/thermal_comparison_figures/fig3_Tj_bar_comparison.png" alt="Junction Temperature Comparison">
+        </div>
+    </div>
+</body>
+</html>

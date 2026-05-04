@@ -1,0 +1,8 @@
+Textbook schematic from "Advanced Power Electronics Converters" by Euzeli Cipriano
+File: Screenshot 2026-05-04 063301.png
+Content: Full 3-phase 3-level flying capacitor inverter circuit schematic
+- Shows all 3 phase legs (a, b, c) with 4 switches each (q1, q2, q2_bar, q1_bar)
+- Flying capacitors between inner switch pairs
+- DC bus with +Vdc, 0, -Vdc rails
+- RL load on output (va, vb, vc with ia, ib, ic into inductors)
+- Neutral point n

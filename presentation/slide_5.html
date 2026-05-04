@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FC Inverter Topology and Switching States</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Merriweather:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #FDFDFD;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 120px repeat(4, 1fr) 1fr;
+            grid-template-columns: repeat(6, 1fr);
+        }
+        .grid-line-h { position: absolute; left: 0; right: 0; height: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .grid-line-v { position: absolute; top: 0; bottom: 0; width: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .gl-h1 { top: calc(100% / 6 * 1); }
+        .gl-h2 { top: calc(100% / 6 * 2); }
+        .gl-h3 { top: calc(100% / 6 * 3); }
+        .gl-h4 { top: calc(100% / 6 * 4); }
+        .gl-h5 { top: calc(100% / 6 * 5); }
+        .gl-v1 { left: calc(100% / 6 * 1); }
+        .gl-v2 { left: calc(100% / 6 * 2); }
+        .gl-v3 { left: calc(100% / 6 * 3); }
+        .gl-v4 { left: calc(100% / 6 * 4); }
+        .gl-v5 { left: calc(100% / 6 * 5); }
+
+        .title-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 1 / 2;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            padding-right: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: #1C1C1C;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Reduced inner padding and gaps to remove overflow */
+        .content-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 2 / 6;
+            padding-left: 28px;
+            padding-right: 28px;
+            padding-top: 24px; /* reduced from 40px */
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 18px; /* reduced from 28px */
+        }
+
+        .text-block {
+            font-family: 'Merriweather', serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: #595959;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 12px; /* reduced */
+        }
+
+        .text-block::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4361EE;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #1C1C1C;
+            font-weight: bold;
+        }
+
+        .states-box {
+            background-color: #F5F5F5;
+            padding: 12px; /* reduced */
+            margin-left: 12px; /* reduced */
+            border-left: 4px solid #F72585;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #1C1C1C;
+            line-height: 1.6; /* slightly tighter */
+        }
+
+        /* Move decorative shapes upward and shrink them so they don't extend past 720px */
+        .shape-1 {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #4361EE;
+            top: 520px; /* positioned using top to avoid pushing bottom */
+            right: 40px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #F72585;
+            top: 140px; /* keep it high */
+            right: 120px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Grid Lines -->
+        <div class="grid-line-h gl-h1"></div>
+        <div class="grid-line-h gl-h2"></div>
+        <div class="grid-line-h gl-h3"></div>
+        <div class="grid-line-h gl-h4"></div>
+        <div class="grid-line-h gl-h5"></div>
+        
+        <div class="grid-line-v gl-v1"></div>
+        <div class="grid-line-v gl-v2"></div>
+        <div class="grid-line-v gl-v3"></div>
+        <div class="grid-line-v gl-v4"></div>
+        <div class="grid-line-v gl-v5"></div>
+
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+        
+        <div class="title-wrapper">
+            <h2>four switches and one flying capacitor produce three output voltage levels</h2>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-block">
+                <span class="highlight">Single phase leg structure:</span> Four switches (S1-S2-S3-S4) connected in series, with the flying capacitor (Cfc) connected between the S1/S2 and S3/S4 junctions.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Output voltage levels:</span> The topology synthesizes three distinct voltage levels at the output node: +Vdc/2, 0, and -Vdc/2.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Redundant zero states enable natural balancing:</span>
+                <div class="states-box">
+                    <strong>State 1:</strong> S1=1, S2=0, S3=1, S4=0 &rarr; Output = 0V (Charges Cfc)<br>
+                    <strong>State 2:</strong> S1=0, S2=1, S3=0, S4=1 &rarr; Output = 0V (Discharges Cfc)
+                </div>
+            </div>
+            <div class="text-block">
+                <span class="highlight">PD-PWM modulation:</span> Phase Disposition PWM actively selects between the redundant zero states based on the current direction to maintain Vfc at exactly Vdc/2.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Pre-charge requirement:</span> A 20ms linear ramp is required to charge Vfc to 400V before active switching commences, preventing severe overvoltage across the inner switches.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+TARGETED REFERENCES FOR SPECIFIC DESIGN CHOICES
+=================================================
+
+1. VOLTAGE DERATING (Why 1200V device for 400V/switch):
+   - IPC-9592B standard: recommends 80% voltage derating for power semiconductors
+   - Vishay AN861: "Industry standards such as IPC9592 recommend 80% derating on operating voltage"
+   - Wolfspeed article: "a 1,200V-rated SiC MOSFET is working on a 700 to 800V bus"
+   - Our case: 400V per switch / 1200V rating = 33% utilization = very conservative
+   - Reasoning: accounts for voltage overshoot from stray inductance during switching transients
+   REF: IPC-9592B, "Requirements for Power Conversion Devices," IPC, 2012.
+
+2. PD-PWM NATURAL BALANCING (Why PD-PWM for FC):
+   - Shukla & Joshi, "Natural Balancing of Flying Capacitor Voltages in Multicell Inverter Under PD Carrier-Based PWM," IEEE Trans. Power Electron., vol. 26, no. 6, 2011. (Cited by 142)
+   - McGrath & Holmes, "Enhanced voltage balancing of a flying capacitor multilevel converter using PD modulation," IEEE Trans. Power Electron., vol. 26, no. 7, 2011. (Cited by 173)
+   - Lee et al., "The carrier-based PWM method for voltage balance of flying capacitor multilevel inverter," IEEE PESC, 2001. (Cited by 135)
+   KEY FINDING: PD-PWM creates natural balancing because redundant switching states automatically charge/discharge the FC in the correct direction based on current polarity.
+
+3. FILM vs ELECTROLYTIC CAPACITOR (Why film for FC):
+   - Film caps: ESR ~1-5 mΩ vs electrolytic ~50-200 mΩ
+   - Film caps: lifetime 100,000+ hours vs electrolytic 5,000-20,000 hours
+   - Film caps: no electrolyte dry-out failure mode
+   - Film caps: can handle high ripple current without significant heating
+   - PSMA report: "Film capacitors are widely assumed to be more reliable than aluminum electrolytic capacitors"
+   REF: H. Wang and F. Blaabjerg, "Reliability of capacitors for DC-link applications in power electronic converters—An overview," IEEE Trans. Ind. Appl., vol. 50, no. 5, 2014.
+
+4. FREQUENCY MODULATION RATIO (Why mf > 21):
+   - Standard textbook guidance (Mohan, Holmes & Lipo): mf should be odd integer ≥ 9 for single-phase, ≥ 21 for three-phase to push harmonics above audible range and ensure symmetry
+   - For multilevel: effective mf per level is higher, so lower fsw is acceptable
+   - ResearchGate paper: "Selection Method of Modulation Index and Frequency ratio for Getting the SPWM Minimum Harmonic"
+   REF: N. Mohan, T. Undeland, and W. Robbins, Power Electronics: Converters, Applications, and Design, 3rd ed. Wiley, 2003.
+
+5. SiC Rds_on POSITIVE TEMPERATURE COEFFICIENT:
+   - Wolfspeed forum: "thanks to the RDS_ON positive temperature coefficient, the power loss and temperature increase will be limited"
+   - Nexperia AN90048: "positive temperature coefficient causes an increase [in Rds_on], which reduces current through that device"
+   - This is a KEY advantage of SiC over Si IGBTs for parallel operation and thermal stability
+   - Our datasheet: Rds_on doubles from 3.3mΩ (25°C) to ~6.6mΩ (175°C) — factor of 2x
+   REF: Wolfspeed CAB450M12XM3 datasheet, Rev. 3, 2024.
+
+6. WHY THE IGBT LOSS MODEL APPLIES TO SiC:
+   - The Graovac-Purschel method is a mathematical framework for computing average losses over a fundamental cycle
+   - The math (duty cycle weighting, average/RMS current extraction) is TOPOLOGY-dependent, not DEVICE-dependent
+   - Device-specific parameters are plugged in:
+     * IGBT: Pcond = Vce_sat * Iavg + r_ce * Irms^2 (threshold + resistive)
+     * SiC MOSFET: Pcond = Rds_on * Irms^2 (purely resistive — simpler!)
+     * Switching: Both use Psw = fsw/pi * Esw(Ipk) * Vdc/Vref — identical formula
+   - Gurpinar & Ozpineci (IEEE ITEC 2018) and Taha et al. (IEEE ECCE 2021) both use this exact approach with SiC devices
+   REF: E. Gurpinar and B. Ozpineci, "Loss analysis and mapping of a SiC MOSFET based inverter for EV traction systems," IEEE ITEC, 2018.

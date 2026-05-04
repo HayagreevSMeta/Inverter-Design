@@ -1,128 +1,89 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
             position: relative;
-        }
-        .accent-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: #2563EB;
+            padding: 60px 80px;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
         }
         h2 {
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 28px;
-            color: #000000;
-            line-height: 1.3;
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-top: 50px;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
         }
-        .course-tag {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            color: #2563EB;
-            margin-left: 80px;
-            padding-top: 12px;
-            letter-spacing: 0.5px;
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #2563EB;
-            margin-left: 80px;
-            margin-top: 12px;
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.5;
         }
-        .intro-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            color: #333333;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 24px;
-            line-height: 1.6;
+        li {
+            margin-bottom: 10px;
         }
-        .grid-3 {
+        .two-col {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 40px;
         }
-        .card {
-            border-top: 3px solid #000000;
-            padding-top: 20px;
-        }
-        .card-num {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: #2563EB;
-            margin-bottom: 12px;
-        }
-        .card-title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
             font-size: 18px;
-            color: #000000;
-            margin-bottom: 12px;
-            line-height: 1.3;
         }
-        .card-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            color: #333333;
-            line-height: 1.6;
+        th, td {
+            border: 1px solid #000000;
+            padding: 12px;
+            text-align: left;
         }
-    </style>
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+        .chart-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .bold { font-weight: bold; }
+        </style>
 </head>
 <body>
-    <div class="slide-container">
-        <div class="accent-bar"></div>
-        <div class="course-tag">ECE 595 — PURDUE UNIVERSITY</div>
-        <h2>Design Choice: 800V Architecture</h2>
-        <div class="divider"></div>
-        
-        <div class="intro-text">
+<div class="slide-container">
+
+
+<h2>Design Choice: 800V Architecture</h2>
+
+<div>
             To meet modern EV performance demands, an <span style="font-weight: 700; color: #000000;">800V DC bus architecture</span> was explicitly chosen for this design over traditional 400V systems to address three primary vehicle-level objectives:
         </div>
-
-        <div class="grid-3">
-            <div class="card">
-                <div class="card-num">01</div>
-                <div class="card-title">Halved Phase Currents</div>
-                <div class="card-text">
-                    Doubling the bus voltage from 400V to 800V halves the required phase current for the exact same motor power output.
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-num">02</div>
-                <div class="card-title">Reduced Ohmic Losses</div>
-                <div class="card-text">
-                    Lower currents drastically reduce I&sup2;R conduction losses in the traction inverter switches, motor stator windings, and high-voltage DC cabling.
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-num">03</div>
-                <div class="card-title">Ultra-Fast Charging</div>
-                <div class="card-text">
-                    An 800V bus allows for DC fast charging at power levels exceeding 350 kW without requiring prohibitively thick, heavy, or liquid-cooled charging cables.
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+<p><b>Halved Phase Currents: </b>Doubling the bus voltage from 400V to 800V halves the required phase current for the exact same motor power output.</p>
+<p><b>Reduced Ohmic Losses: </b>Lower currents drastically reduce I²R conduction losses in the traction inverter switches, motor stator windings, and high-voltage DC cabling.</p>
+<p><b>Ultra-Fast Charging: </b>An 800V bus allows for DC fast charging at power levels exceeding 350 kW without requiring prohibitively thick, heavy, or liquid-cooled charging cables.</p>
+</div>
+</div>
 </body>
 </html>

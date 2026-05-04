@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conclusion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Merriweather:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #FDFDFD;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 120px repeat(4, 1fr) 1fr;
+            grid-template-columns: repeat(6, 1fr);
+        }
+        /* 6-row modular grid outlined by 0.5px gray strokes */
+        .grid-line-h { position: absolute; left: 0; right: 0; height: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .grid-line-v { position: absolute; top: 0; bottom: 0; width: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .gl-h1 { top: calc(100% / 6 * 1); }
+        .gl-h2 { top: calc(100% / 6 * 2); }
+        .gl-h3 { top: calc(100% / 6 * 3); }
+        .gl-h4 { top: calc(100% / 6 * 4); }
+        .gl-h5 { top: calc(100% / 6 * 5); }
+        
+        .gl-v1 { left: calc(100% / 6 * 1); }
+        .gl-v2 { left: calc(100% / 6 * 2); }
+        .gl-v3 { left: calc(100% / 6 * 3); }
+        .gl-v4 { left: calc(100% / 6 * 4); }
+        .gl-v5 { left: calc(100% / 6 * 5); }
+
+        .title-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 1 / 2;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            padding-right: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: #1C1C1C;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 2 / 6;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 40px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .text-block {
+            font-family: 'Merriweather', serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: #595959;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .text-block::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4361EE;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #1C1C1C;
+            font-weight: bold;
+        }
+
+        .highlight-accent {
+            color: #F72585;
+            font-weight: bold;
+        }
+
+        /* Accent geometric shapes */
+        .shape-1 {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #4361EE;
+            bottom: 40px;
+            right: 40px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            background-color: #F72585;
+            top: 140px;
+            right: 120px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Grid Lines -->
+        <div class="grid-line-h gl-h1"></div>
+        <div class="grid-line-h gl-h2"></div>
+        <div class="grid-line-h gl-h3"></div>
+        <div class="grid-line-h gl-h4"></div>
+        <div class="grid-line-h gl-h5"></div>
+        
+        <div class="grid-line-v gl-v1"></div>
+        <div class="grid-line-v gl-v2"></div>
+        <div class="grid-line-v gl-v3"></div>
+        <div class="grid-line-v gl-v4"></div>
+        <div class="grid-line-v gl-v5"></div>
+
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+        
+        <div class="title-wrapper">
+            <h2>mapping vehicle speed to inverter parameters enables intelligent optimization impossible with fixed-frequency designs</h2>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="text-block">
+                <span class="highlight">800V architecture</span> is justified by ultra-fast charging speed, reduced cable weight, and overall efficiency gains.
+            </div>
+            <div class="text-block">
+                <span class="highlight">FC topology</span> was selected over NPC for its superior thermal symmetry and natural balancing capabilities under dynamic EV loads.
+            </div>
+            <div class="text-block">
+                <span class="highlight-accent">Adaptive fsw schedule:</span> Achieved a <span class="highlight">75% switching loss reduction</span> in urban driving, saving 190W (3-phase) compared to a fixed 20 kHz baseline.
+            </div>
+            <div class="text-block">
+                <span class="highlight-accent">Thermal benefit:</span> Delivered a <span class="highlight">9.7°C Tj reduction</span> and 53% less thermal cycling, directly extending the power module's fatigue lifetime.
+            </div>
+            <div class="text-block">
+                <span class="highlight">All metrics validated:</span> Time-domain simulation confirmed THD < 2%, FC balance < 0.04V error, and Tj < 54°C with >120°C thermal margin.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Future work:</span> Experimental validation of the adaptive schedule and thermal models on a hardware prototype.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,166 +1,154 @@
 {
   "project_info": {
-    "title": "800V Three-Level Flying Capacitor Traction Inverter",
-    "created": 1777901257.5179384,
-    "last_updated": 1777903862.1934905,
-    "total_slides": 13
+    "title": "Title Slide",
+    "created": 1777900837.1342516,
+    "last_updated": 1777901132.460039,
+    "total_slides": 12
   },
   "slides": [
     {
-      "id": "title",
+      "id": "slide_1",
       "state": "edited",
       "pageNum": 1
     },
     {
-      "id": "project_intro",
+      "id": "slide_2",
       "state": "edited",
       "pageNum": 2
     },
     {
-      "id": "why_800v",
+      "id": "slide_3",
       "state": "edited",
       "pageNum": 3
     },
     {
-      "id": "dvdt_problem",
+      "id": "slide_4",
       "state": "edited",
       "pageNum": 4
     },
     {
-      "id": "fc_vs_npc",
+      "id": "slide_5",
       "state": "edited",
       "pageNum": 5
     },
     {
-      "id": "switching_states",
+      "id": "slide_6",
       "state": "edited",
       "pageNum": 6
     },
     {
-      "id": "components",
+      "id": "slide_7",
       "state": "edited",
       "pageNum": 7
     },
     {
-      "id": "vehicle_mapping",
+      "id": "slide_8",
       "state": "edited",
       "pageNum": 8
     },
     {
-      "id": "switching_losses",
+      "id": "slide_9",
       "state": "edited",
       "pageNum": 9
     },
     {
-      "id": "adaptive_schedule",
+      "id": "slide_10",
       "state": "edited",
       "pageNum": 10
     },
     {
-      "id": "thermal_impact",
+      "id": "slide_11",
       "state": "edited",
       "pageNum": 11
     },
     {
-      "id": "simulation",
+      "id": "slide_12",
       "state": "edited",
       "pageNum": 12
-    },
-    {
-      "id": "conclusion",
-      "state": "edited",
-      "pageNum": 13
     }
   ],
   "outline": [
     {
-      "id": "title",
-      "title": "800V Three-Level Flying Capacitor Traction Inverter",
-      "summary": "Title slide with author name Hayagreev S. and subtitle: Design and Comprehensive Loss Analysis",
+      "id": "slide_1",
+      "title": "Title Slide",
+      "summary": "Title slide with author information and subtle background image.",
       "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_schematic.png - The title slide requests the FC inverter schematic as a subtle background element. Image 19 is a clear schematic of a three-level flying capacitor inverter, which is highly relevant to the presentation's core topic.",
       "slide_template_key": ""
     },
     {
-      "id": "project_intro",
-      "title": "Project Overview",
-      "summary": "ECE 595 project objectives: specify and simulate a 3-level inverter for EV traction, compare semiconductor temperature under adaptive vs constant switching frequency, RL load (R=1.3Ω, L=2mH), and present findings in IEEE format.",
-      "image_plan": "",
-      "slide_template_key": ""
-    },
-    {
-      "id": "why_800v",
-      "title": "Why 800V Architecture?",
-      "summary": "Justification for 800V: ultra-fast charging (350+ kW), 75% I²R loss reduction, 50% less copper (10-15 kg saved). Challenge: higher dv/dt stress on motor insulation.",
+      "id": "slide_2",
+      "title": "Why 800V? The Case for High-Voltage EV Architecture",
+      "summary": "Explanation of the benefits of 800V architectures, including faster charging and reduced cable weight.",
       "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_results/fig5_thermal.png; /home/ubuntu/upload/search_images/5mmhlHoV1cFG.jpg; /home/ubuntu/upload/search_images/8u7219V8NoHU.jpg - This slide discusses the 800V EV architecture. Images 3, 26, and 27 all depict EV powertrain diagrams, which visually support the discussion of high-voltage EV architecture and its components.",
       "slide_template_key": ""
     },
     {
-      "id": "dvdt_problem",
-      "title": "The dv/dt Problem",
-      "summary": "2-level VSI at 800V produces dv/dt >16 kV/µs, exceeding motor insulation limits by 13x. 3-level topology halves voltage step to 400V, reducing dv/dt to ~8 kV/µs.",
+      "id": "slide_3",
+      "title": "The dv/dt Problem — Why Multilevel?",
+      "summary": "Discussion of the dv/dt stress on motor insulation at 800V and the need for multilevel topologies.",
       "image_plan": "",
       "slide_template_key": ""
     },
     {
-      "id": "fc_vs_npc",
-      "title": "Topology Selection: FC vs NPC",
-      "summary": "FC chosen over NPC for thermal symmetry (all switches block 400V equally), natural capacitor balancing via redundant states, and simpler cooling. NPC has unequal loss distribution and difficult neutral point balance.",
+      "id": "slide_4",
+      "title": "Topology Selection — FC vs NPC",
+      "summary": "Comparison of FC and NPC topologies, highlighting FC's thermal symmetry and natural balancing.",
       "image_plan": "",
       "slide_template_key": ""
     },
     {
-      "id": "switching_states",
-      "title": "FC Switching States and PD-PWM",
-      "summary": "Four switches produce 3 voltage levels (+Vdc/2, 0, -Vdc/2). Two redundant zero states charge/discharge Cfc. PD-PWM selects states based on current direction. Pre-charge ramp required.",
+      "id": "slide_5",
+      "title": "FC Inverter Topology and Switching States",
+      "summary": "Detailed explanation of the 3L-FC topology, switching states, and pre-charge requirement.",
       "image_plan": "",
       "slide_template_key": ""
     },
     {
-      "id": "components",
-      "title": "Component Selection",
-      "summary": "Switch: Wolfspeed CAB450M12XM3 (1200V/450A SiC, Rds_on=3.3mΩ). Capacitor: 680µF film (sized for 5% ripple at 5kHz). 4-layer Foster thermal model.",
+      "id": "slide_6",
+      "title": "Component Selection — Driven by Vehicle Architecture",
+      "summary": "Justification for selecting the Wolfspeed CAB450M12XM3 SiC module and 680µF film capacitor.",
       "image_plan": "/home/ubuntu/upload/search_images/UHnXuYSG0Dhr.png; /home/ubuntu/upload/search_images/6Mm7Myhb8PPL.jpg; /home/ubuntu/upload/search_images/aTmbb5bAcKaD.png - This slide discusses component selection, specifically mentioning SiC modules. Images 21, 23, and 25 are all related to SiC power modules for EV traction inverters, providing relevant visual context for the component selection.",
       "slide_template_key": ""
     },
     {
-      "id": "vehicle_mapping",
-      "title": "Vehicle Architecture Mapping",
-      "summary": "Drivetrain params (G=8.19, r=0.315m, p=4) map vehicle speed to fe and Ipk. Urban: 184 Hz, 136A. Highway: 552 Hz, 51A.",
+      "id": "slide_7",
+      "title": "Vehicle Speed Maps to Inverter Operating Points",
+      "summary": "Mapping of vehicle speed to electrical frequency and peak phase current based on drivetrain parameters.",
       "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig4_vehicle_architecture.png - This slide maps vehicle speed to inverter operating points. Image 11 directly illustrates the relationship between vehicle speed, electrical frequency, peak phase current, and switching frequency, which is highly relevant to the slide's content.",
       "slide_template_key": ""
     },
     {
-      "id": "switching_losses",
-      "title": "Switching Loss Analysis",
-      "summary": "Graovac-Purschel analytical method. At fixed 20kHz: urban switching loss = 84.3W/phase (63% of total). Key insight: 20kHz unnecessary at low speed where fe=184Hz.",
+      "id": "slide_8",
+      "title": "Switching Loss Dominates at Low Speed with Fixed Frequency",
+      "summary": "Analysis of switching vs. conduction losses at a fixed 20 kHz carrier frequency.",
       "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig1_switching_loss_vs_speed.png - This slide discusses switching loss vs. speed. Image 10, titled 'Switching Loss vs. Vehicle Speed — Effect of fsw', directly visualizes the data and concepts presented in the slide.",
       "slide_template_key": ""
     },
     {
-      "id": "adaptive_schedule",
-      "title": "Adaptive Switching Frequency Schedule",
-      "summary": "5kHz urban, 10kHz extra-urban, 20kHz highway. Saves 190W (3-phase) at 40 km/h — 75% switching loss reduction. THD remains <2%.",
+      "id": "slide_9",
+      "title": "Adaptive Switching Frequency Reduces Urban Losses by 75%",
+      "summary": "Presentation of the adaptive switching frequency schedule and its impact on switching losses.",
       "image_plan": "/home/ubuntu/Inverter-Design/switching_loss_figures/fig2_loss_breakdown.png - This slide explains how adaptive switching frequency reduces urban losses. Image 12, 'Loss Breakdown: Adaptive Schedule vs. Fixed 20 kHz', clearly illustrates the reduction in losses with the adaptive schedule.",
       "slide_template_key": ""
     },
     {
-      "id": "thermal_impact",
-      "title": "Thermal Impact of Adaptive Schedule",
-      "summary": "Urban Tj drops from 63.2°C to 53.5°C (ΔTj=9.7°C). Thermal cycling amplitude reduced by 53%. Extends module lifetime per Coffin-Manson model.",
+      "id": "slide_10",
+      "title": "Thermal Impact — 9.7°C Junction Temperature Reduction",
+      "summary": "Analysis of the junction temperature reduction and thermal cycling improvement with the adaptive schedule.",
       "image_plan": "/home/ubuntu/Inverter-Design/thermal_comparison_figures/fig3_Tj_bar_comparison.png - This slide focuses on the thermal impact and junction temperature reduction. Image 17, 'Junction Temperature at Key Operating Points', directly compares junction temperatures for fixed and adaptive schedules, supporting the key points of the slide.",
       "slide_template_key": ""
     },
     {
-      "id": "simulation",
-      "title": "Simulation Results",
-      "summary": "Time-domain simulation validates: 3-level output voltage, clean sinusoidal currents (THD<2%), FC balance <0.04V error, FC ripple 18V vs 20V budget, pre-charge transient.",
+      "id": "slide_11",
+      "title": "Simulation Validates Design — Waveforms and FC Balancing",
+      "summary": "Time-domain simulation results showing phase currents, output voltages, and FC balancing.",
       "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_results_v3/fig4_fc_voltages.png - This slide validates the design through simulation, specifically mentioning FC voltage balancing. Image 7, 'Flying Capacitor Voltages (Cfc=680uF, Vfc_ref=400V)', directly shows the FC voltage waveforms and balancing, which is crucial for this slide.",
       "slide_template_key": ""
     },
     {
-      "id": "conclusion",
-      "title": "Conclusion",
-      "summary": "800V + FC topology justified by vehicle architecture. Adaptive fsw yields 75% switching loss reduction, 9.7°C Tj reduction, 53% less thermal cycling. All validated by simulation.",
+      "id": "slide_12",
+      "title": "Conclusion — Architecture-Driven Design Yields 75% Loss Reduction",
+      "summary": "Summary of key findings, including the 75% loss reduction and successful validation of the FC design.",
       "image_plan": "",
       "slide_template_key": ""
     }

@@ -1,0 +1,121 @@
+direction: down
+
+title: "Three-Level Flying Capacitor Inverter (Single Phase Leg)" {
+  shape: text
+  style.font-size: 22
+  style.bold: true
+}
+
+# DC Bus Rails
+Vdc_pos: "+Vdc/2 = +400V" {
+  style.font-size: 16
+  style.bold: true
+  style.fill: "#FFEBEE"
+  style.stroke: "#C62828"
+}
+
+Vdc_neg: "-Vdc/2 = -400V" {
+  style.font-size: 16
+  style.bold: true
+  style.fill: "#E3F2FD"
+  style.stroke: "#1565C0"
+}
+
+# Four Switches
+S1: "S1 (1200V SiC MOSFET)" {
+  style.font-size: 14
+  style.fill: "#E8F5E9"
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}
+
+S2: "S2 (1200V SiC MOSFET)" {
+  style.font-size: 14
+  style.fill: "#E8F5E9"
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}
+
+S3: "S3 (1200V SiC MOSFET)" {
+  style.font-size: 14
+  style.fill: "#E8F5E9"
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}
+
+S4: "S4 (1200V SiC MOSFET)" {
+  style.font-size: 14
+  style.fill: "#E8F5E9"
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}
+
+# Flying Capacitor
+Cfc: "Flying Capacitor\nCfc = 680uF, Vfc = 400V" {
+  shape: cylinder
+  style.font-size: 14
+  style.fill: "#FFF3E0"
+  style.stroke: "#E65100"
+  style.stroke-width: 2
+}
+
+# Output Node
+Output: "Phase Output (to RL Load)" {
+  style.font-size: 16
+  style.bold: true
+  style.fill: "#F3E5F5"
+  style.stroke: "#6A1B9A"
+  style.stroke-width: 2
+}
+
+# Switching States Table
+states: "Switching States\n─────────────────────────\nS1=1 S2=1 S3=0 S4=0 → +400V\nS1=1 S2=0 S3=1 S4=0 → 0V (charge Cfc)\nS1=0 S2=1 S3=0 S4=1 → 0V (discharge Cfc)\nS1=0 S2=0 S3=1 S4=1 → -400V" {
+  style.font-size: 12
+  style.fill: "#FAFAFA"
+  style.stroke: "#9E9E9E"
+}
+
+# Design Parameters
+params: "Design Parameters\n─────────────────────────\nVdc = 800V (400V per switch)\nModule: Wolfspeed CAB450M12XM3\nCfc: 680uF film capacitor\nEach switch blocks Vdc/2\n50% voltage margin (1200V rated)" {
+  style.font-size: 12
+  style.fill: "#FAFAFA"
+  style.stroke: "#9E9E9E"
+}
+
+# Main current path connections
+Vdc_pos -> S1: "" {
+  style.stroke: "#C62828"
+  style.stroke-width: 2
+}
+S1 -> S2: "" {
+  style.stroke: "#333333"
+  style.stroke-width: 2
+}
+S2 -> Output: "midpoint" {
+  style.stroke: "#6A1B9A"
+  style.stroke-width: 3
+}
+Output -> S3: "" {
+  style.stroke: "#6A1B9A"
+  style.stroke-width: 3
+}
+S3 -> S4: "" {
+  style.stroke: "#333333"
+  style.stroke-width: 2
+}
+S4 -> Vdc_neg: "" {
+  style.stroke: "#1565C0"
+  style.stroke-width: 2
+}
+
+# Flying capacitor connections (dashed)
+S1 -> Cfc: "S1-S2 node" {
+  style.stroke: "#E65100"
+  style.stroke-width: 2
+  style.stroke-dash: 5
+}
+Cfc -> S4: "S3-S4 node" {
+  style.stroke: "#E65100"
+  style.stroke-width: 2
+  style.stroke-dash: 5
+}

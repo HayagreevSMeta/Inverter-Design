@@ -1,117 +1,92 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
             position: relative;
-        }
-        .accent-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: #2563EB;
+            padding: 60px 80px;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
         }
         h2 {
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 28px;
-            color: #000000;
-            line-height: 1.3;
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-top: 50px;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
         }
-        .course-tag {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            color: #2563EB;
-            margin-left: 80px;
-            padding-top: 12px;
-            letter-spacing: 0.5px;
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #2563EB;
-            margin-left: 80px;
-            margin-top: 12px;
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        li {
+            margin-bottom: 10px;
         }
         .two-col {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 24px;
         }
-        .text-content {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            color: #333333;
-            line-height: 1.6;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 18px;
         }
-        .text-content p { margin-bottom: 16px; }
-        .highlight-box {
-            background: #F5F5F5;
-            border-left: 4px solid #2563EB;
-            padding: 16px;
-            margin-bottom: 16px;
+        th, td {
+            border: 1px solid #000000;
+            padding: 12px;
+            text-align: left;
         }
-        .highlight-box .title {
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 8px;
-            font-size: 16px;
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
         }
         .chart-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 480px;
+            height: 500px;
         }
         .chart-container img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
-        .bold { font-weight: 700; color: #000000; }
-    </style>
+        .bold { font-weight: bold; }
+        </style>
 </head>
 <body>
-    <div class="slide-container">
-        <div class="accent-bar"></div>
-        <div class="course-tag">ECE 595 — PURDUE UNIVERSITY</div>
-        <h2>Simulated Adaptive Switching Frequency</h2>
-        <div class="divider"></div>
-        
-        <div class="two-col">
-            <div class="text-content">
-                <p>An adaptive switching frequency schedule was <span class="bold">fully implemented and validated within the dynamic time-domain simulation</span>.</p>
-                <p>The methodology relies on maintaining a sufficient <span class="bold">frequency modulation ratio (m<sub>f</sub> = f<sub>sw</sub> / f<sub>e</sub>)</span> to ensure waveform quality while minimizing losses:</p>
-                
-                <div class="highlight-box">
-                    <div class="title">Urban Driving (Low f<sub>e</sub>)</div>
-                    At 40 km/h, f<sub>e</sub> is only 184 Hz. The simulated controller dynamically drops f<sub>sw</sub> to <span class="bold">5 kHz</span> while keeping m<sub>f</sub> &approx; 27. This yields a massive <span class="bold">75% reduction</span> in switching losses exactly when the phase current is highest (136 A).
-                </div>
-                
-                <div class="highlight-box">
-                    <div class="title">Highway Driving (High f<sub>e</sub>)</div>
-                    At 120 km/h, f<sub>e</sub> reaches 552 Hz. The controller automatically increases f<sub>sw</sub> to <span class="bold">20 kHz</span> to maintain m<sub>f</sub> &approx; 36 and prevent distortion. Fortunately, the phase current is much lower (51 A), keeping absolute losses manageable.
-                </div>
-            </div>
-            <div class="chart-container">
-                <img src="/home/ubuntu/Inverter-Design/loss_analysis_figures/fig3_loss_breakdown_stacked.png" alt="Loss Breakdown">
-            </div>
-        </div>
-    </div>
+<div class="slide-container">
+
+
+<h2>Simulated Adaptive Switching Frequency</h2>
+
+<div class="two-col">
+<div>
+<p>An adaptive switching frequency schedule was <span class="bold">fully implemented and validated within the dynamic time-domain simulation</span>.</p>
+<p>The methodology relies on maintaining a sufficient <span class="bold">frequency modulation ratio (m<sub>f</sub> = f<sub>sw</sub> / f<sub>e</sub>)</span> to ensure waveform quality while minimizing losses:</p>
+<p><b>Urban Driving (Low fe): </b>At 40 km/h, feis only 184 Hz. The simulated controller dynamically drops fswto5 kHzwhile keeping mf≈ 27. This yields a massive75% reductionin switching losses exactly when the phase current is highest (136 A).</p>
+<p><b>Highway Driving (High fe): </b>At 120 km/h, fereaches 552 Hz. The controller automatically increases fswto20 kHzto maintain mf≈ 36 and prevent distortion. Fortunately, the phase current is much lower (51 A), keeping absolute losses manageable.</p>
+</div>
+<div class="chart-container">
+<img alt="Loss Breakdown" src="/home/ubuntu/Inverter-Design/loss_analysis_figures/fig3_loss_breakdown_stacked.png"/>
+</div>
+</div>
+</div>
 </body>
 </html>

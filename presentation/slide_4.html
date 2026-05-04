@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topology Selection — FC vs NPC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Merriweather:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #FDFDFD;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 120px repeat(4, 1fr) 1fr;
+            grid-template-columns: repeat(6, 1fr);
+        }
+        /* 6-row modular grid outlined by 0.5px gray strokes */
+        .grid-line-h { position: absolute; left: 0; right: 0; height: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .grid-line-v { position: absolute; top: 0; bottom: 0; width: 0.5px; background-color: #E0E0E0; z-index: 1; }
+        .gl-h1 { top: calc(100% / 6 * 1); }
+        .gl-h2 { top: calc(100% / 6 * 2); }
+        .gl-h3 { top: calc(100% / 6 * 3); }
+        .gl-h4 { top: calc(100% / 6 * 4); }
+        .gl-h5 { top: calc(100% / 6 * 5); }
+        
+        .gl-v1 { left: calc(100% / 6 * 1); }
+        .gl-v2 { left: calc(100% / 6 * 2); }
+        .gl-v3 { left: calc(100% / 6 * 3); }
+        .gl-v4 { left: calc(100% / 6 * 4); }
+        .gl-v5 { left: calc(100% / 6 * 5); }
+
+        .title-wrapper {
+            grid-column: 1 / 6;
+            grid-row: 1 / 2;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            padding-right: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: #1C1C1C;
+            text-transform: lowercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+        }
+
+        .npc-block {
+            grid-column: 1 / 5;
+            grid-row: 2 / 4;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 30px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fc-block {
+            grid-column: 3 / 7;
+            grid-row: 4 / 7;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 30px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-header {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            text-transform: lowercase;
+            margin-bottom: -8px;
+        }
+
+        .npc-header { color: #F72585; }
+        .fc-header { color: #4361EE; }
+
+        .text-block {
+            font-family: 'Merriweather', serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: #595959;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .text-block::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1C1C1C;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #1C1C1C;
+            font-weight: bold;
+        }
+
+        /* Accent geometric shapes */
+        .shape-1 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #F72585;
+            top: 140px;
+            right: 120px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            position: absolute;
+            width: 180px;
+            height: 40px;
+            background-color: #4361EE;
+            bottom: 80px;
+            left: 80px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Grid Lines -->
+        <div class="grid-line-h gl-h1"></div>
+        <div class="grid-line-h gl-h2"></div>
+        <div class="grid-line-h gl-h3"></div>
+        <div class="grid-line-h gl-h4"></div>
+        <div class="grid-line-h gl-h5"></div>
+        
+        <div class="grid-line-v gl-v1"></div>
+        <div class="grid-line-v gl-v2"></div>
+        <div class="grid-line-v gl-v3"></div>
+        <div class="grid-line-v gl-v4"></div>
+        <div class="grid-line-v gl-v5"></div>
+
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+
+        <div class="title-wrapper">
+            <h2>flying capacitor chosen over npc for thermal symmetry and natural balancing</h2>
+        </div>
+
+        <div class="npc-block">
+            <div class="section-header npc-header">neutral point clamped (npc) limitations</div>
+            <div class="text-block">
+                <span class="highlight">Unequal loss distribution</span> between inner and outer switches leads to asymmetric heating and complex cooling requirements.
+            </div>
+            <div class="text-block">
+                Neutral point balance is notoriously difficult to maintain under <span class="highlight">transient EV loads</span>, requiring complex control algorithms.
+            </div>
+        </div>
+
+        <div class="fc-block">
+            <div class="section-header fc-header">flying capacitor (fc) advantages</div>
+            <div class="text-block">
+                All 4 switches block identical voltage (Vdc/2 = 400V), ensuring <span class="highlight">symmetric thermal stress</span> and allowing identical power modules.
+            </div>
+            <div class="text-block">
+                Redundant switching states enable <span class="highlight">natural capacitor balancing</span> regardless of the load power factor.
+            </div>
+            <div class="text-block">
+                <span class="highlight">Trade-off:</span> Requires a bulky capacitor and pre-charge circuit, which is acceptable in modern EVs where pre-charge contactors already exist.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

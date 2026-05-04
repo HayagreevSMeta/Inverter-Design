@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title Slide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Merriweather:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #FDFDFD;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            grid-template-columns: repeat(6, 1fr);
+        }
+        /* use pseudo-element for background image to avoid an extra absolute IMG element that caused overflow */
+        .slide-container::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('/home/ubuntu/Inverter-Design/fc_inverter_schematic.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* 6-row modular grid outlined by 0.5px gray strokes */
+        .grid-line-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 0.5px;
+            background-color: #E0E0E0;
+            z-index: 1;
+        }
+        .grid-line-v {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 0.5px;
+            background-color: #E0E0E0;
+            z-index: 1;
+        }
+        .gl-h1 { top: calc(100% / 6 * 1); }
+        .gl-h2 { top: calc(100% / 6 * 2); }
+        .gl-h3 { top: calc(100% / 6 * 3); }
+        .gl-h4 { top: calc(100% / 6 * 4); }
+        .gl-h5 { top: calc(100% / 6 * 5); }
+        
+        .gl-v1 { left: calc(100% / 6 * 1); }
+        .gl-v2 { left: calc(100% / 6 * 2); }
+        .gl-v3 { left: calc(100% / 6 * 3); }
+        .gl-v4 { left: calc(100% / 6 * 4); }
+        .gl-v5 { left: calc(100% / 6 * 5); }
+
+        .content-wrapper {
+            /* refresh layout: give the title more horizontal space and reduce vertical span */
+            grid-row: 2 / 5;
+            grid-column: 1 / 6;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 64px;
+            color: #1C1C1C;
+            text-transform: lowercase;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 12px; /* shrink inner spacing */
+            position: relative;
+            z-index: 10;
+        }
+
+        .author-info {
+            font-family: 'Merriweather', serif;
+            font-weight: 400;
+            color: #595959;
+            position: relative;
+            z-index: 10;
+            display: flex; /* place name and affiliation side-by-side to save vertical space */
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .author-name {
+            font-size: 32px;
+            color: #1C1C1C;
+            margin-bottom: 0; /* removed extra bottom spacing */
+        }
+
+        .affiliation {
+            font-size: 20px;
+        }
+
+        /* Accent geometric shapes overlapping text */
+        .shape-1 {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #4361EE;
+            border-radius: 50%;
+            top: -30px;
+            left: -40px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+
+        .shape-2 {
+            position: absolute;
+            width: 200px;
+            height: 60px;
+            background-color: #F72585;
+            bottom: 40px;
+            right: -20px;
+            z-index: 5;
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Grid Lines -->
+        <div class="grid-line-h gl-h1"></div>
+        <div class="grid-line-h gl-h2"></div>
+        <div class="grid-line-h gl-h3"></div>
+        <div class="grid-line-h gl-h4"></div>
+        <div class="grid-line-h gl-h5"></div>
+        
+        <div class="grid-line-v gl-v1"></div>
+        <div class="grid-line-v gl-v2"></div>
+        <div class="grid-line-v gl-v3"></div>
+        <div class="grid-line-v gl-v4"></div>
+        <div class="grid-line-v gl-v5"></div>
+
+        <div class="content-wrapper">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <h1>vehicle architecture-driven design and comprehensive loss analysis of an 800v three-level flying capacitor traction inverter</h1>
+            <div class="author-info">
+                <div class="author-name">Hayagreev S.</div>
+                <div class="affiliation">Department of Electrical Engineering</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

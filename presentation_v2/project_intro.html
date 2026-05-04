@@ -1,158 +1,113 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
             position: relative;
-        }
-        .accent-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: #2563EB;
+            padding: 60px 80px;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
         }
         h2 {
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 28px;
-            color: #000000;
-            line-height: 1.3;
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-top: 50px;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
         }
-        .course-tag {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            color: #2563EB;
-            margin-left: 80px;
-            padding-top: 12px;
-            letter-spacing: 0.5px;
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #2563EB;
-            margin-left: 80px;
-            margin-top: 12px;
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        li {
+            margin-bottom: 10px;
         }
         .two-col {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 48px;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 28px;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
-        .context-text {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 15px;
-            color: #333333;
-            line-height: 1.7;
-        }
-        .context-text .bold { font-weight: 700; color: #000000; }
-        .obj-title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
             font-size: 18px;
-            color: #000000;
-            margin-bottom: 16px;
         }
-        .obj-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        th, td {
+            border: 1px solid #000000;
+            padding: 12px;
+            text-align: left;
         }
-        .obj-item {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            color: #333333;
-            line-height: 1.5;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
         }
-        .obj-num {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 14px;
-            color: #FFFFFF;
-            background: #2563EB;
-            min-width: 26px;
-            height: 26px;
-            border-radius: 50%;
+        .chart-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            margin-top: 1px;
+            align-items: center;
+            height: 500px;
         }
-        .spec-box {
-            background: #F5F5F5;
-            border-left: 4px solid #2563EB;
-            padding: 14px 18px;
-            margin-top: 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: #000000;
-            line-height: 1.6;
+        .chart-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
-        .spec-box .label { font-weight: 700; }
-    </style>
+        .bold { font-weight: bold; }
+        </style>
 </head>
 <body>
-    <div class="slide-container">
-        <div class="accent-bar"></div>
-        <div class="course-tag">ECE 595 — PURDUE UNIVERSITY</div>
-        <h2>Project Overview</h2>
-        <div class="divider"></div>
-        <div class="two-col">
-            <div>
-                <div class="context-text">
-                    In an EV traction inverter, the <span class="bold">fundamental frequency is not fixed</span> — it follows the vehicle operating condition because it is directly tied to motor speed via <span class="bold">f<sub>e</sub> = (P/2) &middot; n<sub>mech</sub> / 60</span>.
+<div class="slide-container">
+
+
+<h2>Project Overview</h2>
+
+<div class="two-col">
+<div>
+<div>
+                    In an EV traction inverter, the <span class="bold">fundamental frequency is not fixed</span> — it follows the vehicle operating condition because it is directly tied to motor speed via <span class="bold">f<sub>e</sub> = (P/2) · n<sub>mech</sub> / 60</span>.
                 </div>
-                <div class="context-text" style="padding-top: 14px;">
+<div style="padding-top: 14px;">
                     Under <span class="bold">city driving</span>, the inverter operates at low f<sub>e</sub> with high current. Under <span class="bold">highway driving</span>, f<sub>e</sub> is higher but current is lower. The <span class="bold">switching frequency can also be scheduled</span> according to operating condition rather than kept constant, balancing efficiency, torque quality, and switching stress across the drive cycle.
                 </div>
-                <div class="spec-box">
-                    <span class="label">Load:</span> 3-phase RL &mdash; R = 1.3 &Omega;, L = 2 mH<br>
-                    <span class="label">DC Bus:</span> 800V battery source<br>
-                    <span class="label">Deliverables:</span> IEEE conference paper
-                </div>
-            </div>
-            <div>
-                <div class="obj-title">Project Objectives</div>
-                <ul class="obj-list">
-                    <li class="obj-item">
-                        <span class="obj-num">1</span>
-                        <span>Research and select a suitable <span style="font-weight:700;">three-level inverter topology</span>, specifying components (voltage, current, frequency)</span>
-                    </li>
-                    <li class="obj-item">
-                        <span class="obj-num">2</span>
-                        <span>Develop a detailed <span style="font-weight:700;">simulation model</span> including DC source, switching devices, and capacitors</span>
-                    </li>
-                    <li class="obj-item">
-                        <span class="obj-num">3</span>
-                        <span><span style="font-weight:700;">Compare semiconductor temperature</span> under adaptive f<sub>sw</sub> vs. constant 20 kHz baseline</span>
-                    </li>
-                    <li class="obj-item">
-                        <span class="obj-num">4</span>
-                        <span>Analyze output current waveforms and verify expected <span style="font-weight:700;">THD performance</span></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<p>Load:3-phase RL — R = 1.3 Ω, L = 2 mHDC Bus:800V battery sourceDeliverables:IEEE conference paper</p>
+</div>
+<div>
+<div>Project Objectives</div>
+<ul>
+<li>
+<span>1</span>
+<span>Research and select a suitable <span style="font-weight:700;">three-level inverter topology</span>, specifying components (voltage, current, frequency)</span>
+</li>
+<li>
+<span>2</span>
+<span>Develop a detailed <span style="font-weight:700;">simulation model</span> including DC source, switching devices, and capacitors</span>
+</li>
+<li>
+<span>3</span>
+<span><span style="font-weight:700;">Compare semiconductor temperature</span> under adaptive f<sub>sw</sub> vs. constant 20 kHz baseline</span>
+</li>
+<li>
+<span>4</span>
+<span>Analyze output current waveforms and verify expected <span style="font-weight:700;">THD performance</span></span>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </body>
 </html>

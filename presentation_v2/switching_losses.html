@@ -1,113 +1,95 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
             position: relative;
-        }
-        .accent-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: #2563EB;
+            padding: 60px 80px;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
         }
         h2 {
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 28px;
-            color: #000000;
-            line-height: 1.3;
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-top: 60px;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #2563EB;
-            margin-left: 80px;
-            margin-top: 16px;
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        li {
+            margin-bottom: 10px;
         }
         .two-col {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 32px;
         }
-        .bullets {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .bullet {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 16px;
-            color: #333333;
-            line-height: 1.6;
-            padding-left: 16px;
-            position: relative;
-        }
-        .bullet::before {
-            content: "\2022";
-            position: absolute;
-            left: 0;
-            color: #2563EB;
-            font-weight: 700;
-        }
-        .bold { font-weight: 700; color: #000000; }
-        .equation {
-            font-family: 'Inter', monospace;
-            font-size: 14px;
-            color: #000000;
-            background-color: #F3F4F6;
-            padding: 12px;
-            margin-top: 8px;
-            border-left: 3px solid #2563EB;
-        }
-        .img-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 460px;
-        }
-        .img-box img {
+        table {
             width: 100%;
-            height: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+        .chart-container img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
         }
-    </style>
+        .bold { font-weight: bold; }
+        </style>
 </head>
 <body>
-    <div class="slide-container">
-        <div class="accent-bar"></div>
-        <h2>Switching Loss Analysis</h2>
-        <div class="divider"></div>
-        <div class="two-col">
-            <div class="bullets">
-                <div class="bullet">
-                    <span class="bold">Graovac-Purschel analytical method</span> used for loss calculation:
-                    <div class="equation">Psw = Nc × (fsw/π) × Esw_ref × (Ipk/Iref) × (Vdc_sw/Vref)</div>
-                </div>
-                <div class="bullet"><span class="bold">Urban driving at 20 kHz:</span> P_sw = 84.3 W/phase vs P_cond = 51.5 W/phase. Switching losses heavily dominate (63% of total) due to high phase currents (136A).</div>
-                <div class="bullet"><span class="bold">Highway driving at 20 kHz:</span> P_sw = 31.7 W/phase vs P_cond = 5.6 W/phase. Both losses are relatively low due to reduced current (51A).</div>
-                <div class="bullet"><span class="bold">Key insight:</span> Operating at 20 kHz is unnecessary at 40 km/h where the fundamental electrical frequency (fe) is only 184 Hz.</div>
-                <div class="bullet">A minimum carrier ratio (mf = fsw/fe) of 27 at 5 kHz / 184 Hz is sufficient to maintain excellent THD while drastically cutting losses.</div>
-            </div>
-            <div class="img-box">
-                <img src="/home/ubuntu/Inverter-Design/switching_loss_figures/fig1_switching_loss_vs_speed.png" alt="Switching Loss vs Speed">
-            </div>
-        </div>
-    </div>
+<div class="slide-container">
+
+<h2>Switching Loss Analysis</h2>
+
+<div class="two-col">
+<div>
+<div>
+<span class="bold">Graovac-Purschel analytical method</span> used for loss calculation:
+                    <div>Psw = Nc × (fsw/π) × Esw_ref × (Ipk/Iref) × (Vdc_sw/Vref)</div>
+</div>
+<div><span class="bold">Urban driving at 20 kHz:</span> P_sw = 84.3 W/phase vs P_cond = 51.5 W/phase. Switching losses heavily dominate (63% of total) due to high phase currents (136A).</div>
+<div><span class="bold">Highway driving at 20 kHz:</span> P_sw = 31.7 W/phase vs P_cond = 5.6 W/phase. Both losses are relatively low due to reduced current (51A).</div>
+<div><span class="bold">Key insight:</span> Operating at 20 kHz is unnecessary at 40 km/h where the fundamental electrical frequency (fe) is only 184 Hz.</div>
+<div>A minimum carrier ratio (mf = fsw/fe) of 27 at 5 kHz / 184 Hz is sufficient to maintain excellent THD while drastically cutting losses.</div>
+</div>
+<div>
+<img alt="Switching Loss vs Speed" src="/home/ubuntu/Inverter-Design/switching_loss_figures/fig1_switching_loss_vs_speed.png"/>
+</div>
+</div>
+</div>
 </body>
 </html>

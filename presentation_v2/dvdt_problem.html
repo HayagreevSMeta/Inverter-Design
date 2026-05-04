@@ -1,112 +1,98 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .slide-container {
             width: 1280px;
             min-height: 720px;
             background: #FFFFFF;
             position: relative;
-        }
-        .accent-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: #2563EB;
+            padding: 60px 80px;
+            font-family: 'Inter', sans-serif;
+            color: #000000;
         }
         h2 {
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 28px;
-            color: #000000;
-            line-height: 1.3;
-            margin-left: 80px;
-            margin-right: 80px;
-            padding-top: 60px;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #2563EB;
-            margin-left: 80px;
-            margin-top: 16px;
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        li {
+            margin-bottom: 10px;
         }
         .two-col {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-left: 80px;
-            margin-right: 80px;
-            margin-top: 36px;
+            gap: 40px;
         }
-        .col-header {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 18px;
-            color: #000000;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
-            padding-top: 4px;
-            border-top: 2px solid #000000;
+            font-size: 18px;
         }
-        .col-header.solution {
-            border-top-color: #2563EB;
-            color: #2563EB;
+        th, td {
+            border: 1px solid #000000;
+            padding: 12px;
+            text-align: left;
         }
-        .bullets {
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+        .chart-container {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
         }
-        .bullet {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 16px;
-            color: #333333;
-            line-height: 1.6;
-            padding-left: 16px;
-            position: relative;
+        .chart-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
-        .bullet::before {
-            content: "\2022";
-            position: absolute;
-            left: 0;
-            color: #000000;
-            font-weight: 700;
-        }
-        .col-right .bullet::before {
-            color: #2563EB;
-        }
-        .bold { font-weight: 700; color: #000000; }
-    </style>
+        .bold { font-weight: bold; }
+        </style>
 </head>
 <body>
-    <div class="slide-container">
-        <div class="accent-bar"></div>
-        <h2>The dv/dt Problem and the Multilevel Solution</h2>
-        <div class="divider"></div>
-        <div class="two-col">
-            <div class="col-left">
-                <div class="col-header">The 800V Challenge</div>
-                <div class="bullets">
-                    <div class="bullet">A standard 2-level VSI at 800V switches the full bus voltage in under 50 ns, generating <span class="bold">dv/dt spikes exceeding 16 kV/µs</span>.</div>
-                    <div class="bullet">Standard motor insulation is rated for ~1200 V/µs maximum — the <span class="bold">limit is exceeded by over 13×</span>.</div>
-                    <div class="bullet">This causes partial discharge and <span class="bold">insulation breakdown within 1000 hours</span> of continuous operation.</div>
-                </div>
-            </div>
-            <div class="col-right">
-                <div class="col-header solution">The Multilevel Solution</div>
-                <div class="bullets">
-                    <div class="bullet">A 3-level topology reduces the voltage step to <span class="bold">Vdc/2 = 400V</span>, halving dv/dt to ~8 kV/µs.</div>
-                    <div class="bullet">The improved waveform <span class="bold">reduces output THD</span> by synthesizing a closer sine approximation.</div>
-                    <div class="bullet">Lower harmonic content reduces EMI and allows a <span class="bold">smaller, lighter output filter</span>.</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="slide-container">
+
+<h2>The dv/dt Problem and the Multilevel Solution</h2>
+
+<div class="two-col">
+<div>
+<div>The 800V Challenge</div>
+<div>
+<div>A standard 2-level VSI at 800V switches the full bus voltage in under 50 ns, generating <span class="bold">dv/dt spikes exceeding 16 kV/µs</span>.</div>
+<div>Standard motor insulation is rated for ~1200 V/µs maximum — the <span class="bold">limit is exceeded by over 13×</span>.</div>
+<div>This causes partial discharge and <span class="bold">insulation breakdown within 1000 hours</span> of continuous operation.</div>
+</div>
+</div>
+<div>
+<div>The Multilevel Solution</div>
+<div>
+<div>A 3-level topology reduces the voltage step to <span class="bold">Vdc/2 = 400V</span>, halving dv/dt to ~8 kV/µs.</div>
+<div>The improved waveform <span class="bold">reduces output THD</span> by synthesizing a closer sine approximation.</div>
+<div>Lower harmonic content reduces EMI and allows a <span class="bold">smaller, lighter output filter</span>.</div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
