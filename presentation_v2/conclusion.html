@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+        }
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2563EB;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #000000;
+            line-height: 1.3;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-top: 60px;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #2563EB;
+            margin-left: 80px;
+            margin-top: 16px;
+        }
+        .content {
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .bullet {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: #333333;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+        .bullet::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #2563EB;
+            font-weight: 700;
+            font-size: 24px;
+            top: -2px;
+        }
+        .bold { font-weight: 700; color: #000000; }
+        .highlight { color: #2563EB; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <h2>Conclusion</h2>
+        <div class="divider"></div>
+        <div class="content">
+            <div class="bullet"><span class="bold">800V architecture</span> is justified by ultra-fast charging speed, reduced cable weight, and overall efficiency gains.</div>
+            <div class="bullet"><span class="bold">FC topology</span> was selected over NPC for its superior thermal symmetry and natural balancing capabilities under dynamic EV loads.</div>
+            <div class="bullet"><span class="bold">Adaptive fsw schedule:</span> Achieved a <span class="highlight">75% switching loss reduction</span> in urban driving, saving 190W (3-phase) compared to a fixed 20 kHz baseline.</div>
+            <div class="bullet"><span class="bold">Thermal benefit:</span> Delivered a <span class="highlight">9.7°C Tj reduction</span> and 53% less thermal cycling, directly extending the power module's fatigue lifetime.</div>
+            <div class="bullet"><span class="bold">All metrics validated:</span> Time-domain simulation confirmed THD < 2%, FC balance < 0.04V error, and Tj < 54°C with >120°C thermal margin.</div>
+            <div class="bullet"><span class="bold">Future work:</span> Experimental validation of the adaptive schedule and thermal models on a hardware prototype.</div>
+        </div>
+    </div>
+</body>
+</html>

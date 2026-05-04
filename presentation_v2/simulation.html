@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+        }
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2563EB;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #000000;
+            line-height: 1.3;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-top: 60px;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #2563EB;
+            margin-left: 80px;
+            margin-top: 16px;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 32px;
+        }
+        .bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .bullet {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+        }
+        .bullet::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #2563EB;
+            font-weight: 700;
+        }
+        .bold { font-weight: 700; color: #000000; }
+        .img-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 460px;
+        }
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <h2>Simulation Results</h2>
+        <div class="divider"></div>
+        <div class="two-col">
+            <div class="bullets">
+                <div class="bullet">Time-domain simulation confirms proper <span class="bold">3-level output voltage</span> synthesis at both urban and highway speeds.</div>
+                <div class="bullet">Phase currents are clean sinusoids with <span class="bold">THD < 2%</span> (1.92% at 5 kHz urban, 1.13% at 20 kHz highway).</div>
+                <div class="bullet">FC voltage is successfully maintained at 400V with <span class="bold">± 0.04V mean error</span> using PD-PWM active state selection.</div>
+                <div class="bullet">FC ripple: <span class="bold">18V simulated</span> vs 20V analytical budget — excellent agreement with design calculations.</div>
+                <div class="bullet"><span class="bold">Pre-charge transient:</span> 20ms linear ramp from 0V to 400V successfully executed before active switching commences.</div>
+            </div>
+            <div class="img-box">
+                <img src="/home/ubuntu/Inverter-Design/fc_inverter_results_v3/fig4_fc_voltages.png" alt="FC Voltage Balancing">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

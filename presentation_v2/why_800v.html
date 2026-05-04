@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+        }
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2563EB;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #000000;
+            line-height: 1.3;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-top: 60px;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #2563EB;
+            margin-left: 80px;
+            margin-top: 16px;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 32px;
+        }
+        .bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .bullet {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+        }
+        .bullet::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #2563EB;
+            font-weight: 700;
+        }
+        .bold { font-weight: 700; color: #000000; }
+        .img-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 420px;
+        }
+        .img-box img {
+            width: 500px;
+            height: 400px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <h2>Why 800V Architecture?</h2>
+        <div class="divider"></div>
+        <div class="two-col">
+            <div class="bullets">
+                <div class="bullet"><span class="bold">Ultra-fast charging at 350+ kW</span> — reduces charge time from ~45 min to under 20 min compared to 400V systems.</div>
+                <div class="bullet"><span class="bold">75% reduction in I²R losses</span> — halving current for the same power output cuts ohmic losses across inverter, motor, and cabling.</div>
+                <div class="bullet"><span class="bold">50% less copper</span> — smaller conductor cross-section saves approximately 10–15 kg of vehicle weight.</div>
+                <div class="bullet"><span class="bold">Industry adoption</span> — Porsche Taycan, Hyundai E-GMP, and GM Ultium all use 800V platforms.</div>
+                <div class="bullet"><span class="bold">Challenge:</span> Higher DC-link voltage significantly increases dv/dt stress on motor insulation, demanding advanced inverter topologies.</div>
+            </div>
+            <div class="img-box">
+                <img src="/home/ubuntu/upload/search_images/8u7219V8NoHU.jpg" alt="EV Powertrain">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+        }
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2563EB;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #000000;
+            line-height: 1.3;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-top: 60px;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #2563EB;
+            margin-left: 80px;
+            margin-top: 16px;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-top: 32px;
+        }
+        .bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .bullet {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+        }
+        .bullet::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #2563EB;
+            font-weight: 700;
+        }
+        .bold { font-weight: 700; color: #000000; }
+        .img-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 460px;
+        }
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <h2>Thermal Impact of Adaptive Schedule</h2>
+        <div class="divider"></div>
+        <div class="two-col">
+            <div class="bullets">
+                <div class="bullet"><span class="bold">Urban Tj reduction:</span> Junction temperature drops from 63.2°C (fixed 20 kHz) to 53.5°C (adaptive 5 kHz) — a <span class="bold">ΔTj of 9.7°C</span>.</div>
+                <div class="bullet"><span class="bold">Peak torque Tj reduction:</span> At 20 km/h, the temperature drops from 87.4°C to 71.3°C — a massive <span class="bold">ΔTj of 16.2°C</span>.</div>
+                <div class="bullet"><span class="bold">Thermal cycling amplitude</span> over a mixed drive cycle is reduced by 53% (from 16.4°C to 7.7°C).</div>
+                <div class="bullet">Per the Coffin-Manson fatigue model, this reduced thermal cycling directly and significantly <span class="bold">extends solder fatigue lifetime</span>.</div>
+                <div class="bullet">All operating points remain well below the module's Tj_max of 175°C, providing <span class="bold">>100°C of thermal margin</span>.</div>
+            </div>
+            <div class="img-box">
+                <img src="/home/ubuntu/Inverter-Design/thermal_comparison_figures/fig3_Tj_bar_comparison.png" alt="Junction Temperature Comparison">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: #FFFFFF;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2563EB;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #000000;
+            line-height: 1.3;
+            margin-left: 80px;
+            margin-right: 80px;
+            padding-top: 60px;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #2563EB;
+            margin-left: 80px;
+            margin-top: 16px;
+            margin-bottom: 40px;
+        }
+        .content-area {
+            margin-left: 80px;
+            margin-right: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .block {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .block-header {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #000000;
+            border-bottom: 1px solid #E0E0E0;
+            padding-bottom: 8px;
+        }
+        .block-header.fc {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+        .bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .bullet {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+        }
+        .bullet::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #000000;
+            font-weight: 700;
+        }
+        .block.fc .bullet::before {
+            color: #2563EB;
+        }
+        .bold { font-weight: 700; color: #000000; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <h2>Topology Selection: FC vs NPC</h2>
+        <div class="divider"></div>
+        
+        <div class="content-area">
+            <div class="block npc">
+                <div class="block-header">Neutral Point Clamped (NPC) Limitations</div>
+                <div class="bullets">
+                    <div class="bullet"><span class="bold">Unequal loss distribution</span> between inner and outer switches leads to asymmetric heating and complex cooling requirements.</div>
+                    <div class="bullet">Neutral point balance is notoriously difficult to maintain under <span class="bold">transient EV loads</span>, requiring complex control algorithms.</div>
+                </div>
+            </div>
+            
+            <div class="block fc">
+                <div class="block-header fc">Flying Capacitor (FC) Advantages</div>
+                <div class="bullets">
+                    <div class="bullet">All 4 switches block identical voltage (Vdc/2 = 400V), ensuring <span class="bold">symmetric thermal stress</span> and allowing identical power modules.</div>
+                    <div class="bullet">Redundant switching states enable <span class="bold">natural capacitor balancing</span> regardless of the load power factor.</div>
+                    <div class="bullet"><span class="bold">Trade-off:</span> Requires a bulky capacitor and pre-charge circuit, which is acceptable in modern EVs where pre-charge contactors already exist.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
