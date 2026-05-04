@@ -38,7 +38,7 @@
         }
         .two-col {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 0.9fr 1.1fr;
             gap: 40px;
             margin-left: 80px;
             margin-right: 80px;
@@ -89,6 +89,13 @@
             height: 100%;
             object-fit: contain;
         }
+        .caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -98,18 +105,21 @@
         <div class="divider"></div>
         <div class="two-col">
             <div class="bullets">
-                <div class="bullet"><span class="bold">Single phase leg structure:</span> Four switches (S1-S4) connected in series, with the flying capacitor (Cfc) connected between the S1/S2 and S3/S4 junctions.</div>
-                <div class="bullet"><span class="bold">Output voltage levels:</span> The topology synthesizes three distinct voltage levels at the output node: +Vdc/2, 0, and -Vdc/2.</div>
+                <div class="bullet"><span class="bold">3-Phase Structure:</span> Each phase leg (a, b, c) utilizes four switches (e.g., q1a, q2a, q2a, q1a) with a flying capacitor bridging the inner junctions.</div>
+                <div class="bullet"><span class="bold">Output voltage levels:</span> The topology synthesizes three distinct voltage levels per phase relative to the DC midpoint (0): +Vdc, 0, and -Vdc.</div>
                 <div class="bullet"><span class="bold">Redundant zero states enable natural balancing:</span>
                     <div class="states-box">
-                        <span class="bold">State 1:</span> S1=1, S2=0, S3=1, S4=0 &rarr; Output = 0V (Charges Cfc)<br>
-                        <span class="bold">State 2:</span> S1=0, S2=1, S3=0, S4=1 &rarr; Output = 0V (Discharges Cfc)
+                        <span class="bold">State 1:</span> q1=1, q2=0 &rarr; Output = 0V (Charges Cfc)<br>
+                        <span class="bold">State 2:</span> q1=0, q2=1 &rarr; Output = 0V (Discharges Cfc)
                     </div>
                 </div>
-                <div class="bullet"><span class="bold">PD-PWM modulation:</span> Phase Disposition PWM actively selects between the redundant zero states based on the current direction to maintain Vfc at exactly Vdc/2 (400V).</div>
+                <div class="bullet"><span class="bold">PD-PWM modulation:</span> Phase Disposition PWM actively selects between the redundant zero states based on the phase current direction to maintain Vfc at exactly Vdc/2.</div>
             </div>
-            <div class="img-box">
-                <img src="/home/ubuntu/Inverter-Design/fc_inverter_schematic.png" alt="3-Level Flying Capacitor Schematic">
+            <div>
+                <div class="img-box">
+                    <img src="/home/ubuntu/Inverter-Design/Screenshot 2026-05-04 063301.png" alt="3-Level Flying Capacitor Schematic from Textbook">
+                </div>
+                <div class="caption">Source: Advanced Power Electronics Converters (E. Cipriano)</div>
             </div>
         </div>
     </div>
