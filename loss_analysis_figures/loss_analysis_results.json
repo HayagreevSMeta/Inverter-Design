@@ -1,0 +1,117 @@
+{
+  "device": "Wolfspeed CAB450M12XM3",
+  "datasheet_params": {
+    "Rds_on_25C_mohm": 3.3,
+    "Rds_on_175C_mohm": 6.6,
+    "Eon_ref_mJ": 25.4,
+    "Eoff_ref_mJ": 7.51,
+    "Err_ref_mJ": 0.2,
+    "Iref_A": 450.0,
+    "Vref_V": 600.0,
+    "Rth_jc_CW": 0.094,
+    "Rth_total_CW": 0.14400000000000002,
+    "Foster_R": [
+      0.015,
+      0.025,
+      0.03,
+      0.024
+    ],
+    "Foster_tau": [
+      0.0001,
+      0.001,
+      0.01,
+      0.1
+    ]
+  },
+  "operating_points": {
+    "urban_40": {
+      "speed_kmh": 40,
+      "fe_Hz": 183.9,
+      "Ipk_A": 135.8,
+      "cos_phi": 0.49,
+      "P_cond_5kHz_W": 48.8,
+      "P_sw_5kHz_W": 21.1,
+      "P_rr_5kHz_W": 0.13,
+      "P_total_5kHz_W": 70.0,
+      "Tj_5kHz_C": 50.1,
+      "P_cond_10kHz_W": 49.7,
+      "P_sw_10kHz_W": 42.1,
+      "P_rr_10kHz_W": 0.26,
+      "P_total_10kHz_W": 92.1,
+      "Tj_10kHz_C": 53.3,
+      "P_cond_20kHz_W": 51.5,
+      "P_sw_20kHz_W": 84.3,
+      "P_rr_20kHz_W": 0.51,
+      "P_total_20kHz_W": 136.2,
+      "Tj_20kHz_C": 59.6
+    },
+    "extra_urban_80": {
+      "speed_kmh": 80,
+      "fe_Hz": 367.8,
+      "Ipk_A": 75.0,
+      "cos_phi": 0.271,
+      "P_cond_5kHz_W": 12.6,
+      "P_sw_5kHz_W": 11.6,
+      "P_rr_5kHz_W": 0.07,
+      "P_total_5kHz_W": 24.3,
+      "Tj_5kHz_C": 43.5,
+      "P_cond_10kHz_W": 12.7,
+      "P_sw_10kHz_W": 23.3,
+      "P_rr_10kHz_W": 0.14,
+      "P_total_10kHz_W": 36.1,
+      "Tj_10kHz_C": 45.2,
+      "P_cond_20kHz_W": 13.0,
+      "P_sw_20kHz_W": 46.5,
+      "P_rr_20kHz_W": 0.28,
+      "P_total_20kHz_W": 59.8,
+      "Tj_20kHz_C": 48.6
+    },
+    "highway_120": {
+      "speed_kmh": 120,
+      "fe_Hz": 551.7,
+      "Ipk_A": 51.0,
+      "cos_phi": 0.184,
+      "P_cond_5kHz_W": 5.5,
+      "P_sw_5kHz_W": 7.9,
+      "P_rr_5kHz_W": 0.05,
+      "P_total_5kHz_W": 13.4,
+      "Tj_5kHz_C": 41.9,
+      "P_cond_10kHz_W": 5.5,
+      "P_sw_10kHz_W": 15.8,
+      "P_rr_10kHz_W": 0.1,
+      "P_total_10kHz_W": 21.4,
+      "Tj_10kHz_C": 43.1,
+      "P_cond_20kHz_W": 5.6,
+      "P_sw_20kHz_W": 31.7,
+      "P_rr_20kHz_W": 0.19,
+      "P_total_20kHz_W": 37.4,
+      "Tj_20kHz_C": 45.4
+    }
+  },
+  "adaptive_schedule": {
+    "urban_40": {
+      "fsw_kHz": 5.0,
+      "P_cond_W": 48.8,
+      "P_sw_W": 21.1,
+      "P_rr_W": 0.13,
+      "P_total_W": 70.0,
+      "Tj_C": 50.1
+    },
+    "extra_urban_80": {
+      "fsw_kHz": 20.0,
+      "P_cond_W": 13.0,
+      "P_sw_W": 46.5,
+      "P_rr_W": 0.28,
+      "P_total_W": 59.8,
+      "Tj_C": 48.6
+    },
+    "highway_120": {
+      "fsw_kHz": 20.0,
+      "P_cond_W": 5.6,
+      "P_sw_W": 31.7,
+      "P_rr_W": 0.19,
+      "P_total_W": 37.4,
+      "Tj_C": 45.4
+    }
+  }
+}

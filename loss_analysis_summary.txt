@@ -1,0 +1,17 @@
+LOSS ANALYSIS FIGURES SUMMARY
+=============================
+All 8 figures generated successfully in loss_analysis_figures/
+
+Fig 1: Conduction loss vs speed - shows 2x spread from 25°C to 175°C. At 40km/h: 120W (25°C) to 200W (175°C). Drops steeply with speed.
+Fig 2: Switching loss vs speed - 7 fsw curves + adaptive. Adaptive tracks 5kHz below 60, jumps to 20kHz at 80+. Clear savings at low speed.
+Fig 3: Stacked area breakdown - side by side adaptive vs fixed 20kHz. Adaptive has much smaller switching area at low speeds.
+Fig 4: Tj vs speed - all well below 175°C limit. Adaptive peaks at ~50°C at 20km/h. Fixed 20kHz peaks at ~60°C.
+Fig 5: Loss vs fsw at 3 fixed speeds - shows conduction nearly flat, switching linear. Total dominated by switching at high fsw.
+Fig 6: Switching energy vs current - linear SiC scaling. Operating points marked: Urban 136A, Extra-Urban 75A, Highway 51A.
+Fig 7: Rds_on vs temperature - linear 3.3 to 6.6 mΩ. Datasheet points overlaid.
+Fig 8: Thermal impedance - log-log Foster network. Reaches steady-state ~0.094 °C/W at 100ms.
+
+KEY NUMBERS:
+Urban 40km/h, 5kHz: P_cond=48.8W, P_sw=21.1W, P_total=70.0W, Tj=50.1°C
+Urban 40km/h, 20kHz: P_cond=51.5W, P_sw=84.3W, P_total=136.2W, Tj=59.6°C
+Highway 120km/h, 20kHz: P_cond=5.6W, P_sw=31.7W, P_total=37.4W, Tj=45.4°C
