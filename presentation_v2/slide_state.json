@@ -2,8 +2,8 @@
   "project_info": {
     "title": "800V Three-Level Flying Capacitor Traction Inverter",
     "created": 1777901257.5179384,
-    "last_updated": 1777901385.438918,
-    "total_slides": 12
+    "last_updated": 1777903229.4722946,
+    "total_slides": 13
   },
   "slides": [
     {
@@ -12,59 +12,64 @@
       "pageNum": 1
     },
     {
-      "id": "why_800v",
+      "id": "project_intro",
       "state": "edited",
       "pageNum": 2
     },
     {
-      "id": "dvdt_problem",
+      "id": "why_800v",
       "state": "edited",
       "pageNum": 3
     },
     {
-      "id": "fc_vs_npc",
+      "id": "dvdt_problem",
       "state": "edited",
       "pageNum": 4
     },
     {
-      "id": "switching_states",
+      "id": "fc_vs_npc",
       "state": "edited",
       "pageNum": 5
     },
     {
-      "id": "components",
+      "id": "switching_states",
       "state": "edited",
       "pageNum": 6
     },
     {
-      "id": "vehicle_mapping",
+      "id": "components",
       "state": "edited",
       "pageNum": 7
     },
     {
-      "id": "switching_losses",
+      "id": "vehicle_mapping",
       "state": "edited",
       "pageNum": 8
     },
     {
-      "id": "adaptive_schedule",
+      "id": "switching_losses",
       "state": "edited",
       "pageNum": 9
     },
     {
-      "id": "thermal_impact",
+      "id": "adaptive_schedule",
       "state": "edited",
       "pageNum": 10
     },
     {
-      "id": "simulation",
+      "id": "thermal_impact",
       "state": "edited",
       "pageNum": 11
     },
     {
-      "id": "conclusion",
+      "id": "simulation",
       "state": "edited",
       "pageNum": 12
+    },
+    {
+      "id": "conclusion",
+      "state": "edited",
+      "pageNum": 13
     }
   ],
   "outline": [
@@ -73,6 +78,13 @@
       "title": "800V Three-Level Flying Capacitor Traction Inverter",
       "summary": "Title slide with author name Hayagreev S. and subtitle: Design and Comprehensive Loss Analysis",
       "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_schematic.png - The title slide requests the FC inverter schematic as a subtle background element. Image 19 is a clear schematic of a three-level flying capacitor inverter, which is highly relevant to the presentation's core topic.",
+      "slide_template_key": ""
+    },
+    {
+      "id": "project_intro",
+      "title": "Project Overview",
+      "summary": "ECE 595 project objectives: specify and simulate a 3-level inverter for EV traction, compare semiconductor temperature under adaptive vs constant switching frequency, RL load (R=1.3Ω, L=2mH), and present findings in IEEE format.",
+      "image_plan": "",
       "slide_template_key": ""
     },
     {
