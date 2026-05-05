@@ -1,0 +1,90 @@
+DESIRED LAYOUT ANALYSIS FROM USER'S PDF
+========================================
+
+COMMON ELEMENTS ACROSS ALL SLIDES:
+- White background, clean and minimal
+- Blue accent bar on left edge of slide (thin vertical blue stripe, ~4px wide)
+- Blue short underline under the slide title (~60px wide)
+- "ECE 595 — PURDUE UNIVERSITY" header in blue at top-left (on content slides, not title)
+- Font: Sans-serif (appears to be Inter or similar)
+- Bullet points: round disc bullets, generous line spacing
+- Bold used for key terms inline
+- Blue color used for: section subtitles, numbered items, accent elements
+- Black for: main titles, body text
+- No background colors, no cards, no shadows, no rounded corners
+- Plenty of whitespace — content occupies upper 60% of slide, bottom is empty
+
+SLIDE 1 (TITLE):
+- Large bold title top-left, ~48px
+- Subtitle below in lighter weight, ~20px
+- Author name bold, ~16px
+- "ECE 595 - Purdue University" below author
+- Faint schematic watermark on right side
+- Thin black horizontal line near bottom
+- Blue vertical accent bar on left edge
+
+SLIDE 2 (PROJECT OVERVIEW):
+- Two-column: left has paragraph text with blue-bordered spec box at bottom, right has numbered objectives (1-4) with blue circle numbers
+- Blue circle numbers are filled circles with white number inside
+
+SLIDE 3 (800V ARCHITECTURE):
+- Paragraph intro text spanning full width
+- Three columns below with "01", "02", "03" in blue
+- Each column has bold subtitle and description paragraph
+- Blue horizontal line above each column
+
+SLIDE 4 (DV/DT PROBLEM):
+- Two-column layout
+- Left: "The 800V Challenge" with black underline, bullet points
+- Right: "The Multilevel Solution" with blue underline and blue title, bullet points
+
+SLIDE 5 (FC VS NPC):
+- Single column, two sections stacked
+- "Neutral Point Clamped (NPC) Limitations" — black title, thin gray line, bullets
+- "Flying Capacitor (FC) Advantages" — blue title, blue line, bullets
+
+SLIDE 6 (SWITCHING STATES):
+- Two-column: left has bullets with gray blockquote box for states, right has the textbook schematic image
+- Source citation below image in small gray text
+
+SLIDE 7 (COMPONENT SELECTION):
+- Two-column: left has bullets, right has product image
+- Bullets use bold lead-in text with em-dash separator
+
+SLIDE 8 (VEHICLE ARCHITECTURE):
+- Two-column: left has bullets with blockquote for formula, right has the 3-panel chart image
+
+SLIDE 9 (SWITCHING LOSS ANALYSIS):
+- Two-column: left has formula in gray blockquote, then bullets; right has switching loss vs speed chart
+- Bullets use bold lead-in
+
+SLIDE 10 (SIMULATED ADAPTIVE SWITCHING FREQUENCY):
+- Has "ECE 595 — PURDUE UNIVERSITY" header in blue at top
+- Paragraph intro text (not bullets)
+- Two blue-bordered blockquote boxes stacked: "Urban Driving (Low fe)" and "Highway Driving (High fe)"
+- Right side: loss breakdown stacked area chart (smaller, two side-by-side)
+
+SLIDE 11 (THERMAL IMPACT):
+- Two-column: left has bullets, right has bar chart
+- Standard layout
+
+SLIDE 12 (SIMULATION RESULTS):
+- Two-column: left has bullets, right has 4-panel FC voltage figure
+- Standard layout
+
+SLIDE 13 (CONCLUSION):
+- Full-width bullets, larger text
+- Key numbers highlighted in blue bold (75%, 9.7°C)
+- Larger bullet markers (filled circles)
+- More generous line spacing than other slides
+
+KEY DESIGN SYSTEM:
+- Title: ~36px bold black, Inter/system sans-serif
+- Blue accent bar: 4px wide, ~60px tall, below title
+- Subtitles: bold black or bold blue
+- Body text: ~18px, dark gray/black
+- Bullets: round disc, left-aligned with generous padding
+- Blockquotes: 3px blue left border, light gray background (#f8f9fa)
+- Blue color: #2563EB or similar
+- Header bar: "ECE 595 — PURDUE UNIVERSITY" in blue, top-left, ~14px
+- Images: right-aligned in two-column layouts, object-contain

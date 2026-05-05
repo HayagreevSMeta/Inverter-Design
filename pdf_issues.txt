@@ -1,0 +1,15 @@
+PDF Formatting Issues Found:
+1. Page 1 (Title): OK - clean centered title
+2. Page 2 (Project Overview): Left side text runs together - "Load:3-phase RL" and "battery sourceDeliverables:" are concatenated with no line breaks. Spec items need proper spacing.
+3. Page 3 (800V Architecture): OK but lots of empty space at bottom - text could be better distributed
+4. Page 4 (dv/dt Problem): OK but lots of empty space - two columns with text only at top
+5. Page 5 (FC vs NPC): All text crammed at top, huge empty space below. NPC and FC sections run together.
+6. Page 6 (Switching States): Good - schematic shows well with text on left
+7. Page 7 (Component Selection): Good - image and text layout works
+8. Page 8 (Vehicle Architecture): BROKEN - text column is tiny and squeezed, text overflows vertically. The figure takes too much space.
+
+Key issues to fix:
+- Text running together without proper spacing (slide 2)
+- Too much empty space on text-only slides (3, 4, 5)
+- Vehicle architecture slide (8) has broken text layout
+- Need consistent vertical distribution of content
