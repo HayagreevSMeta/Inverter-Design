@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IEEE Paper Template</title>
+    <style>
+        @page { size: A4; margin: 19mm 13mm 19mm 13mm; }
+        body { font-family: "Times New Roman", Times, serif; font-size: 10pt; line-height: 1.15; color: #000; margin: 0; padding: 0; }
+        .container { column-count: 2; column-gap: 4mm; text-align: justify; }
+        .header { column-span: all; text-align: center; margin-bottom: 20pt; }
+        .title { font-size: 24pt; font-weight: normal; margin-bottom: 12pt; margin-top: 10pt; line-height: 1.1; }
+        .authors { font-size: 11pt; margin-bottom: 6pt; }
+        .affiliation { font-size: 10pt; font-style: italic; margin-bottom: 15pt; }
+        h1 { font-size: 10pt; font-weight: normal; text-transform: uppercase; text-align: center; margin-top: 12pt; margin-bottom: 6pt; }
+        h2 { font-size: 10pt; font-style: italic; font-weight: normal; margin-top: 10pt; margin-bottom: 4pt; }
+        p { text-indent: 1em; margin-top: 0; margin-bottom: 0; }
+        .abstract { font-weight: bold; font-size: 9pt; margin-bottom: 10pt; }
+        .abstract-title { font-weight: bold; font-style: italic; }
+        figure { margin: 12pt 0; text-align: center; page-break-inside: avoid; }
+        img { max-width: 100%; height: auto; }
+        figcaption { font-size: 8pt; text-align: left; margin-top: 4pt; }
+        table { width: 100%; border-collapse: collapse; margin: 12pt 0; font-size: 8pt; page-break-inside: avoid; }
+        th, td { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 4pt; text-align: center; }
+        th { font-weight: bold; border-top: 2px solid #000; }
+        .table-caption { text-transform: uppercase; font-size: 8pt; text-align: center; margin-bottom: 4pt; }
+        .equation { text-align: center; margin: 10pt 0; font-style: italic; }
+        .references p { text-indent: -1.5em; padding-left: 1.5em; font-size: 8pt; margin-bottom: 3pt; }
+        .first-para { text-indent: 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Vehicle Architecture-Driven Design and Comprehensive Loss Analysis of an 800V Three-Level Flying Capacitor Traction Inverter</div>
+        <div class="authors">Hayagreev S.</div>
+        <div class="affiliation">ECE 595 - Purdue University</div>
+    </div>
+    <div class="container">
+        <p class="abstract first-para"><span class="abstract-title">Abstract</span>&mdash;This paper presents the specification, simulation, and loss analysis of a three-level flying capacitor (FC) traction inverter for an 800V electric vehicle powertrain. The 800V DC bus architecture is adopted to reduce phase currents and ohmic losses relative to conventional 400V systems. The FC topology is selected over the Neutral Point Clamped (NPC) alternative on the basis of thermal symmetry and natural voltage balancing under dynamic loads. Conduction and switching losses are quantified using the Graovac-Purschel analytical method, calibrated with parameters from the Wolfspeed CAB450M12XM3 1200V/450A SiC module datasheet. An adaptive switching frequency schedule is proposed that reduces switching losses by 75% during high-current urban operation compared to a fixed 20&nbsp;kHz baseline. Time-domain simulations confirm successful capacitor voltage balancing, proper pre-charge handling, and safe thermal operation across a representative drive cycle.</p>
+
+        <h1>I. Introduction</h1>
+        <p class="first-para">The traction inverter converts DC battery power into variable-frequency AC power for the electric vehicle (EV) motor. A fundamental constraint in traction inverter design is that the required electrical frequency is directly proportional to vehicle speed: low-speed urban driving demands high phase currents at low fundamental frequencies, while highway cruising requires high frequencies but lower sustained currents. Evaluating inverter performance therefore requires analysis across the full operating envelope rather than at a single nominal point.</p>
+        <p>An 800V DC bus architecture was selected for this design. Compared to 400V systems, an 800V bus halves the phase current for a given power level, reducing I&sup2;R losses in the inverter, motor windings, and cabling [1]. However, the elevated bus voltage introduces challenges for semiconductor stress management. In a conventional two-level voltage source inverter (2L-VSI), each device must block the full 800V bus, and the fast switching transitions of SiC MOSFETs generate high dv/dt that can degrade motor winding insulation [2]. A multilevel topology addresses both issues by synthesizing the output from multiple voltage levels, reducing the per-device blocking voltage and the voltage step size at the output [3].</p>
+
+        <h1>II. Topology and Component Selection</h1>
+        <p class="first-para">This section details the topology choice, component specifications, and the vehicle architecture mapping used to define the inverter operating points.</p>
+
+        <h2>A. Topology Selection: FC vs. NPC</h2>
+        <p class="first-para">The two principal three-level topologies for traction applications are the Neutral Point Clamped (NPC) and the Flying Capacitor (FC). The FC topology was selected for this design based on three considerations [4].</p>
+        <p>First, the NPC topology exhibits unequal loss distribution among its inner and outer switches, leading to asymmetric thermal stress that complicates heatsink design [5]. The FC topology distributes losses symmetrically: all four switches in a phase leg block the same voltage (V<sub>dc</sub>/2 = 400V) and carry comparable currents. Second, the FC eliminates the clamping diodes required in the NPC, removing components from the conduction path. Third, the FC topology can maintain capacitor voltage balance through redundant switching states. By selecting between redundant zero-voltage states based on the instantaneous phase current direction, the flying capacitor voltage is regulated to V<sub>dc</sub>/2 without a dedicated closed-loop controller [6].</p>
+        
+        <figure>
+            <img src="Screenshot 2026-05-04 063301.png" alt="FC Inverter Schematic">
+            <figcaption>Fig. 1. Three-phase schematic of the 3-level flying capacitor inverter. Source: Advanced Power Electronics Converters (E. Cipriano).</figcaption>
+        </figure>
+
+        <h2>B. Component Selection</h2>
+        <p class="first-para">The Wolfspeed CAB450M12XM3 SiC half-bridge module was selected for the active switches. In the 3L-FC configuration, each switch blocks V<sub>dc</sub>/2 = 400V. The 1200V device rating therefore provides a voltage utilization of 33%, consistent with IPC-9592B derating guidelines for power conversion equipment [7]. The 450A continuous current rating provides a 3.3&times; margin over the worst-case peak phase current of 136A.</p>
+        <p>The total effective on-state resistance per switch position is the sum of the die R<sub>ds(on)</sub> (2.6&nbsp;m&Omega; typical at 25&deg;C) and the package resistance (~0.7&nbsp;m&Omega;), yielding approximately 3.3&nbsp;m&Omega; at 25&deg;C. From the datasheet normalized R<sub>ds(on)</sub> curve (Fig. 2 of [8]), this value approximately doubles at 175&deg;C. The positive temperature coefficient is characteristic of SiC MOSFETs and provides inherent current-sharing stability in paralleled configurations.</p>
+        <p>The flying capacitor must maintain its voltage within a 5% ripple budget (20V on a 400V reference). Using the standard sizing relation C&nbsp;=&nbsp;I<sub>pk</sub>&nbsp;/&nbsp;(2&nbsp;&middot;&nbsp;f<sub>sw,min</sub>&nbsp;&middot;&nbsp;&Delta;V<sub>fc</sub>), with I<sub>pk</sub>&nbsp;=&nbsp;136A, f<sub>sw,min</sub>&nbsp;=&nbsp;5&nbsp;kHz, and &Delta;V<sub>fc</sub>&nbsp;=&nbsp;20V, the required capacitance is 680&nbsp;&mu;F. Metallized polypropylene film capacitors are specified for their low ESR (&lt;5&nbsp;m&Omega;), high ripple current capability, and long operational lifetime relative to electrolytic alternatives [9].</p>
+
+        <h2>C. Vehicle Architecture and Operating Points</h2>
+        <p class="first-para">The electrical operating points are mapped from the vehicle's mechanical state. The drivetrain parameters are: single-speed reduction gear (ratio G&nbsp;=&nbsp;8.19), tyre radius r&nbsp;=&nbsp;0.315&nbsp;m, and an 8-pole PMSM (pole pairs p&nbsp;=&nbsp;4). The fundamental electrical frequency is:</p>
+        <p class="equation">f<sub>e</sub> = (v / r) &middot; (G / 2&pi;) &middot; p</p>
+        <p>At 40&nbsp;km/h, f<sub>e</sub>&nbsp;=&nbsp;184&nbsp;Hz; at 120&nbsp;km/h, f<sub>e</sub>&nbsp;=&nbsp;552&nbsp;Hz. The inverter drives an RL load (R&nbsp;=&nbsp;1.3&nbsp;&Omega;, L&nbsp;=&nbsp;2&nbsp;mH) with modulation index m&nbsp;=&nbsp;0.9. Because the load impedance Z&nbsp;=&nbsp;&radic;(R&sup2;&nbsp;+&nbsp;(&omega;L)&sup2;) increases with frequency, the peak phase current is highest at low speeds: 136A at 40&nbsp;km/h versus 51A at 120&nbsp;km/h.</p>
+
+        <h2>D. Loss Formulation</h2>
+        <p class="first-para">Losses are computed using the analytical method of Graovac and Purschel [10], which averages switching energy over the fundamental cycle. The relevant device parameters from the CAB450M12XM3 datasheet are: E<sub>on</sub>&nbsp;=&nbsp;25.4&nbsp;mJ and E<sub>off</sub>&nbsp;=&nbsp;7.51&nbsp;mJ at the reference condition of 450A, 600V; R<sub>th,jc</sub>&nbsp;=&nbsp;0.094&nbsp;&deg;C/W per switch position [8].</p>
+        <p>The average switching power loss per phase for the 3L-FC topology is:</p>
+        <p class="equation">P<sub>sw</sub> = N<sub>c</sub> &middot; (f<sub>sw</sub> / &pi;) &middot; E<sub>sw,ref</sub> &middot; (I<sub>pk</sub> / I<sub>ref</sub>) &middot; (V<sub>dc,sw</sub> / V<sub>ref</sub>)</p>
+        <p>where N<sub>c</sub>&nbsp;=&nbsp;2 is the number of devices commutating per PWM transition in the 3L-FC leg, E<sub>sw,ref</sub>&nbsp;=&nbsp;E<sub>on</sub>&nbsp;+&nbsp;E<sub>off</sub>&nbsp;=&nbsp;32.9&nbsp;mJ, I<sub>ref</sub>&nbsp;=&nbsp;450A, V<sub>ref</sub>&nbsp;=&nbsp;600V, and V<sub>dc,sw</sub>&nbsp;=&nbsp;V<sub>dc</sub>/2&nbsp;=&nbsp;400V. The (1/&pi;) factor arises from averaging the rectified sinusoidal current over one fundamental period. Conduction loss per phase is P<sub>cond</sub>&nbsp;=&nbsp;2&nbsp;&middot;&nbsp;R<sub>ds(on)</sub>(T<sub>j</sub>)&nbsp;&middot;&nbsp;I<sub>pk</sub>&sup2;/8, reflecting that two devices conduct simultaneously and the RMS current per switch is I<sub>pk</sub>/2&radic;2 for sinusoidal modulation.</p>
+
+        <h1>III. Results</h1>
+        <p class="first-para">This section presents the analytical loss optimization results and the time-domain simulation validation.</p>
+
+        <h2>A. Analytical Loss Optimization</h2>
+        <p class="first-para">Fig. 2 shows the switching loss per phase across the vehicle speed range for several carrier frequencies. At a fixed 20&nbsp;kHz, switching losses are 84.3&nbsp;W/phase at 40&nbsp;km/h (urban) due to the high phase current. Reducing the carrier to 5&nbsp;kHz at this operating point yields 21.1&nbsp;W/phase&mdash;a 75% reduction.</p>
+
+        <figure>
+            <img src="loss_analysis_figures/fig2_switching_vs_speed.png" alt="Switching Loss vs Speed">
+            <figcaption>Fig. 2. Switching loss per phase vs. vehicle speed for various carrier frequencies. The dashed line indicates the adaptive schedule.</figcaption>
+        </figure>
+
+        <p>An adaptive switching frequency schedule was developed to exploit this relationship. The schedule assigns f<sub>sw</sub>&nbsp;=&nbsp;5&nbsp;kHz for speeds below 60&nbsp;km/h (where f<sub>e</sub>&nbsp;&lt;&nbsp;276&nbsp;Hz, giving m<sub>f</sub>&nbsp;&asymp;&nbsp;27), f<sub>sw</sub>&nbsp;=&nbsp;10&nbsp;kHz for 60&ndash;90&nbsp;km/h, and f<sub>sw</sub>&nbsp;=&nbsp;20&nbsp;kHz above 90&nbsp;km/h (where f<sub>e</sub>&nbsp;&gt;&nbsp;414&nbsp;Hz, giving m<sub>f</sub>&nbsp;&asymp;&nbsp;36). The constraint is that the frequency modulation ratio m<sub>f</sub>&nbsp;=&nbsp;f<sub>sw</sub>/f<sub>e</sub> must remain sufficiently high to avoid low-order baseband harmonics in the output voltage spectrum.</p>
+
+        <div class="table-caption">TABLE I. Analytical Loss and Thermal Comparison</div>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Urban (40 km/h)</th>
+                <th>Highway (120 km/h)</th>
+            </tr>
+            <tr>
+                <td>Electrical Frequency (f<sub>e</sub>)</td>
+                <td>183.9 Hz</td>
+                <td>551.7 Hz</td>
+            </tr>
+            <tr>
+                <td>Peak Phase Current (I<sub>pk</sub>)</td>
+                <td>135.8 A</td>
+                <td>51.0 A</td>
+            </tr>
+            <tr>
+                <td>Fixed 20 kHz Switching Loss</td>
+                <td>84.3 W/phase</td>
+                <td>31.7 W/phase</td>
+            </tr>
+            <tr>
+                <td>Scheduled Switching Loss</td>
+                <td>21.1 W/phase (5 kHz)</td>
+                <td>31.7 W/phase (20 kHz)</td>
+            </tr>
+            <tr>
+                <td>Steady-State T<sub>j</sub> (Fixed 20 kHz)</td>
+                <td>63.2 &deg;C</td>
+                <td>46.0 &deg;C</td>
+            </tr>
+            <tr>
+                <td>Steady-State T<sub>j</sub> (Scheduled)</td>
+                <td>53.5 &deg;C</td>
+                <td>46.0 &deg;C</td>
+            </tr>
+        </table>
+
+        <p>Table I summarizes the comparison at the two primary operating points. The adaptive schedule reduces the three-phase switching loss at 40&nbsp;km/h by 190&nbsp;W (from 253&nbsp;W to 63&nbsp;W), which corresponds to a 9.7&deg;C reduction in steady-state junction temperature. The thermal analysis uses a 4-layer Foster network parameterized from the CAB450M12XM3 Z<sub>th</sub> curve (R<sub>th,jc</sub>&nbsp;=&nbsp;0.094&nbsp;&deg;C/W total) with a coolant temperature of 65&deg;C.</p>
+
+        <figure>
+            <img src="thermal_comparison_figures/fig6_power_and_thermal.png" alt="Power and Thermal Response">
+            <figcaption>Fig. 3. Power dissipation and junction temperature over a mixed drive cycle comparing the adaptive schedule against a fixed 20 kHz baseline.</figcaption>
+        </figure>
+
+        <p>A transient thermal simulation over a synthetic drive cycle (Fig. 3) shows that the adaptive schedule reduces the peak-to-peak thermal cycling amplitude from 16.4&deg;C to 7.7&deg;C&mdash;a 53% reduction. According to the Coffin-Manson model, this reduction in &Delta;T<sub>j</sub> translates to a substantial extension of the power module's fatigue lifetime, as the number of cycles to failure scales inversely with (&Delta;T<sub>j</sub>)<sup>n</sup> where n is typically 4&ndash;5 for wire-bond interconnects [11].</p>
+
+        <h2>B. Time-Domain Simulation</h2>
+        <p class="first-para">A time-domain simulation was constructed in Python to validate the design under dynamic conditions. The simulation models the three-phase 3L-FC inverter with Phase-Disposition PWM (PD-PWM), temperature-dependent R<sub>ds(on)</sub>, linear switching energy scaling, a 4-layer Foster thermal network, and dead-time voltage distortion (t<sub>dead</sub>&nbsp;=&nbsp;200&nbsp;ns). The time step is 2&nbsp;&mu;s and the total simulation spans 1.52&nbsp;s across nine drive-cycle segments.</p>
+        <p>Fig. 4 shows the simulated three-phase output currents, which exhibit the expected sinusoidal waveforms with amplitude variation corresponding to the different speed segments. The Total Harmonic Distortion (THD), computed using a Hanning-windowed FFT over 20 fundamental cycles, is 1.92% for the urban segment (5&nbsp;kHz) and 1.13% for the highway segment (20&nbsp;kHz). These values represent an optimistic bound, as the simulation does not model device voltage drops in the output voltage synthesis, discrete dead-time distortion, or DC bus voltage ripple&mdash;all of which would increase THD in hardware.</p>
+
+        <figure>
+            <img src="fc_inverter_results_v3/fig3_phase_currents.png" alt="Phase Currents">
+            <figcaption>Fig. 4. Simulated three-phase output currents across the multi-segment drive cycle.</figcaption>
+        </figure>
+
+        <figure>
+            <img src="fc_inverter_results_v3/fig2_output_voltages.png" alt="Output Voltages">
+            <figcaption>Fig. 5. Three-level output voltage waveforms (line-to-neutral) showing the &plusmn;V<sub>dc</sub>/2 and zero levels.</figcaption>
+        </figure>
+
+        <h2>C. Flying Capacitor Balancing</h2>
+        <p class="first-para">The simulation incorporates a 20&nbsp;ms linear pre-charge ramp to bring the flying capacitor voltage from 0V to 400V before active PWM commences, preventing overvoltage across the inner switches at startup. As shown in Fig. 6, the PD-PWM natural balancing algorithm maintains the capacitor voltage with a mean error of less than 0.04V from the 400V reference. The simulated urban ripple is 18.0V peak-to-peak, consistent with the analytical prediction of 20V for the 680&nbsp;&mu;F capacitor at 5&nbsp;kHz and 136A peak current.</p>
+
+        <figure>
+            <img src="fc_inverter_results_v3/fig4_fc_voltages.png" alt="FC Voltages">
+            <figcaption>Fig. 6. Flying capacitor voltage showing the 20 ms pre-charge transient and steady-state ripple.</figcaption>
+        </figure>
+
+        <h1>IV. Discussion</h1>
+        <p class="first-para">Several modeling simplifications should be noted. The simulation uses ideal switching transitions without modeling commutation-loop parasitic inductance (6.7&nbsp;nH per the datasheet). The dead-time effect is implemented as a continuous average voltage error rather than discrete pulse-by-pulse distortion, which underestimates the resulting low-order harmonics. The DC bus is modeled as an ideal voltage source without ripple. The flying capacitor balancing algorithm updates every carrier period with perfect voltage measurement, which is more frequent and more accurate than would be achievable in a digital controller with ADC noise. These simplifications collectively produce THD values at the optimistic end of the range reported in the literature for 3-level FC inverters: 3&ndash;8% at 5&nbsp;kHz and 1.5&ndash;4% at 20&nbsp;kHz are more typical experimental values [12].</p>
+        <p>The R<sub>ds(on)</sub> temperature scaling used in this work (2&times; from 25&deg;C to 175&deg;C) is derived from the normalized resistance curve in the datasheet at the rated current of 450A. At the lower operating currents in this design (51&ndash;136A), the actual temperature coefficient may differ slightly. This represents a conservative assumption for loss estimation, as it overestimates the resistance at elevated temperatures relative to the tabulated typical value of 4.7&nbsp;m&Omega; (die only) at 175&deg;C.</p>
+
+        <h1>V. Conclusion</h1>
+        <p class="first-para">This work demonstrates that traction inverter design benefits from explicit coupling to the vehicle architecture. The 3L-FC topology was selected over NPC for its symmetric loss distribution and natural capacitor balancing under dynamic loads. Component selection was justified against the CAB450M12XM3 datasheet and IPC-9592B derating standards. By mapping vehicle speed to electrical operating points, the Graovac-Purschel analytical method quantified a 75% reduction in urban switching losses (84.3 to 21.1&nbsp;W/phase) when the carrier frequency is reduced from 20&nbsp;kHz to 5&nbsp;kHz. Over a representative drive cycle, the adaptive schedule reduces thermal cycling amplitude by 53% (from 16.4&deg;C to 7.7&deg;C), with direct implications for power module fatigue lifetime. Time-domain simulation validated the FC voltage balancing and confirmed THD below 2% across all operating points, though these values represent an optimistic bound due to the ideal switching model employed.</p>
+
+        <h1>References</h1>
+        <div class="references">
+            <p>[1] I. Aghabali et al., &ldquo;800-V electric vehicle powertrains: Review and analysis of benefits, challenges, and future trends,&rdquo; <i>IEEE Trans. Transp. Electrific.</i>, vol. 6, no. 4, pp. 1696&ndash;1714, Dec. 2020.</p>
+            <p>[2] X. Ding et al., &ldquo;Analytical and experimental evaluation of SiC-inverter nonlinearities for traction drives used in electric vehicles,&rdquo; <i>IEEE Trans. Veh. Technol.</i>, vol. 67, no. 1, pp. 146&ndash;159, Jan. 2018.</p>
+            <p>[3] D. Cittanti et al., &ldquo;Analysis and conceptualization of an 800&nbsp;V 100&nbsp;kVA full-GaN three-level flying capacitor inverter for next-generation EVs,&rdquo; <i>IEEE J. Emerg. Sel. Topics Power Electron.</i>, vol. 10, no. 6, pp. 7264&ndash;7281, Dec. 2022.</p>
+            <p>[4] W. Taha and B. Nahid-Mobarakeh, &ldquo;Efficiency evaluation of 2L and 3L SiC-based traction inverters for 400V and 800V electric vehicle powertrains,&rdquo; <i>2021 IEEE Energy Convers. Congr. Expo. (ECCE)</i>, pp. 5241&ndash;5248, 2021.</p>
+            <p>[5] E. Gurpinar and B. Ozpineci, &ldquo;Loss analysis and mapping of a SiC MOSFET based segmented two-level three-phase inverter for EV traction systems,&rdquo; <i>2018 IEEE Transp. Electrific. Conf. (ITEC)</i>, pp. 468&ndash;473, 2018.</p>
+            <p>[6] A. Shukla and A. Joshi, &ldquo;Natural balancing of flying capacitor voltages in multicell inverter under PD carrier-based PWM,&rdquo; <i>IEEE Trans. Power Electron.</i>, vol. 26, no. 6, pp. 1682&ndash;1693, Jun. 2011.</p>
+            <p>[7] IPC, &ldquo;Requirements for power conversion devices for the computer and telecommunications industries,&rdquo; IPC-9592B, 2012.</p>
+            <p>[8] Wolfspeed, &ldquo;CAB450M12XM3 1200&nbsp;V, 450&nbsp;A silicon carbide half-bridge module datasheet,&rdquo; Rev. 3, Jun. 2024.</p>
+            <p>[9] H. Wang and F. Blaabjerg, &ldquo;Reliability of capacitors for DC-link applications in power electronic converters&mdash;An overview,&rdquo; <i>IEEE Trans. Ind. Appl.</i>, vol. 50, no. 5, pp. 3569&ndash;3578, Sep./Oct. 2014.</p>
+            <p>[10] D. Graovac and M. P&uuml;rschel, &ldquo;IGBT power losses calculation using the data-sheet parameters,&rdquo; Infineon Appl. Note AN 2009-05, pp. 1&ndash;15, 2009.</p>
+            <p>[11] M. Held et al., &ldquo;Fast power cycling test of IGBT modules in traction application,&rdquo; in <i>Proc. Int. Conf. Power Electron. Drive Syst.</i>, 1997, pp. 425&ndash;430.</p>
+            <p>[12] B. P. McGrath and D. G. Holmes, &ldquo;Analytical modelling of voltage balance dynamics for a flying capacitor multilevel converter,&rdquo; <i>IEEE Trans. Power Electron.</i>, vol. 23, no. 3, pp. 1460&ndash;1469, May 2008.</p>
+        </div>
+    </div>
+</body>
+</html>
