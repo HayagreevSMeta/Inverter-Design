@@ -80,9 +80,9 @@
                 <div class="col">
                     <h3>Key Findings</h3>
                     <ul>
-                        <li><strong>Topology Validation:</strong> The 800V 3-Level Flying Capacitor topology successfully mitigates dv/dt stress and improves harmonic performance compared to 2L-VSI.</li>
-                        <li><strong>Loss Reduction:</strong> The simulated adaptive switching frequency schedule reduces urban switching losses by <strong>75%</strong> (from 84.3W to 21.1W per phase).</li>
-                        <li><strong>Thermal Improvement:</strong> The adaptive schedule reduces thermal cycling amplitude by <strong>53%</strong>, significantly extending the lifetime of the SiC power modules.</li>
+                        <li><strong>Topology Validation:</strong> The 800V 3-Level Flying Capacitor topology reduces dv/dt stress by half and improves harmonic performance relative to 2L-VSI.</li>
+                        <li><strong>Loss Reduction:</strong> Adaptive switching frequency reduces urban switching losses by <strong>75%</strong> (84.3 → 21.1 W/phase), saving 190 W three-phase.</li>
+                        <li><strong>Thermal Improvement:</strong> Thermal cycling amplitude reduced by <strong>53%</strong> (16.4°C → 7.7°C), extending power module fatigue lifetime per Coffin-Manson.</li>
                     </ul>
                 </div>
                 
@@ -91,7 +91,7 @@
                     <ul>
                         <li><strong>Ideal Switching:</strong> The current time-domain simulation employs ideal switching transitions.</li>
                         <li><strong>Unmodeled Parasitics:</strong> The model does not currently account for device voltage drops, discrete dead-time distortion, DC bus ripple, or stray inductance.</li>
-                        <li><strong>Future Enhancements:</strong> Incorporating these non-idealities in future iterations would yield more conservative and hardware-accurate THD and loss estimates.</li>
+                        <li><strong>THD Caveat:</strong> Simulated THD (1.9%, 1.1%) represents an optimistic bound; literature reports 3–8% at 5 kHz in hardware implementations.</li>
                     </ul>
                 </div>
             </div>

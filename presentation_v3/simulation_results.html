@@ -81,27 +81,27 @@
                 <div class="col">
                     <div class="section-title">FC Voltage Balancing</div>
                     <ul>
-                        <li><strong>Pre-charge Sequence:</strong> A 20ms linear ramp is implemented to prevent inrush currents during startup.</li>
-                        <li><strong>Natural Balancing:</strong> PD-PWM successfully keeps the flying capacitor voltage tightly regulated at exactly 400V.</li>
-                        <li><strong>Ripple Budget:</strong> The peak-to-peak voltage ripple is 18.0V, successfully meeting the strict 5% (20V) design constraint.</li>
+                        <li><strong>Pre-charge:</strong> A 20 ms linear ramp prevents inrush currents during startup.</li>
+                        <li><strong>Natural Balancing:</strong> PD-PWM maintains the flying capacitor voltage at 400V with a mean error &lt; 0.04V.</li>
+                        <li><strong>Ripple Budget:</strong> Peak-to-peak ripple is 18.0V, within the 5% (20V) design constraint.</li>
                     </ul>
                 </div>
                 
                 <div class="col">
-                    <div class="section-title">THD Validation</div>
+                    <div class="section-title">THD Performance</div>
                     <ul>
-                        <li><strong>Harmonic Performance:</strong> The 3-level output inherently reduces the voltage step size, significantly improving power quality.</li>
-                        <li><strong>Urban Driving:</strong> At a 5 kHz switching frequency, the output Total Harmonic Distortion (THD) is 1.92%.</li>
-                        <li><strong>Highway Driving:</strong> At a 20 kHz switching frequency, the output THD is 1.13%.</li>
+                        <li><strong>3-Level Output:</strong> The reduced voltage step size improves the harmonic spectrum relative to a 2-level inverter.</li>
+                        <li><strong>Urban (5 kHz):</strong> Simulated current THD = 1.92%. Note: this is an optimistic bound (ideal switching model).</li>
+                        <li><strong>Highway (20 kHz):</strong> Simulated current THD = 1.13%. Literature range for hardware: 1.5–4%.</li>
                     </ul>
                 </div>
                 
                 <div class="col">
                     <div class="section-title">Thermal Analysis</div>
                     <ul>
-                        <li><strong>Foster Network:</strong> A 4-layer thermal model accurately captures the transient junction temperature dynamics.</li>
-                        <li><strong>Peak Temperature:</strong> The junction temperature (T<sub>j</sub>) peaks at only 50.1°C under the adaptive schedule.</li>
-                        <li><strong>Safety Margin:</strong> This provides a massive 124.9°C safety margin to the 175°C semiconductor limit.</li>
+                        <li><strong>Foster Network:</strong> A 4-layer model (R<sub>th,jc</sub> = 0.094 °C/W) captures transient junction temperature dynamics.</li>
+                        <li><strong>Peak T<sub>j</sub>:</strong> Under the adaptive schedule, the junction temperature peaks at 46.4°C (T<sub>ambient</sub> = 40°C).</li>
+                        <li><strong>Safety Margin:</strong> 128.6°C below the 175°C device limit, confirming robust thermal headroom.</li>
                     </ul>
                 </div>
             </div>
