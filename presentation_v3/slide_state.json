@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "title": "Vehicle Architecture-Driven Design and Comprehensive Loss Analysis of an 800V Three-Level Flying Capacitor Traction Inverter",
+    "title": "Design and Loss Analysis of an 800V Flying Capacitor Traction Inverter",
     "created": 1777906537.1720998,
     "last_updated": 1777950584.8791616,
     "total_slides": 13
@@ -75,7 +75,7 @@
   "outline": [
     {
       "id": "title",
-      "title": "Vehicle Architecture-Driven Design and Comprehensive Loss Analysis of an 800V Three-Level Flying Capacitor Traction Inverter",
+      "title": "Design and Loss Analysis of an 800V Flying Capacitor Traction Inverter",
       "summary": "Title slide with author and affiliation",
       "image_plan": "/home/ubuntu/Inverter-Design/fc_inverter_schematic.png - The title slide requests the FC inverter schematic as a subtle background element. Image 19 is a clear schematic of a three-level flying capacitor inverter, which is highly relevant to the presentation's core topic.",
       "slide_template_key": ""
